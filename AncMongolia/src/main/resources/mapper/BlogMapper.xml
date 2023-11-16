@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.crewfactory.main.dao.BlogDao">
+
+	<select id="select" parameterType="com.crewfactory.main.domain.SearchDomain" resultType="com.crewfactory.main.domain.BlogDomain">
+		SELECT 
+			idx, section, openyn, thumbnail, title, description, visit, taglib, description, regdate, regid
+		FROM mg_blog_info 
+	</select>
+	
+	<select id="selectBlogByHome" resultType="com.crewfactory.main.domain.BlogDomain">
+		SELECT 
+			idx, code, section, title, description, thumbnail, visit, regdate, loginyn
+		FROM mg_blog_info 
+		WHERE openyn = 'Y'
+		ORDER BY idx DESC 
+		LIMIT 8;
+	</select>
+	
+	<select id="selectBlogOsByHome" resultType="com.crewfactory.main.domain.BlogDomain">
+		SELECT 
+			idx, code, section, title, description, thumbnail, visit, regdate
+		FROM mg_blog_info 
+		WHERE openyn = 'Y'
+		AND section = 'blog'
+		AND code = 'os' 
+		ORDER BY idx DESC 
+		LIMIT 8;
+	</select>
+	
+	<select id="selectMomentByWebTotal" parameterType="java.util.HashMap" resultType="int">
+		SELECT 
+			count(idx)
+		FROM mg_moment_info 
+		WHERE openyn = 'Y'
+		<if test = "searchText != null">
+			AND (title like CONCAT('%', #{searchText}, '%') OR content like CONCAT('%', #{searchText}, '%'))
+		</if>
+	</select>
+	
+	<select id="selectBolgByWebTotal" parameterType="java.util.HashMap" resultType="int">
+		SELECT 
+			count(idx)
+		FROM mg_blog_info 
+		WHERE openyn = 'Y'
+		AND section = 'blog'
+		<if test = "searchText != null">
+			AND (title like CONCAT('%', #{searchText}, '%') OR content like CONCAT('%', #{searchText}, '%'))
+		</if>
+	</select>
+	
+	<select id="selectBlogByWeb" parameterType="java.util.HashMap" resultType="com.crewfactory.main.domain.BlogDomain">
+		SELECT 
+			idx, section, openyn, thumbnail, title, description, visit, regdate, regid, loginyn
+		FROM mg_blog_info 
+		<trim prefix="WHERE" prefixOverrides="AND||OR">
+			AND openyn = 'Y'
+			AND section = 'blog'
+			<if test = "searchText != null">
+			AND (title like CONCAT('%', #{searchText}, '%') OR content like CONCAT('%', #{searchText}, '%'))
+			</if>
+		</trim> 
+		ORDER BY idx DESC LIMIT #{start}, #{end};
+	</select>
+	
+	<select id="selectMomentByWeb" parameterType="java.util.HashMap" resultType="com.crewfactory.main.domain.BlogDomain">
+		SELECT 
+			idx, section, openyn, thumbnail, title, description, visit, regdate, regid
+		FROM mg_moment_info
+		<trim prefix="WHERE" prefixOverrides="AND||OR">
+			<if test = "searchText != null">
+			AND (title like CONCAT('%', #{searchText}, '%') OR content like CONCAT('%', #{searchText}, '%'))
+			</if>
+		</trim> 
+		ORDER BY idx DESC LIMIT #{start}, #{end};
+	</select>
+	
+	<select id="selectTopBlogByWeb" parameterType="java.util.HashMap" resultType="com.crewfactory.main.domain.BlogDomain">
+		SELECT 
+			idx, section, openyn, thumbnail, title, visit, regdate, loginyn
+		FROM mg_blog_info 
+		WHERE topblog = 'Y'
+		AND openyn = 'Y'
+		AND section = 'blog'
+		ORDER BY idx DESC
+		LIMIT 4
+	</select>
+	
+	<select id="selectTopBlog" parameterType="java.util.HashMap" resultType="com.crewfactory.main.domain.BlogDomain">
+		SELECT 
+			idx, section, openyn, thumbnail, title, visit, regdate, loginyn
+		FROM mg_blog_info 
+		<trim prefix="WHERE" prefixOverrides="AND||OR">
+			<if test = "searchSection != null">
+				AND section = #{searchSection}
+			</if>
+		</trim> 		
+		AND topblog = 'Y'
+		AND openyn = 'Y'
+		ORDER BY idx DESC
+		LIMIT 4
+	</select>
+	
+	<select id="view" parameterType="int" resultType="com.crewfactory.main.domain.BlogDomain">
+		SELECT 
+			*
+		FROM mg_blog_info  where idx = #{idx};
+	</select>
+	
+	<select id="viewMoment" parameterType="int" resultType="com.crewfactory.main.domain.BlogDomain">
+		SELECT 
+			*
+		FROM mg_moment_info where idx = #{idx};
+	</select>	
+	
+	<select id="viewMomentIncheon" parameterType="int" resultType="com.crewfactory.main.domain.BlogDomain">
+		SELECT 
+			*
+		FROM mg_moment_info_incheon where idx = #{idx};
+	</select>
+	
+	<insert id="insert" parameterType="com.crewfactory.main.domain.BlogDomain">
+		INSERT INTO mg_blog_info  (
+			idx,
+			section,
+			code,
+			loginyn,
+			openyn,
+			thumbnail,
+			title,
+			content,
+			taglib,
+			description,
+			regid,
+			regip,
+			regdate
+		) VALUES (
+			(select ifnull(max(idx)+1, 1) from mg_blog_info a),
+			#{ section },
+			#{ code },
+			#{ loginyn },
+			#{ openyn },
+			#{ thumbnail },
+			#{ title },
+			#{ content },
+			#{ taglib },
+			#{ description },
+			#{ regid },
+			#{ regip },
+			now()
+		);
+	</insert>
+	
+	<update id="update" parameterType="com.crewfactory.main.domain.BlogDomain">
+        UPDATE mg_blog_info 
+			SET
+			section = #{ section },
+			code = #{ code },
+			loginyn = #{ loginyn },
+			openyn = #{ openyn },
+			thumbnail = #{ thumbnail },
+			title = #{ title },
+			content = #{ content },
+			taglib = #{ taglib },
+			description = #{ description },
+			regid = #{ regid },
+			regip = #{ regip },
+			visit = #{visit}
+		WHERE idx = #{idx};
+    </update>    
+    
+    <delete id="delete" parameterType="int">
+        DELETE FROM mg_blog_info  WHERE idx = #{idx}
+    </delete>
+    
+    <select id="selectMomentByHome" resultType="com.crewfactory.main.domain.BlogDomain">
+		SELECT 
+			idx, section, openyn, thumbnail, title, visit, regdate
+		FROM mg_moment_info	
+		WHERE openyn = 'Y'
+		ORDER BY idx DESC
+		LIMIT 5
+	</select>
+    
+</mapper>

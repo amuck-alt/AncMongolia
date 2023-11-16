@@ -1,0 +1,524 @@
+@media only screen and (max-width: 767px) {
+
+	
+html, body, input, textarea, select, button, table {
+	font-size: 12px;
+	line-height: 1.25em;;
+}	
+	
+.mobile-hidden, .pc-show { display:none; }
+.mobile-show, .pc-hidden { display:block; }	
+
+
+.cf-row, .main-row, .sub-row, .sub2-row, .main-review-row, .sm-row, .member-row, .main-interview-row, .gs-row, .quick-row { max-width:100%; min-width:100%; }
+#containter-body, .containter-body { padding:0 !important; margin:0 !important; }
+
+.banner-button {
+	width:150px;
+	height:34px;
+	padding-bottom:1px;
+	color:#fff;
+	font-size:12px;
+	border-radius: 20px;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	-ms-border-radius: 20px;
+}
+
+.banner-button5 {
+	width:150px;
+	height:34px;
+	padding-bottom:1px;
+	color:#fff;
+	font-size:12px;
+	border-radius: 20px;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	-ms-border-radius: 20px;
+	border: 2px solid #fff;
+}
+
+	
+#head { display:none; }
+#gnb-menu-pc { display:none; }
+#navi-mobile { display: block; }
+
+.floating-bar { display:none; }
+
+.main-visual-mobile { width: 100%;	height:auto; }
+.main-visual-mobile .swiper-slide img { width: 100%; padding:0px !important; }
+
+.main-sign-ment { height:35rem; }
+/*.main-sign-ment div div { margin-top:20%; margin-bottom:5rem; }*/
+
+#scheduler { padding:0 !important; }
+#scheduler .col-2 { max-width:30%; height:110px; }
+#scheduler .col-10 { max-width:70%; height:110px; }
+.main-scheduler .swiper-slide { width:100%; height:110px; }
+.main-scheduler .swiper-slide img { width:85%; }
+
+#notice { padding:0 !important; }
+#col-main-notice { max-width:100%; padding-top:20px; padding-left:10px; padding-right:10px; padding-bottom:5px; }
+#col-main-quickmenu { max-width:100%; height:auto; }
+#col-main-quickmenu .col-11, #col-main-quickmenu .col-1 { max-width:100%; }
+#col-main-quickmenu .col-1 { display:none; }
+
+.main-quick-menu .quick-class, .main-quick-menu .quick-ke-day, .main-quick-menu .quick-oz-day { height:150px; }
+/* -------- main > quickmenu -------- */
+
+/* -------- main > moment -------- */
+.main-moment { height: 500px; }
+
+/* -------- main > weare  -------- */
+#blogko ul a li { width: 50%; }
+#blogos ul a li { width: 50%; }
+
+/* -------- main > bottom > banner -------- */
+.main-bt-banner-01 { background-size:250%; height:15rem; }
+.main-bt-banner-01 div { padding-top:5rem; }
+.main-bt-banner-01 div img { width:80%; }
+.main-bt-banner-02 { background:url('/img/main-teacherbanner-bg-02.jpg') no-repeat top; height:21rem; }
+.main-bt-banner-02 img { width:90%; position:absolute; bottom:0px; right:0; }
+
+
+/* -------- 筌롫뗄�뵥沃섎챶諭얕린醫딄섐 -------- */
+.main-midbanner ul li { display: none; }
+
+/* -------- 筌롫뗄�뵥�뚣끇�봺占쎄굄占쎌쓥 -------- */
+#main-cur-row { height:400px; }
+#main-cur-row .col-8 { width:100%; max-width:100%; }
+
+#main-pro .col-4, #main-pro .col-7 { width:100%; max-width:100%; padding-left:10px; padding-right:10px; }
+
+.main-pro3-row {
+	max-width:100%;
+	min-width:100%;
+	padding:0px;
+}
+
+
+#main-review { padding:0 !important; }
+#main-review .col-5 { max-width:100%; }
+#main-review .col-7 { max-width:100%; padding-top:50px; }
+
+#main-middle-banner img { width:100%; }
+
+#wis .spcl-title { position:relative; width:250px; height:auto; float:left; padding-top:30px; }
+#wis .spcl-title .spcl_mobile { display:block; }
+#wis .spcl-title .spcl_pc { display:none; }
+#wis .spcl-title .spcl-title-list { width:250px; height:350px; }
+#wis .spcl-title .spcl-title-list .swiper-wrapper { height:350px; }
+#wis .spcl-title .spcl-title-list .swiper-wrapper .swiper-slide { width:60px; padding:15px 20px; height:50px; background:#06112d; border-radius:5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -ms-border-radius: 5px; }
+#wis .spcl-title .spcl-title-list .swiper-wrapper .swiper-slide:hover { background:#fc229c; }
+#wis .spcl-title .spcl-title-list .swiper-wrapper .swiper-slide-thumb-active { background:#fc229c; }
+#wis #first-slide { margin-top:30px; background-size:50%; }
+
+#pro-swiper img { width:85%; }
+
+#main-thumb-banner img { width:100%; }
+
+#mobile-quick-menu ul li { float:left; }
+
+
+.cont-main-review { height:430px; margin-top:0rem; }
+.cont-main-interview { height:430px; margin-top:0rem; }
+.cont-main-review-os { height:320px; }
+
+.cont-main-review-thumb { height:120px; }
+.cont-main-review .col-main-review { padding-top:10px; }
+.cont-main-review .col-main-review img, .cont-main-review-os .col-main-review img { width:170px; height:170px; }
+.cont-main-review #review-ko-title, #review-os-title { width:100%; }
+
+.slk-main-review-ko-1 .slick-slide img, .slk-main-review-os-1 .slick-slide img { width:80px; height:80px; }
+
+#review-ko-title, #review-os-title { height: 3.6rem; overflow:hidden; }
+
+
+
+
+#footer-outlink .col-4 { max-width:100%; width:100%; padding-bottom:20px; border-bottom:1px solid #fff; }
+#footer-outlink .col-8 { max-width:100%; width:100%; padding-top:20px; }
+
+/*----------- 占쎄퐣�뜮袁る읂占쎌뵠筌욑옙 占쎌궎�몴紐꾠걹筌롫뗀�뤀 -----------*/
+#sub-quickmenu { margin-bottom:4rem; }
+#sub-quickmenu div ul li { padding-top:5%; width:33.33333%; margin:0 auto; text-align:center; }
+
+
+/*----------- 占쎌맄占쎈툡占쎄쾿�뙴占� -----------*/
+#pc-blog-title { display:none; }
+#mobile-blog-title { display:block; }
+#blog-popular ul li { float:left; width:50%; }
+
+/* --------- 占쎈�믭옙�뵠�뇡遊쁈 ----------- */
+#pc-bbs-td { display:none; }
+#mobile-bbs-td { display:block; }
+#bbs-thumbnail img { width:150px; }
+
+/*----------- 野껊슣�뻻占쎈솇占쎈퓠 占쎈굶占쎈선揶쏉옙占쎈뮉 占쎌뵠沃섎챷占� 占쎄텢占쎌뵠筌앾옙 揶쏅벡�젫 鈺곌퀣�젟 -----------*/
+#bbs-content { min-height:300px; margin:0 auto; }
+#bbs-content img { width:100%; max-width:100%; min-width:100%; }
+#bbs-content figure { width:100%; max-width:100%; min-width:100%; }
+#bbs-content figure img { width:100%; max-width:100%; min-width:100%; }
+
+/*----------- 占쎈�野꺿뫗源�占쎌뵥占쎄숲�뀎占� -----------*/
+#review-img img { width:100%; }
+
+
+/* -------- 占쎄쾿�뙴�뫂�솯占쎈꽅�뵳�딅꺖揶쏉옙 -------- */
+#ko-swiper img { width:200px; }
+#os-swiper img { width:200px; }
+
+
+.blog-row {	flex: 0 0 100%; max-width: 100%; }
+.blog-row-first { float:left; flex: 0 0 100%; max-width:100%; }
+.blog-row-last { float:left; flex: 0 0 100%; max-width:100%; padding-left:0px; }
+
+.moment-list ul li { width: 100%; padding:1rem 0rem 1rem 0rem;  }
+
+.blog-list ul li { float:left; width:50%; padding:10px 10px; }	
+
+
+.col-main-4, .col-main-8 {
+	flex: 0 0 100%;
+    max-width: 100%;
+}	
+	
+
+.mt-7 { margin-top:10px; }	
+
+.col-recruit {
+	max-width: 100%;
+	padding-top: 50px;
+	padding-right: 0px;
+}
+
+.col-padd-left-5 { padding-left: 1rem !important; }
+
+.col-padding-6 {
+	padding-right: 1rem;
+}
+
+.col-padding-sec, .col-padding, col-padding-3 {
+	padding-left: 0rem;
+	padding-right: 0rem;
+}
+
+.mrate-info-container {
+	width: 100%;
+	height: 350px;
+	background: url('/img/mrate-banner-bg-img.jpg') no-repeat bottom center;
+}
+
+.univ-info-container {
+	width: 100%;
+	height: 350px;
+	background: url('/img/univ-banner-bg-img.jpg') no-repeat top left;
+}
+
+#wis {
+	height: 400px;
+	
+}
+
+#wis img {
+	width: 100%;
+}
+
+#wis-bg {
+	display: none;
+}
+
+#wis-swip-zone {
+	width: 100%;
+	max-width: 100%;
+}
+
+#wis-swiper-thumb {
+	width: 100%;
+	max-width: 100%;
+}
+
+#wis-swiper-thumb img {
+	width: 100%;
+}
+
+#wis-swiper .wis-pc {
+	display: none;
+}
+
+#wis-swiper .wis-m {
+	display: visible;
+}
+
+#wis-swiper-thumb .per95 { 
+	font-size: 80px; 
+	margin-top: -30%; 
+	margin-left: 64%; 
+}
+
+
+
+.col-review ul li { width:100%; float:none; }
+
+
+
+#col-pro-12, #col-event-12 {
+	width: 100%;
+	max-width: 100%;
+}
+
+#col-event-12-01 {
+	width: 60%;
+	max-width: 60%;
+}
+
+#col-event-12-02 {
+	width: 40%;
+	max-width: 40%;
+	padding-left: 50px;
+} 
+
+
+#col-sub-9, #col-sub-3 {
+	flex: 0 0 100%;
+	width: 100%;
+	max-width: 100%;
+} 
+
+.edu-row { 
+	max-width:100%;
+	min-width:100%;
+}
+
+
+
+
+#curri { position:relative; width:100%; height:auto; margin:0 auto; margin-top:50px; }
+#curri .container { width:100%; height:auto; margin:0 auto; text-align:center; }
+#curri .container .curri-content { width:100%; height:auto; margin:0 auto; margin-top:10px; padding:20px; }
+#curri .container .curri-content .list { width:100%; height:auto; margin:0 auto; }
+
+#curri .container .curri-content .list .swiper-wrapper { width:auto; height:auto; }
+#curri .container .curri-content .list .swiper-slide { width:250px; height:auto; }
+#curri .container .swiper-pagination { width:100%; height:30px; margin:5px auto; text-align:center; }
+#curri .container .swiper-pagination-bullet { width:8px; height:8px; margin:7px 5px; text-align:center; }
+
+
+#midbanner { margin-top:70px; }
+#midbanner .container ul li { float:none; width:100%; }
+#midbanner .container ul li .consu { padding:30px; }
+#midbanner .container ul li .event { padding:30px; }
+
+#teach { margin-top:30px; }
+#teach .container { width:100%; }
+#teach .teach { width:100%; }
+#teach .teach .teach-view { height:380px; margin:0 auto; float:none; margin-top:10px; }
+#teach .teach .teach-list { width:100%; height:130px; margin-top:10px; }
+#teach .teach .teach-list .swiper-pagination { width:100%; }
+
+
+
+
+#review { display:none; }
+
+
+#sub-banner { width:100%; height:150px; margin:0 auto; padding-top:45px; margin-bottom:15px; }
+#sub-banner .title-wrap { padding-left:10px; padding-top:15px;}
+#sub-banner .banner-wrap {display:none;}
+
+
+
+
+
+#sub-contents { width:100%; margin-top:15px; }
+#sub-contents .sub-menu-box { width:100%; padding:0px 10px; height:40px; }
+#sub-contents .container { width:100%; margin:0 auto; position:relative; }
+
+.pro_hei{
+	height:50%;
+}
+
+.pad-top-150 {
+	padding-top: 100px;
+}
+
+.mobile-off-percent, #mobile-off-percent {
+	display:none;
+}
+
+
+.mobile-20-percent, #mobile-20-percent {
+	width: 20%; max-width: 20%; flex: 20%;
+}
+
+.mobile-20-percent img, #mobile-20-percent img {
+	width: 100%; max-width:100%; flex: 100%;
+}
+
+.mobile-25-percent, #mobile-25-percent {
+	width: 25%; max-width: 25%; flex: 25%;
+}
+
+.mobile-25-percent img, #mobile-25-percent img {
+	width: 100%; max-width:100%; flex: 100%;
+}
+
+.mobile-30-percent, #mobile-30-percent {
+	width: 30%; max-width: 30%; flex: 30%;
+}
+
+.mobile-30-percent img, #mobile-30-percent img {
+	width: 100%; max-width:100%; flex: 100%;
+}
+
+.mobile-45-percent, #mobile-45-percent {
+	width: 45%; max-width: 45%; flex: 45%;
+}
+
+.mobile-45-percent img, #mobile-45-percent img {
+	width: 100%; max-width:100%; flex: 100%;
+}
+
+.mobile-50-percent, #mobile-50-percent {
+	width: 50%; max-width: 50%; flex: 50%;
+}
+
+.mobile-50-percent img, #mobile-50-percent img {
+	width: 100%; max-width:100%; flex: 100%;
+}
+
+.mobile-55-percent, #mobile-55-percent {
+	width: 55%; max-width: 55%; flex: 55%;
+}
+
+.mobile-55-percent img, #mobile-55-percent img {
+	width: 100%; max-width:100%; flex: 100%;
+}
+
+.mobile-75-percent, #mobile-75-percent {
+	width: 75%; max-width: 75%; flex: 75%;
+}
+
+.mobile-75-percent img, #mobile-75-percent img {
+	width: 100%; max-width:100%; flex: 100%;
+}
+
+.mobile-90-percent, #mobile-90-percent {
+	width: 90%; max-width: 90%; flex: 90%;
+}
+.mobile-90-percent, #mobile-90-percent {
+	width: 100%; max-width: 100%; flex: 100%;
+}
+
+.mobile-100-percent, #mobile-100-percent {
+	width: 100%; max-width: 100%; flex: 100%;
+}
+
+.mobile-100-percent, #mobile-100-percent {
+	width: 100%; max-width:100%; flex: 100%;
+}
+
+.mobile-100-percent a video, #mobile-100-percent a video{
+	width: 100%; max-width:100%; flex: 100%; padding:0px !important;
+	
+}
+
+
+.mobile-100-height, #mobile-100-height {
+	height: 100%; max-height: 100%; flex: 100%;
+}
+
+.mobile-100-height img, #mobile-100-height img {
+	height: 100%; max-height: 100%; flex: 100%;
+}
+
+.mobile-50-height, #mobile-50-height {
+	height: 50%; max-height: 50%; flex: 50%;
+}
+
+.mobile-50-height img, #mobile-50-height img {
+	height: 50%; max-height: 50%; flex: 50%;
+}
+
+.main-pro-mobile {
+	width: 100%; height:auto; 
+}
+
+.univ-li-in ul li {
+	float:left; width:50%;
+}
+
+.univ-li-in2 ul li {
+	float:left; width:100%;
+}
+
+.pass2-banner-row {
+	width: 100%;
+	margin: 0 auto;
+}
+
+.hof-bbs-col li { 
+	width:50%; 
+}
+
+.hof-bbs-col #hof-bbs-col-title {
+	height:36px; overflow:hidden;
+}
+
+.hof-bbs-col li div div { 
+	height:200px;
+}
+
+.hof-univ-list ul li { width:33.33333%; }
+
+.main-visual { height:350px; }
+
+.m-pad-30 { padding-left:30px; padding-right:30px; }
+.m-pad-20 { padding-left:20px; padding-right:20px; }
+.margin-top-130 { margin-top:70px; }
+
+.edu-banner-container { height:350px; }
+
+
+#sw-main-review .swiper-wrapper .swiper-slide .review-container {
+	height:350px; margin-right:1.5rem; padding:1.25rem; margin-top:45px;
+}
+
+#sw-main-review .swiper-wrapper .swiper-slide .review-container #review-wrapper {
+	margin-top:50px;
+}
+
+#sw-main-blog .swiper-slide .swiper-blog-content {
+	padding: 2rem !important;
+}
+
+#sw-main-blog .swiper-slide .swiper-blog-image {
+	padding-top:1rem !important; padding-bottom:0rem !important; padding-left:0rem !important; padding-right:0rem !important;
+}
+
+#sw-main-blog .swiper-slide .swiper-blog-image img {
+	border:0px solid #dadada; border-radius:0px; -webkit-border-radius:0px; -moz-border-radius:0px; -ms-border-radius:0px; height:150px;
+}
+
+
+
+
+.py-5-m { padding-top:0rem !important; padding-bottom:0.5rem !important; }
+.my-3-m { margin-top:0.5rem !important; margin-bottom:0.5rem !important; }
+
+
+.top-banner-img-cont { height:35px; }
+.top-banner-btn-x { top:10%; }
+
+
+
+}	/* media 762 end */
+
+
+
+@media (max-width: 382px) { 
+	.main-visual-mobile { width: 100%;	height:auto; }
+	.main-visual-mobile .swiper-slide { width: 100%; padding:0px !important; }
+	.cont-main-interview { height:330px; margin-top:0rem; }
+	.main-quick-menu .quick-class, .main-quick-menu .quick-ke-day, .main-quick-menu .quick-oz-day { height:120px; }
+}

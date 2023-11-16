@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.crewfactory.main.dao.AnnounceDao">
+
+	<select id="selectNew" resultType="com.crewfactory.main.domain.AnnounceDomain">
+		SELECT 
+			idx, section, thumbnail, title, description, regdate, regid
+		FROM mg_news_info ORDER BY idx DESC LIMIT 3;
+	</select>
+	
+	<select id="selectAdmin" resultType="com.crewfactory.main.domain.AnnounceDomain">
+		SELECT 
+			idx, section, title, visit, regdate, regid, thumbnail
+		FROM mg_news_info;
+	</select>
+	
+	<select id="selectTotal" parameterType="java.util.HashMap" resultType="int">
+		SELECT 
+			count(idx) as total
+		FROM mg_news_info
+		<trim prefix="WHERE" prefixOverrides="AND||OR">
+			<if test = "searchSection != null">
+				AND section = #{searchSection}
+			</if>
+		</trim>
+		<trim prefix="WHERE" prefixOverrides="AND||OR">
+			<if test = "searchText != null">
+				AND (title like CONCAT('%', #{searchText}, '%') OR content like CONCAT('%', #{searchText}, '%'))
+			</if>
+		</trim>;
+	</select>
+	
+	<select id="selectAll" parameterType="java.util.HashMap" resultType="com.crewfactory.main.domain.AnnounceDomain">
+		SELECT 
+			idx, section, title, description, regdate, regid, thumbnail
+		FROM mg_news_info
+		<trim prefix="WHERE" prefixOverrides="AND||OR">
+			<if test = "searchSection != null">
+				AND section = #{searchSection}
+			</if>
+		</trim>
+		<trim prefix="WHERE" prefixOverrides="AND||OR">
+			<if test = "searchText != null">
+				AND (title like CONCAT('%', #{searchText}, '%') OR content like CONCAT('%', #{searchText}, '%'))
+			</if>
+		</trim>
+		ORDER BY idx DESC LIMIT #{start}, #{end};
+	</select>
+	
+	<select id="selectEvent" parameterType="java.util.HashMap" resultType="com.crewfactory.main.domain.AnnounceDomain">
+		SELECT 
+			idx, section, title, description, regdate, regid, thumbnail
+		FROM mg_news_info
+		WHERE section='special'
+		<trim prefix="WHERE" prefixOverrides="AND||OR">
+			<if test = "searchText != null">
+				AND (title like CONCAT('%', #{searchText}, '%') OR content like CONCAT('%', #{searchText}, '%'))
+			</if>
+		</trim>
+		ORDER BY idx DESC LIMIT #{start}, #{end};
+	</select>
+	
+	<select id="selectOne" parameterType="int" resultType="com.crewfactory.main.domain.AnnounceDomain">
+		SELECT 
+			*
+		FROM mg_news_info where idx = #{idx};
+	</select>
+	
+	<insert id="insert" parameterType="com.crewfactory.main.domain.AnnounceDomain">
+		INSERT INTO mg_news_info (
+			idx, section, description, title, content, regid, regip, regdate, thumbnail
+		) VALUES (
+			(select ifnull(max(idx)+1, 1) from mg_news_info a),
+			#{section },
+			#{description },
+			#{title },
+			#{content },
+			#{regid },
+			#{regip },
+			now(),
+			#{thumbnail }
+		);
+	</insert>
+	<update id="update" parameterType="com.crewfactory.main.domain.AnnounceDomain">
+        UPDATE mg_news_info
+			SET
+			section = #{section },
+			description = #{description },
+			title = #{title },
+			content = #{content },
+			regid = #{regid },
+			regip = #{regip },
+			visit = #{visit },
+			thumbnail = #{thumbnail }
+		WHERE idx = #{idx}
+    </update>    
+    <delete id="delete" parameterType="int">
+        DELETE FROM mg_news_info WHERE idx = #{idx}
+    </delete>
+    
+</mapper>

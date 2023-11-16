@@ -1,0 +1,37 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.13'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id 'java'
+	id 'war'
+}
+
+group = 'com.crewfactory'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation		'org.springframework.boot:spring-boot-starter-web'
+	implementation		'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
+	implementation		'org.springframework.boot:spring-boot-starter-data-jpa'
+	developmentOnly		'org.springframework.boot:spring-boot-devtools'
+	implementation 		'org.apache.tomcat.embed:tomcat-embed-jasper'
+	providedRuntime		'org.springframework.boot:spring-boot-starter-tomcat'
+	testImplementation	'org.springframework.boot:spring-boot-starter-test'
+	implementation		'mysql:mysql-connector-java'
+	implementation		'javax.servlet:jstl'
+	implementation 		'org.apache.poi:poi:4.1.2'
+	implementation		'org.apache.poi:poi-ooxml:4.1.2'
+	implementation		'org.apache.poi:poi-ooxml-schemas:4.1.2'
+	implementation		'org.apache.poi:poi-scratchpad:4.1.2'
+	implementation		'org.apache.commons:commons-lang3'
+	implementation		'commons-io:commons-io:2.11.0'
+	implementation		'org.json:json:20220320'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

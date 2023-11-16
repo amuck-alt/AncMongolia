@@ -1,0 +1,540 @@
+/*NEW모바일 글로벌메뉴 시작*/
+
+.drop-bg {
+	margin: 0 auto;
+	display:table;
+	line-height:45px;
+	padding:0px;
+}
+
+.dropbtn {
+	text-align: center;
+	margin: 0 auto;
+  background-color: #1b2e5f;
+  color: white;
+  padding: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  float:auto;
+}
+
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+ /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);*/
+  z-index: 100;
+  min-width:100px;
+}
+
+
+.dropdown-content a {
+  color: black;
+  padding: 8px 8px;
+  text-decoration: none;
+  display: block;
+}
+
+
+.dropdown-content a:hover {background-color: #f1f1f1;   text-decoration: none;}
+
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+.dropdown:hover .dropbtn {
+  background-color: #3f5aa0;
+  boder:0;
+}
+/*NEW모바일 글로벌메뉴 끝*/
+
+.cf-sub-btn {
+	width: 50px;
+	height: 40px;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	float: left;
+	z-index: 1;
+	background-image: url("/img/ico-list-box3.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	cursor: pointer;
+}
+
+.edu-bg_junior {
+	background: url('../img/bg_junior.png');
+}
+
+.clear-up {
+	z-index: 999;
+}
+
+.cf-sub-close {
+	width: 50px;
+	height: 50px;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	background-image: url("/img/ico-list-box4.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 50%;
+	cursor: pointer;
+}
+
+#cf-sub-menu {
+	width: 300px;
+	height: 100%;
+	position: fixed;
+	top: 0px;
+	right: -302px;
+	z-index: 10;
+	border: 1px solid #c9c9c9;
+	background-color: white;
+	text-align: center;
+	transition: All 0.2s ease;
+	-webkit-transition: All 0.2s ease;
+	-moz-transition: All 0.2s ease;
+	-o-transition: All 0.2s ease;
+}
+
+#cf-sub-menu.open {
+	right: 0px;
+}
+
+.page_cover.open {
+	display: block;
+}
+
+.page_cover {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	background-color: rgba(0, 0, 0, 0.6);
+	z-index: 4;
+	display: none;
+}
+
+#cf-sub-menu ul {
+	list-style: none;
+	margin: 0;
+	width: 100%;
+	padding: 0;
+}
+
+#cf-sub-menu li {
+	position: relative;
+	font-size: 1em;
+	border-bottom: 1px solid #f2f2f2;
+}
+
+#cf-sub-menu li a {
+	color: #fff;
+	text-decoration: none;
+}
+
+#cf-sub-m-nav {
+	font-family: 'arial';
+}
+
+#cf-sub-m-nav ul {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+#cf-sub-m-nav ul.csm-menu li {
+	position: relative;
+	float: left;
+	width: 100%;
+	line-height: 50px;
+	font-size: 17px;
+	color: #3d3f40;
+	list-style-type: none;
+}
+
+#cf-sub-m-nav ul.csm-menu li a {
+	display: block;
+	width: 100%;;
+	line-height: 50px;
+	text-indent: 30px;
+	color: #000;
+	text-decoration: none;
+}
+
+#cf-sub-m-nav ul.csm-menu li a:hover {
+	background: #eee;
+}
+
+#cf-sub-m-nav ul.csm-menu li .csm-submenu a {
+	position: relative;
+	float: left;
+	display: block;
+	font-size: 14px;
+	color: #828587;
+	width: 100%;
+	z-index: 999;
+	padding-right: 25px;
+}
+
+#cf-sub-m-nav ul.csm-menu li .csm-submenu a:hover {
+	background: #444;
+	color: #fff;
+}
+
+.cf-logo {
+	width: 150px;
+	height: 150px;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	z-index: 1;
+	background-image: url("/img/sub-title-img0.png");
+	background-size: 50%;
+	background-repeat: no-repeat;
+	background-position: left;
+	cursor: pointer;
+}
+
+.edu-banner-std-sub-container {
+	width: 100%;
+}
+
+
+#point-hvr :hover {
+	box-shadow: 7px 10px 25px #acacac;
+}
+
+#point-hvr p:hover {
+	box-shadow: none;
+}
+
+#point-hvr div div:hover {
+	box-shadow: none;
+}
+
+#point-hvr div div div a:hover {
+	box-shadow: none;
+}
+
+#point-hvr div div .border-lightgray :hover {
+	box-shadow: none;
+}
+
+.cf-row2 {
+	width: 1100px;
+	margin: 0 auto;
+}
+
+.edu-pv-con {
+	width: 1000px;
+	margin: 0 auto;
+}
+
+.cf-row5 {
+	width: 1400px;
+	margin: 0 auto;
+	margin: 10px;
+}
+
+.cf-row3 {
+	width: 1400px;
+	background-color: #f2eeeb;
+}
+
+.mpro-row {
+	width: 1250px;
+	margin: 0 auto;
+}
+
+.main-cur-m-banner {
+	max-width: 100%;
+	min-width: 100%;
+	margin: 0 auto;
+}
+
+.main-cur-nv {
+	max-width: 1300px;
+	min-width: 1300px;
+	margin: 0 auto;
+}
+
+.edu-banner-pv-main-container {
+	width: 100%;
+	height: 100%;
+	background: url('../img/edu-banner-pv-main-bg.png')
+}
+
+.edu-banner-ev-main-container {
+	width: 100%;
+	height: 100%;
+}
+
+.edu-banner-ev-con-1 {
+	width: 100%;
+	height: 100%;
+}
+
+.edu-banner-pv-new-container {
+	width: 100%;
+}
+
+.edu-sub-pv-title1-bg {
+	width: 100%;
+	height: 100%;
+}
+
+.edu-sub-pv-bg {
+	width: 100%;
+	height: 100%;
+	background: url('../img/edu-sub-pv-bg-img.png') no-repeat;
+}
+
+.main-cur-n-container {
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+	background: url('../img/cur-bgc-img2.png') no-repeat right;
+	/*background-color:#efefef;*/
+}
+
+.border-lightgray-2 {
+	border: 1px solid #f0f0f0;
+}
+
+.edu-banner-pv-container {
+	width: 100%;
+	height: 550px;
+	background: url('../img/edu-banner-pv-bg.jpg') no-repeat right;
+}
+
+.edu-banner-pv2-container {
+	width: 100%;
+	height: 420px;
+	background: url('../img/edu-banner-pv-main-bg2.png')no-repeat center;
+}
+
+.my-8 {
+	margin-top: 120px;
+	margin-bottom: 60px;
+}
+
+.my-7 {
+	margin-top: 100px;
+	margin-bottom: 50px;
+}
+
+.px-3 {
+	padding-left: 2em;
+	padding-right: 2em;
+}
+
+.px-4 {
+	padding-left: 3em;
+	padding-right: 3em;
+}
+
+.px-5 {
+	padding-left: 4em;
+	padding-right: 4em;
+}
+
+.mid-title-banner {
+	display: inline-block;
+	float: left;
+}
+
+.pro-menu a {
+	cursor: pointer;
+}
+
+.pro-menu .hide {
+	display: none;
+}
+
+#pro-menu a {
+	cursor: pointer;
+}
+
+#pro-menu .hide {
+	display: none;
+}
+
+.proul li {
+	display: inline-block;
+	text-align: center;
+	margin: 0 auto;
+	margin: 5px;
+	border: 1px solid #e7e5e0;
+}
+
+#scroll-dis-n::-webkit-scrollbar {
+	display: none;
+}
+
+.mproul li {
+	display: inline-block;
+	float: left;
+}
+
+.mproul-sid li {
+	display: inline-block;
+	float: left;
+}
+
+.mcurul li {
+	float: left;
+	line-height: 152px;
+}
+
+.pro-row {
+	width: 100%;
+	margin: 0 auto;
+}
+
+.bg-img-navy {
+	background: url('../img/bg-img-navy.png') no-repeat top;
+}
+
+.main-dct-bg {
+	width: 100%;
+	height: 520px;
+	background: url('../img/main-dct2-bg-img.png') no-repeat right;
+}
+
+.main-dct-bg div p {
+	font-family: 'Noto Serif KR', serif;
+	font-weight: 500;
+	line-height: 60px;
+	font-size: 40px;
+}
+
+@media only screen and (max-width: 768px) {
+	#sddsd {
+		width: 100%;
+	}
+	.edu-banner-pv-container {
+	width: 100%;
+	height: 350px;
+	background: url('../img/edu-banner-pv-bg.png')no-repeat right;
+}
+.edu-banner-keoz-container{
+		width: 100%;
+	height: 350px;
+	background: url('../img/edu-banner-keoz-bg.png') no-repeat center;
+
+}
+.edu-banner-os-container{
+		width: 100%;
+	height: 350px;
+	background: url('../img/edu-banner-os-bg.jpg')no-repeat center;
+	background-size:180% 100%;
+}
+.edu-banner-steward-container{
+		width: 100%;
+	height: 350px;
+	background: url('../img/edu-banner-steward-bg.png')no-repeat right;
+}
+.edu-banner-std-main-container{
+		width: 100%;
+		max-width:100%;'
+		margin: 0 auto;
+}
+	#proimg {
+		width: 100%;
+		max-width: 100%;
+		position: static;
+		display: block;
+		float: left;
+		vertical-align: bottom;
+	}
+	.edu-banner-pv-main-container {
+	width: 100%;
+	height: 100%;
+	background: url('../img/edu-banner-pv-main-bg.png') no-repeat right;
+}
+	#moimg {
+		width: 100%;
+		max-width: 100%;
+	}
+	#moimg20 {
+		width: 20%;
+		max-width: 20;
+		position: absolute;
+		display: block;
+		float: left;
+		vertical-align: bottom;
+	}
+	#moimg30 {
+		width: 100%;
+		max-width: 100%;
+		position: absolute;
+		display: block;
+	}
+	.main-sign-ment {
+		height: 35rem;
+		line-height: 35rem;
+		text-align: center;
+	}
+	.edu-banner-row {
+		width: 100%;
+		margin: 0 auto;
+		padding-top: 150px;
+	}
+	.edu-foot-banner-bg-container {
+		width: 100%;
+		background: none;
+		background-color: #d2d2d0;
+	}
+	.cf-row3 {
+		width: 100%;
+		margin: 0 auto;
+	}
+	.main-cur-n-container {
+		width: 100%;
+		height: 100%;
+		margin: 0 auto;
+		background-color: #efefef;
+	}
+	.pro_hei {
+		height: 800px;
+	}
+	.edu-banner-ko-sub-container {
+		width: 100%;
+		height: 650px;
+		background: url('../img/edu-banner-ko-sub-bg.jpg') no-repeat right;
+	}
+	.call-bg-container {
+		width: 100%;
+		background: url('../img/wis-bg3.png') no-repeat center;
+	}
+	.border-light-gray {
+		box-shadow: none;
+	}
+	.main-pro3-row {
+		max-width: 100%;
+		min-width: 100%;
+		height: 100%;
+		background: none;
+	}
+	#mobile-col-6 {
+		width: 100%;
+		max-width: 100%;
+	}
+	.mproul li a video {
+		width: 100%;
+		height: 100%;
+	}
+}

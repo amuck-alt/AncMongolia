@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.crewfactory.main.dao.ProfessorDao">
+
+	<select id="selectByAdmin" resultType="com.crewfactory.main.domain.ProfessorDomain">
+		SELECT 
+			*
+		FROM mg_professor_info ORDER BY openidx asc, openpos asc;
+	</select>
+	
+	<select id="selectByWebHome" resultType="com.crewfactory.main.domain.ProfessorDomain">
+		SELECT 
+			*
+		FROM mg_professor_info ORDER BY openidx asc, openpos desc limit 5;
+	</select>
+	
+	<select id="selectByWeb" resultType="com.crewfactory.main.domain.ProfessorDomain">
+		SELECT 
+			*
+		FROM mg_professor_info ORDER BY openidx asc, openpos desc, idx desc;
+	</select>
+	
+	
+	<select id="viewByAdmin" parameterType="int" resultType="com.crewfactory.main.domain.ProfessorDomain">
+		SELECT 
+			idx, openidx, openpos, thumbnail, proname, ranks, subject, sentence, schedule, classnm, history, regid, regip, regdate
+		FROM mg_professor_info where idx = #{idx};
+	</select>
+	
+	<insert id="insert" parameterType="com.crewfactory.main.domain.ProfessorDomain">
+		INSERT INTO mg_professor_info (
+			idx, openidx, openpos, thumbnail, proname, ranks, subject, sentence, schedule, classnm, history, regid, regip, regdate
+		) VALUES (
+			(select ifnull(max(idx)+1, 1) from mg_professor_info a),
+			#{openidx}, 
+			#{openpos}, 
+			#{thumbnail}, 
+			#{proname}, 
+			#{ranks}, 
+			#{subject}, 
+			#{sentence}, 
+			#{schedule}, 
+			#{classnm}, 
+			#{history}, 
+			#{regid}, 
+			#{regip}, 
+			now()
+		);
+	</insert>
+	<update id="update" parameterType="com.crewfactory.main.domain.ProfessorDomain">
+		UPDATE mg_professor_info
+			SET
+			openpos = #{openpos}, 
+			openidx = #{openidx}, 
+			thumbnail = #{thumbnail}, 
+			proname = #{proname}, 
+			ranks = #{ranks}, 
+			subject = #{subject}, 
+			sentence = #{sentence}, 
+			schedule = #{schedule}, 
+			classnm = #{classnm}, 
+			history = #{history}, 
+			regid = #{regid}, 
+			regip = #{regip}, 
+			regdate = now()
+		WHERE idx = #{idx}
+    </update>
+        
+    <delete id="delete" parameterType="int">
+        DELETE FROM mg_professor_info WHERE idx = #{idx}
+    </delete>
+    
+</mapper>

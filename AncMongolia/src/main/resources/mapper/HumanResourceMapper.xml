@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.crewfactory.main.dao.HumanResourceDao">
+
+	<select id="select" parameterType="com.crewfactory.main.domain.HumanResourceDomain" resultType="com.crewfactory.main.domain.HumanResourceDomain">
+		select 
+			*,
+			(select concat(a.itvday, ' ', a.itvtime) from ck_interview_info a where a.idx = hopeintv1 and a.recruitidx = #{catenum} limit 1) as interviewday1, 
+			(select concat(a.itvday, ' ', a.itvtime) from ck_interview_info a where a.idx = hopeintv2 and a.recruitidx = #{catenum} limit 1) as interviewday2,
+			concat(birthyear, '. ', birthmonth, '. ', birthday) as birth,
+			concat(phoneagency, '-', phonefirst, '-', phonesecond) as phonenum
+		from ck_recruit_volunteer
+		where catenum = #{catenum}
+		<if test="itvcode == '1차'">
+			and hopeintv1 = #{hopeidx}
+		</if>
+		 <if test="itvcode == '2차'">
+			and hopeintv2 = #{hopeidx}
+		</if>
+		<if test="result1st != ''">
+			and result1st = '합격'
+		</if>
+		<if test="result2nd != ''">
+			and result2nd = '합격'
+		</if>
+		<if test="result3rd != ''">
+			and result3rd = '합격'
+		</if>
+		order by regdate desc
+	</select>
+	
+	<select id="downExcel" parameterType="com.crewfactory.main.domain.HumanResourceDomain" resultType="com.crewfactory.main.domain.HumanResourceDomain">
+		select 
+			*,
+			(select concat(a.itvday, ' ', a.itvtime) from ck_interview_info a where a.idx = hopeintv1 and a.recruitidx = #{catenum} limit 1) as interviewday1, 
+			(select concat(a.itvday, ' ', a.itvtime) from ck_interview_info a where a.idx = hopeintv2 and a.recruitidx = #{catenum} limit 1) as interviewday2,
+			concat(birthyear, '. ', birthmonth, '. ', birthday) as birth,
+			concat(phoneagency, '-', phonefirst, '-', phonesecond) as phonenum
+		from ck_recruit_volunteer
+		where catenum = #{catenum}
+		<if test="itvcode == '1차'">
+			and hopeintv1 = #{hopeidx}
+		</if>
+		 <if test="itvcode == '2차'">
+			and hopeintv2 = #{hopeidx}
+		</if>
+		<if test="result1st != ''">
+			and result1st = '합격'
+		</if>
+		<if test="result2nd != ''">
+			and result2nd = '합격'
+		</if>
+		<if test="result3rd != ''">
+			and result3rd = '합격'
+		</if>
+		order by catenum, studentnum asc
+	</select>
+	
+	<select id="view" parameterType="int" resultType="com.crewfactory.main.domain.HumanResourceDomain">
+		select 
+			*,
+			(select concat(a.itvday, ' ', a.itvtime) from ck_interview_info a where a.idx = hopeintv1 limit 1) as interviewday1,
+			concat(birthyear, birthmonth, birthday) as birth,
+			concat(phoneagency, phonefirst, phonesecond) as phonenum
+		from ck_recruit_volunteer
+		where idx = #{idx} 
+	</select>
+	
+	<select id="checkVolunteer" parameterType="com.crewfactory.main.domain.HRSearchDomain" resultType="int">
+		select 
+			count(a.idx) as count
+		from ck_recruit_volunteer a
+		where a.catenum = #{catenum} 
+		and a.korname = #{korname}
+		and concat(a.phoneagency, a.phonefirst, a.phonesecond) = concat(#{phoneagency}, #{phonefirst}, #{phonesecond})
+	</select>
+	
+	<select id="search" parameterType="com.crewfactory.main.domain.HRSearchDomain" resultType="com.crewfactory.main.domain.HumanResourceDomain">
+		select 
+			a.*,
+			b.title,
+			(select count(idx) from ck_recruit_volunteer where catenum = a.catenum and hopeintv1 = a.hopeintv1) as voluncount,
+			concat(b.stday, ' ', b.sttime) as stdaytime,
+			concat(b.endday, ' ', b.endtime) as enddaytime
+		from ck_recruit_volunteer a, ck_recruit_info b
+		where a.catenum = b.idx
+		and a.catenum = #{srhcatenum} 
+		and a.korname = #{srhkorname}
+		and concat(a.phoneagency, a.phonefirst, a.phonesecond) = concat(#{srhphoneagency}, #{srhphonefirst}, #{srhphonesecond})
+		and concat(a.birthyear, a.birthmonth, a.birthday) = concat(#{srhBirthYear}, #{srhBirthMonth}, #{srhBirthDay})
+		and a.email = #{srhEmail}
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		delete from ck_recruit_volunteer
+		where idx = #{idx} 
+	</delete>
+	
+	<update id="update" parameterType="com.crewfactory.main.domain.HumanResourceDomain">
+        update ck_recruit_volunteer
+			set
+			resultgb = #{ resultgb },
+			interviewday = #{ interviewday },
+			interviewaddr = #{ interviewaddr },
+			memotxt = #{ memotxt },
+			resultgb = #{resultgb}
+		where idx = #{idx};
+    </update> 
+    
+    <update id="setpass1st" parameterType="com.crewfactory.main.domain.HumanResourceDomain">
+        update ck_recruit_volunteer
+			set
+			result1st = #{value}
+		where idx = #{idx};
+    </update>
+    <update id="setpass2nd" parameterType="com.crewfactory.main.domain.HumanResourceDomain">
+        update ck_recruit_volunteer
+			set
+			result2nd = #{value}
+		where idx = #{idx};
+    </update> 
+    <update id="setpass3rd" parameterType="com.crewfactory.main.domain.HumanResourceDomain">
+        update ck_recruit_volunteer
+			set
+			result3rd = #{value}
+		where idx = #{idx};
+    </update>  
+    
+    <update id="updateIntv1" parameterType="com.crewfactory.main.domain.HumanResourceDomain">
+        update ck_recruit_volunteer set
+			hopeintv1 = #{ hopeintv1 }
+		where idx = #{idx};
+    </update> 
+    
+    <update id="updateIntv2" parameterType="com.crewfactory.main.domain.HumanResourceDomain">
+        update ck_recruit_volunteer set
+			hopeintv2 = #{ hopeintv2 }
+		where idx = #{idx};
+    </update>
+    
+    <update id="allpass1st" parameterType="com.crewfactory.main.domain.HumanResourceDomain">
+        update ck_recruit_volunteer
+			set
+			result1st = '합격'
+		where catenum = #{catenum}
+		and (result1st != '불합격' or result1st is NULL or result1st = '')
+    </update>
+    
+    <update id="allpass2nd" parameterType="com.crewfactory.main.domain.HumanResourceDomain">
+        update ck_recruit_volunteer
+			set
+			result2nd = '합격'
+		where catenum = #{catenum}
+		and (result2nd != '불합격' or result1st is NULL or result2nd = '')
+    </update>
+
+	<insert id="insert" parameterType="com.crewfactory.main.domain.HumanResourceDomain">
+		insert into ck_recruit_volunteer (
+			idx,
+			catenum,
+			studentnum,
+			korname,
+			engname,
+			photo,
+			phoneagency,
+			phonefirst,
+			phonesecond,
+			email,
+			birthyear,
+			birthmonth,
+			birthday,
+			height,
+			weight,
+			gender,
+			nation,
+			address,
+			edulv,
+			gradlv,
+			edugb,
+			langlv1,
+			langlv2,
+			age,
+			referyear,
+			reference,
+			introduce,
+			regdate,
+			regip,
+			resume,
+			resumename,
+			result1st,
+			result2nd,
+			result3rd
+		) values (
+			(select ifnull(max(idx)+1, 1) from ck_recruit_volunteer a), 
+			#{catenum},
+			(select ifnull(max(c.studentnum)+1, 1) from ck_recruit_volunteer c where c.catenum = #{catenum} ),
+			UPPER(#{korname}),
+			#{engname},
+			#{photo},
+			#{phoneagency},
+			#{phonefirst},
+			#{phonesecond},
+			#{email},
+			#{birthyear},
+			#{birthmonth},
+			#{birthday},
+			#{height},
+			#{weight},
+			#{gender},
+			#{nation},
+			#{address},
+			#{edulv},
+			#{gradlv},
+			#{edugb},
+			#{langlv1},
+			#{langlv2},
+			#{age},
+			#{referyear},
+			#{reference},
+			#{introduce},
+			now(),
+			'',
+			#{resume},
+			#{resumename},
+			'',
+			'',
+			''
+		)
+	</insert>
+	
+	<update id="updateResume" parameterType="com.crewfactory.main.domain.HumanResourceDomain">
+		update ck_recruit_volunteer set 
+			korname = #{korname},
+			engname = UPPER(#{engname}),
+			photo = #{photo},
+			phoneagency = #{phoneagency},
+			phonefirst = #{phonefirst},
+			phonesecond = #{phonesecond},
+			email = #{email},
+			birthyear = #{birthyear},
+			birthmonth = #{birthmonth},
+			birthday = #{birthday},
+			height = #{height},
+			weight = #{weight},
+			gender = #{gender},
+			nation = #{nation},
+			address = #{address},
+			edulv = #{edulv},
+			gradlv = #{gradlv},
+			edugb = #{edugb},
+			langlv1 = #{langlv1},
+			langlv2 = #{langlv2},
+			age = #{age},
+			referyear = #{referyear},
+			reference = #{reference},
+			introduce = #{introduce},
+			resume = #{resume},
+			resumename = #{resumename}
+		where idx = #{idx}
+	</update>
+	
+	<select id="checkLimitVolunteer1" parameterType="com.crewfactory.main.domain.HumanResourceDomain" resultType="int">
+		select count(*) from ck_recruit_volunteer where HOPEINTV1 = #{ hopeintv1 }
+	</select>
+	
+	<select id="checkLimitVolunteer2" parameterType="com.crewfactory.main.domain.HumanResourceDomain" resultType="int">
+		select count(*) from ck_recruit_volunteer where HOPEINTV2 = #{ hopeintv2 }
+	</select>
+
+</mapper>

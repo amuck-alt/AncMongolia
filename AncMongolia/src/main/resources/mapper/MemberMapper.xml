@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.crewfactory.main.dao.MemberDao">
+
+	<select id="select" resultType="com.crewfactory.main.domain.MemberDomain">
+		SELECT 
+			idx, domain, userid, regip, mobile, usernm, age,  date_format(regdate, '%Y-%m-%d %H:%i') as regdate, fn_getManagerNm(manager) as manager, status, team
+		FROM mg_member_info;
+	</select>
+	
+	<select id="view" parameterType="int" resultType="com.crewfactory.main.domain.MemberDomain">
+		SELECT 
+			*
+		FROM mg_member_info where idx = #{idx};
+	</select>
+	
+	<select id="check" parameterType="com.crewfactory.main.domain.MemberDomain" resultType="int">
+		SELECT 
+			count(idx)
+		FROM mg_member_info 
+		WHERE userid = #{userid}
+		AND userpw = #{userpw}
+		AND status != '불량회원'
+		AND status != '탈퇴회원';
+	</select>
+	
+	<select id="overlap" parameterType="com.crewfactory.main.domain.MemberDomain" resultType="int">
+		SELECT 
+			count(idx)
+		FROM mg_member_info 
+		WHERE userid = #{userid}
+	</select>
+	
+	<select id="findIdpw" parameterType="com.crewfactory.main.domain.MemberDomain" resultType="com.crewfactory.main.domain.MemberDomain">
+		SELECT 
+			userid, userpw
+		FROM mg_member_info 
+		WHERE usernm = #{usernm}
+		AND email = #{email}
+		AND mobile = #{mobile}
+	</select>
+	
+	<select id="find" parameterType="com.crewfactory.main.domain.MemberDomain" resultType="com.crewfactory.main.domain.MemberDomain">
+		SELECT 
+			userpw
+		FROM mg_member_info 
+		WHERE email = #{email}
+		AND userid = #{userid};
+	</select>
+	
+	<insert id="insert" parameterType="com.crewfactory.main.domain.MemberDomain">
+		INSERT INTO mg_member_info (
+			idx,
+			sect,
+			userid,
+			userpw,
+			nickname,
+			usernm,
+			email,
+			gender,
+			age,
+			birthday,
+			profile,
+			regdate,
+			regip,
+			path,
+			domain,
+			mobile,
+			hopse,
+			status
+		) VALUES (
+			(select ifnull(max(idx)+1, 1) from mg_member_info a),
+			#{sect},
+			#{userid},
+			#{userpw},
+			#{nickname},
+			#{usernm},
+			#{email},
+			#{gender},
+			#{age},
+			#{birthday},
+			#{profile},
+			now(),
+			#{regip},
+			#{path},
+			#{domain},
+			#{mobile},
+			#{hopse},
+			'신규'
+		);
+	</insert>
+	
+	<update id="update" parameterType="com.crewfactory.main.domain.MemberDomain">
+        UPDATE mg_member_info
+			SET
+			sect=#{sect},
+			status=#{status},
+			userpw=#{userpw},
+			nickname=#{nickname},
+			usernm=#{usernm},
+			email=#{email},
+			gender=#{gender},
+			age=#{age},
+			smemo=#{smemo},
+			hopse=#{hopse},
+			team=#{team},
+			manager=#{manager}
+		WHERE idx = #{idx};
+    </update>
+    
+    <delete id="delete" parameterType="int">
+        DELETE FROM mg_member_info WHERE idx = #{idx}
+    </delete>
+    
+</mapper>

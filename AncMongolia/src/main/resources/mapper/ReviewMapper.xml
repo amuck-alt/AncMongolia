@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.crewfactory.main.dao.ReviewDao">
+
+	<select id="selectKoTop" resultType="com.crewfactory.main.domain.ReviewDomain">
+		SELECT idx, section, gubun, title, age, spec, gradlv, langlv, reference, description, thumbnail from (
+  		(
+	  		SELECT 
+	  			idx, section, gubun, title, age, spec, gradlv, langlv, reference, description, thumbnail
+	  		FROM review
+	  		WHERE gubun = 'ke'
+	  		ORDER BY idx DESC
+	  		LIMIT 10
+  		) UNION ALL (
+	  		SELECT 
+	  			idx, section, gubun, title, age, spec, gradlv, langlv, reference, description, thumbnail
+	  		FROM review
+	  		WHERE gubun = 'oz'
+	  		ORDER BY idx DESC
+	  		LIMIT 10
+  		) UNION ALL (
+			  SELECT 
+			  	idx, section, gubun, title, age, spec, gradlv, langlv, reference, description, thumbnail
+			  FROM review
+			  WHERE gubun = 'ko'
+			  ORDER BY idx DESC
+			  LIMIT 10
+  		)
+		) a
+	</select>
+	
+	<select id="selectKe" resultType="com.crewfactory.main.domain.ReviewDomain">
+		SELECT 
+			idx, section, gubun, title, age, spec, gradlv, langlv, reference, description, thumbnail
+		FROM review
+		WHERE gubun='ke'
+		ORDER BY idx DESC
+		LIMIT 10;
+	</select>
+	
+	<select id="selectOz" resultType="com.crewfactory.main.domain.ReviewDomain">
+		SELECT 
+			idx, section, gubun, title, age, spec, gradlv, langlv, reference, description, thumbnail
+		FROM review
+		WHERE gubun='oz'
+		ORDER BY idx DESC
+		LIMIT 10;
+	</select>
+	
+	<select id="selectKo" resultType="com.crewfactory.main.domain.ReviewDomain">
+		SELECT 
+			idx, section, gubun, title, age, spec, gradlv, langlv, reference, description, thumbnail
+		FROM review
+		WHERE gubun='lcc'
+		ORDER BY idx DESC
+		LIMIT 10;
+	</select>
+	
+	<select id="selectEa" resultType="com.crewfactory.main.domain.ReviewDomain">
+		SELECT 
+			idx, section, gubun, title, age, spec, gradlv, langlv, reference, description, thumbnail
+		FROM review
+		WHERE gubun='ea'
+		ORDER BY idx DESC
+		LIMIT 10;
+	</select>
+	
+	<select id="selectEu" resultType="com.crewfactory.main.domain.ReviewDomain">
+		SELECT 
+			idx, section, gubun, title, age, spec, gradlv, langlv, reference, description, thumbnail
+		FROM review
+		WHERE gubun='eu'
+		ORDER BY idx DESC
+		LIMIT 10;
+	</select>
+	
+	<select id="selectAs" resultType="com.crewfactory.main.domain.ReviewDomain">
+		SELECT 
+			idx, section, gubun, title, age, spec, gradlv, langlv, reference, description, thumbnail
+		FROM review
+		WHERE gubun='as'
+		ORDER BY idx DESC
+		LIMIT 10;
+	</select>
+	
+	<select id="selectBest" resultType="com.crewfactory.main.domain.ReviewDomain">
+		SELECT 
+			idx, section, gubun, title, age, spec, gradlv, langlv, reference, description, thumbnail, classnm, comment
+		FROM review
+		ORDER BY idx DESC
+		LIMIT 10;
+	</select>
+	
+	
+	<select id="selectOsTop" resultType="com.crewfactory.main.domain.ReviewDomain">
+		SELECT 
+			idx, section, gubun, title, age, spec, gradlv, langlv, reference, description, thumbnail
+		FROM review
+		WHERE section='os'
+		ORDER BY idx DESC
+		LIMIT 8;
+	</select>
+	
+	<select id="selectAll" parameterType="java.util.HashMap" resultType="com.crewfactory.main.domain.ReviewDomain">
+		SELECT 
+			*
+		FROM review
+		<trim prefix="WHERE" prefixOverrides="AND||OR">
+			<if test = "searchText != null">
+				AND (title like CONCAT('%', #{searchText}, '%') OR content like CONCAT('%', #{searchText}, '%'))
+			</if>
+			<if test = "searchSection != null">
+				AND section = #{searchSection}
+			</if>
+			<if test = "searchGubun != null">
+				AND gubun = #{searchGubun}
+			</if>
+			<if test = "searchHeight != null">
+				AND spec like CONCAT('%', #{searchHeight}, '%')
+			</if>
+			<if test = "searchWeight != null">
+				AND spec like CONCAT('%', #{searchWeight}, '%')
+			</if>
+			<if test = "searchGradlv != null">
+				AND gradlv like CONCAT('%', #{searchGradlv}, '%')
+			</if>
+			<if test = "searchLanglv != null">
+				AND langlv like CONCAT('%', #{searchLanglv}, '%')
+			</if>
+		</trim>
+	</select>
+	
+	<select id="selectTotal" parameterType="java.util.HashMap" resultType="int">
+		SELECT 
+			count(idx) as total
+		FROM review
+		<trim prefix="WHERE" prefixOverrides="AND||OR">
+			<if test = "searchText != null">
+				AND (title like CONCAT('%', #{searchText}, '%') OR content like CONCAT('%', #{searchText}, '%'))
+			</if>
+			<if test = "searchSection != null">
+				AND section = #{searchSection}
+			</if>
+			<if test = "searchGubun != null">
+				AND gubun = #{searchGubun}
+			</if>
+			<if test = "searchHeight != null">
+				AND spec like CONCAT('%', #{searchHeight}, '%')
+			</if>
+			<if test = "searchWeight != null">
+				AND spec like CONCAT('%', #{searchWeight}, '%')
+			</if>
+			<if test = "searchGradlv != null">
+				AND gradlv like CONCAT('%', #{searchGradlv}, '%')
+			</if>
+			<if test = "searchLanglv != null">
+				AND langlv like CONCAT('%', #{searchLanglv}, '%')
+			</if>
+		</trim>
+	</select>
+	
+	<select id="select" parameterType="java.util.HashMap" resultType="com.crewfactory.main.domain.ReviewDomain">
+		SELECT 
+			idx, section, gubun, fn_airline(alcd) as alcd, thumbnail, classnm, age, major, gradlv, langlv, spec, reference, comment, description, title, visit, regdate
+		FROM review
+		<trim prefix="WHERE" prefixOverrides="AND||OR">
+			<if test = "searchText != null">
+				AND (title like CONCAT('%', #{searchText}, '%') OR content like CONCAT('%', #{searchText}, '%'))
+			</if>
+			<if test = "searchSection != null">
+				AND section = #{searchSection}
+			</if>
+			<if test = "searchGubun != null">
+				AND gubun = #{searchGubun}
+			</if>
+			<if test = "searchHeight != null">
+				AND spec like CONCAT('%', #{searchHeight}, '%')
+			</if>
+			<if test = "searchWeight != null">
+				AND spec like CONCAT('%', #{searchWeight}, '%')
+			</if>
+			<if test = "searchGradlv != null">
+				AND gradlv like CONCAT('%', #{searchGradlv}, '%')
+			</if>
+			<if test = "searchLanglv != null">
+				AND langlv like CONCAT('%', #{searchLanglv}, '%')
+			</if>
+		</trim>
+		ORDER BY idx DESC LIMIT #{start}, #{end};
+	</select>
+	
+	<select id="view" parameterType="int" resultType="com.crewfactory.main.domain.ReviewDomain">
+		SELECT 
+			*
+		FROM review where idx = #{idx};
+	</select>
+	
+	<insert id="insert" parameterType="com.crewfactory.main.domain.ReviewDomain">
+		INSERT INTO review (
+			idx,
+			section,
+			gubun,
+			alcd,
+			thumbnail,
+			age,
+			gradlv,
+			major,
+			langlv,
+			reference,
+			spec,
+			classnm,
+			comment,
+			description,
+			title,
+			content,
+			regid,
+			regip,
+			regdate
+		) VALUES (
+			(select ifnull(max(idx)+1, 1) from review a),
+			#{section},
+			#{gubun},
+			#{alcd},
+			#{thumbnail},
+			#{age},
+			#{gradlv},
+			#{major},
+			#{langlv},
+			#{reference},
+			#{spec},
+			#{classnm},
+			#{comment},
+			#{description},
+			#{title},
+			#{content},
+			#{regid},
+			#{regip},
+			now()
+		);
+	</insert>
+	
+	<update id="update" parameterType="com.crewfactory.main.domain.ReviewDomain">
+        UPDATE review
+			SET
+			section = #{section},
+			gubun = #{gubun},
+			alcd = #{alcd},
+			thumbnail = #{thumbnail},
+			age = #{age},
+			gradlv = #{gradlv},
+			langlv = #{langlv},
+			major = #{major},
+			langlv = #{langlv},
+			reference = #{reference},
+			spec = #{spec},
+			classnm = #{classnm},
+			comment = #{comment},
+			description = #{description},
+			title = #{title},
+			content = #{content},
+			regid = #{regid},
+			regip = #{regip}
+		WHERE idx = #{idx};
+    </update>
+        
+    <delete id="delete" parameterType="int">
+        DELETE FROM review WHERE idx = #{idx}
+    </delete>
+
+</mapper>
