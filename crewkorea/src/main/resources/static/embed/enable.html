@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="/dist/css/bootstrap.css">
+<link rel="stylesheet" href="/css/cfw-sub-style.css">
+<link rel="stylesheet" href="/css/cfw-sub-style-mobile.css">
+<link rel="stylesheet" href="/vendor/swiper/css/swiper.min.css">
+<script src="/dist/js/jquery.min.js"></script>
+<script src="/dist/js/jquery-ui.min.js"></script>
+<script src="/dist/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.js"></script>
+<script src="/vendor/swiper/js/swiper.min.js"></script>
+</head>
+<body>
+
+
+<div class="container-fluid" style="margin:0 !important; padding:0 !important;" id="containter-body">
+	<div class="row sm-row my-5">
+		<h3>- 게시글을 끝마칠때 사용하는 베너</h3>
+		<img src="/embed/images/embed-ex-img-001.png" class="py-3">
+		<p>위와같이 게시글 에디터에 <span class="mx-2 font-pink font-bold font-underline">http://www.crew-factory.com/embed/banner.html</span>를 복사하여 붙여넣기 한다. </p>
+		<div class="col-12 my-4 border text-center align-middle">
+			<div style="position: relative; height:30rem;">
+				<iframe src="/embed/banner.html"	style="position: absolute; width:100%; height:30rem; top:0; left:0;" frameborder="0" scrolling="no"></iframe>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- <h2>이미지체크, 기출문제제공 베너</h2>
+<div class="col-12 text-center" style="margin:0 !important; padding:0 !important;" id="containter-body">
+	<div class="swiper-container">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide bg-navy">
+				<img src="/img/banner-img-imgchk.png" class="mobile-100-percent">
+			</div>
+			<div class="swiper-slide bg-purple">
+				<img src="/img/banner-img-interviewchk.png" class="mobile-100-percent">
+			</div>
+		</div>
+		<div class="swiper-pagination"></div>
+	</div>
+</div> -->
+
+
+
+<script>
+	var swiper = new Swiper('.swiper-container', {
+		pagination: {
+	        el: '.swiper-pagination', clickable: true,
+	   },
+	   loop: true,
+		autoplay: { delay: 4000, disableOnInteraction: false, },
+	});
+</script>
+</body>
+</html>

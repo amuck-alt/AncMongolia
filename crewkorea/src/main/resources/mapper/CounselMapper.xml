@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.crewfactory.main.dao.CounselDao">
+	
+	<select id="select" resultType="com.crewfactory.main.domain.CounselDomain">
+		SELECT 
+			idx,gubun, domain,name,phone,age, date_format(regdate, '%Y-%m-%d %H:%i') as regdate, regip, stat, fn_getManagerNm(manager) as manager,email, team
+		FROM ck_counsel_info
+		WHERE (gubun != '특강신청' or gubun is null)
+		AND stat not like '%불량%'
+	</select>
+	
+	<select id="selectSpc" resultType="com.crewfactory.main.domain.CounselDomain">
+		SELECT 
+			idx,gubun, domain,name,phone,age, date_format(regdate, '%Y-%m-%d %H:%i') as regdate, stat, fn_getManagerNm(manager) as manager,email, team
+		FROM ck_counsel_info
+		WHERE gubun = '특강신청'
+		AND stat not like '%불량%'
+	</select>
+	
+	<select id="selectSubscribe" resultType="com.crewfactory.main.domain.CounselDomain">
+		SELECT 
+			idx,gubun, domain, name, phone, age, date_format(regdate, '%Y-%m-%d %H:%i') as regdate, stat, fn_getManagerNm(manager) as manager, email, team
+		FROM ck_counsel_info
+		WHERE gubun = '구독신청'
+		AND stat not like '%불량%'
+	</select>
+	
+	<select id="selectBlack" resultType="com.crewfactory.main.domain.CounselDomain">
+		SELECT 
+			idx,gubun, domain,name,phone,age, date_format(regdate, '%Y-%m-%d %H:%i') as regdate, regip, stat, fn_getManagerNm(manager) as manager,email, team
+		FROM ck_counsel_info
+		WHERE stat like '%불량%'
+	</select>	
+	
+	<select id="view" parameterType="int" resultType="com.crewfactory.main.domain.CounselDomain">
+		SELECT 
+			*
+		FROM ck_counsel_info where idx = #{idx};
+	</select>
+	
+	<insert id="insert" parameterType="com.crewfactory.main.domain.CounselDomain">
+		INSERT INTO ck_counsel_info (
+			idx,
+			gubun,
+			office,
+			id,
+			name,
+			phone,
+			hopse,
+			worse,
+			memo,
+			wants,
+			regdate,
+			manager,
+			stat,
+			path,
+			domain,
+			gender,
+			height,
+			weight,
+			edulv,
+			gradlv,
+			lang,
+			langlv,
+			smemo,
+			age,
+			regip,
+			email
+		) VALUES (
+			(select ifnull(max(idx)+1, 1) from ck_counsel_info a),
+			#{gubun},
+			#{office},
+			#{id},
+			#{name},
+			#{phone},
+			#{hopse},
+			#{worse},
+			#{memo},
+			#{wants},
+			now(),
+			#{manager},
+			#{stat},
+			#{path},
+			#{domain},
+			#{gender},
+			#{height},
+			#{weight},
+			#{edulv},
+			#{gradlv},
+			#{lang},
+			#{langlv},
+			#{smemo},
+			#{age},
+			#{regip},
+			#{email}
+		);
+	</insert>
+	
+	<update id="update" parameterType="com.crewfactory.main.domain.CounselDomain">
+        UPDATE ck_counsel_info
+			SET
+			team=#{team},
+			age=#{age},
+			manager=#{manager},
+			stat=#{stat},
+			gender=#{gender},
+			height=#{height},
+			weight=#{weight},
+			edulv=#{edulv},
+			gradlv=#{gradlv},
+			lang=#{lang},
+			langlv=#{langlv},
+			email=#{email},
+			smemo=#{smemo},
+			manager=#{manager},
+			hopse=#{hopse},
+			worse=#{worse}
+		WHERE idx = #{idx};
+    </update>
+    
+    <update id="delupdate" parameterType="int">
+        UPDATE ck_counsel_info
+			SET
+			stat='불량회원'
+		WHERE idx = #{idx};
+    </update>
+        
+    <delete id="delete" parameterType="int">
+        DELETE FROM ck_counsel_info WHERE idx = #{idx}
+    </delete>
+
+</mapper>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.crewfactory.main.dao.VisitCounterDao">
+	<insert id="insert_visiter" parameterType="com.crewfactory.main.domain.VanalyzerDomain">
+		INSERT INTO vanalyzer (
+			ipaddr, path, current, sector, area, domain, keyword, agent, regdate
+		) VALUES (
+			#{ipaddr},
+			#{path},
+			#{current},
+			#{sector},
+			#{area},
+			#{domain},
+			#{keyword},
+			#{agent},
+			now()
+		);
+	</insert>
+	
+	<select id="checkIp" parameterType="com.crewfactory.main.domain.VanalyzerDomain" resultType="int">
+		SELECT 
+			count(idx)
+		FROM vanalyzer WHERE ipaddr = #{ipaddr} 
+		AND DATE_FORMAT(regdate, '%Y%m%d') = DATE_FORMAT(now(),'%Y%m%d')	
+	</select>
+	
+	<select id="selectLog" parameterType="java.util.HashMap" resultType="com.crewfactory.main.domain.VanalyzerDomain">
+		SELECT 
+			*
+		FROM vanalyzer
+		WHERE ipaddr = #{regip}	
+		ORDER BY idx DESC
+	</select>
+	
+	<select id="ov_count" parameterType="java.util.HashMap" resultType="com.crewfactory.main.domain.CounterDomain">
+		select
+			(select count(1) from vanalyzer where date_format(regdate, '%Y%m%d') = #{searchDay} and (ipaddr != '61.74.145.67' or ipaddr='119.197.80.138' or ipaddr='121.135.160.87') and ipaddr not like '211.249.42%' and (agent not like '%naver.me%' and agent not like '%google.com/bot%' and agent not like '%Daum%')) as ov_visiter_count,
+			(select count(1) from vanalyzer where date_format(regdate, '%Y%m%d') = #{searchDay} and (ipaddr != '61.74.145.67' or ipaddr='119.197.80.138' or ipaddr='121.135.160.87') and (agent like '%android%' or agent like '%iphone%') and ipaddr not like '211.249.42%' and (agent not like '%naver.me%' and agent not like '%google.com/bot%' and agent not like '%Daum%')) as ov_visiter_count_m,
+			(select count(1) from vanalyzer where date_format(regdate, '%Y%m%d') = #{searchDay} and (ipaddr != '61.74.145.67' or ipaddr='119.197.80.138' or ipaddr='121.135.160.87') and (agent not like '%android%' and agent not like '%iphone%') and ipaddr not like '211.249.42%' and (agent not like '%naver.me%' and agent not like '%google.com/bot%' and agent not like '%Daum%')) as ov_visiter_count_pc,
+			(select count(1) from ck_counsel_info where date_format(regdate, '%Y%m%d') = #{searchDay} ) as ov_counsel_count_check,
+			0 as ov_membership_count_new
+		from dual	
+	</select>
+	
+	<select id="ov_count_monthly" parameterType="java.util.HashMap" resultType="com.crewfactory.main.domain.CounterDomain">
+		select
+			(select count(1) from vanalyzer where date_format(regdate, '%Y%m') = #{searchMonth} and (ipaddr != '61.74.145.67' or ipaddr='119.197.80.138' or ipaddr='121.135.160.87') and ipaddr not like '211.249.42%') as ov_visiter_count,
+			(select count(1) from vanalyzer where date_format(regdate, '%Y%m') = #{searchMonth} and (ipaddr != '61.74.145.67' or ipaddr='119.197.80.138' or ipaddr='121.135.160.87') and (agent like '%android%' or agent like '%iphone%') and ipaddr not like '211.249.42%') as ov_visiter_count_m,
+			(select count(1) from vanalyzer where date_format(regdate, '%Y%m') = #{searchMonth} and (ipaddr != '61.74.145.67' or ipaddr='119.197.80.138' or ipaddr='121.135.160.87') and (agent not like '%android%' and agent not like '%iphone%') and ipaddr not like '211.249.42%') as ov_visiter_count_pc,
+			(select count(1) from ck_counsel_info where date_format(regdate, '%Y%m') = #{searchMonth} ) as ov_counsel_count_check,
+			0 as ov_membership_count_new
+		from dual	
+	</select>
+	
+	<select id="selectRecent" parameterType="java.util.HashMap" resultType="com.crewfactory.main.domain.VanalyzerDomain">
+		select idx, ipaddr, current, keyword, domain, path, regdate,
+		(select count(*) from ck_counsel_info where regip=ipaddr and date_format(regdate, '%Y%m%d') = date_format(#{searchDay}, '%Y%m%d')) as counsel
+		from vanalyzer 
+		where date_format(regdate, '%Y%m%d') = date_format(#{searchDay}, '%Y%m%d')
+		and (ipaddr != '61.74.145.67' or ipaddr='119.197.80.138' or ipaddr='121.135.160.87')
+		and (path != 'null' or current != 'null')
+		and (ipaddr not like '211.249.42%') 
+		and (agent not like '%naver.me%' and agent not like '%google.com/bot%' and agent not like '%Daum%')
+		order by idx desc
+	</select>
+	
+	<select id="total_count" parameterType="java.util.HashMap" resultType="com.crewfactory.main.domain.VanalyzerDomain">
+	select (
+		select count(*) from vanalyzer 
+				where date_format(regdate, '%Y%m%d') = date_format(#{searchDay}, '%Y%m%d')
+				and (ipaddr != '61.74.145.67' or ipaddr='119.197.80.138' or ipaddr='121.135.160.87')
+				and path != 'null'
+				and ipaddr not like '211.249.42%' 
+				and (agent not like '%naver.me%' and agent not like '%google.com/bot%' and agent not like '%Daum%')
+		    	and (current like '%n_keyword=%' or path like '%ad.search%' or path like '%url=%')
+		) as total_naver_keyword, (
+		select count(*) from vanalyzer 
+				where date_format(regdate, '%Y%m%d') = date_format(#{searchDay}, '%Y%m%d')
+				and (ipaddr != '61.74.145.67' or ipaddr='119.197.80.138' or ipaddr='121.135.160.87')
+				and path != 'null'
+				and ipaddr not like '211.249.42%' 
+				and (agent not like '%naver.me%' and agent not like '%google.com/bot%' and agent not like '%Daum%')
+		    	and (path like '%search.naver.com%' or current like '%n_keyword%')
+		) as total_naver_search, (
+		select count(*) from vanalyzer 
+				where date_format(regdate, '%Y%m%d') = date_format(#{searchDay}, '%Y%m%d')
+				and (ipaddr != '61.74.145.67' or ipaddr='119.197.80.138' or ipaddr='121.135.160.87')
+				and path != 'null'
+				and ipaddr not like '211.249.42%' 
+				and (agent not like '%naver.me%' and agent not like '%google.com/bot%' and agent not like '%Daum%')
+		    	and path like '%blog.naver.com%'
+		) as total_naver_blog, (
+		select count(*) from vanalyzer 
+				where date_format(regdate, '%Y%m%d') = date_format(#{searchDay}, '%Y%m%d')
+				and (ipaddr != '61.74.145.67' or ipaddr='119.197.80.138' or ipaddr='121.135.160.87')
+				and path != 'null'
+				and ipaddr not like '211.249.42%' 
+				and (agent not like '%naver.me%' and agent not like '%google.com/bot%' and agent not like '%Daum%')
+		    	and path like '%cafe.naver.com%'
+		) as total_naver_cafe, (
+		select count(*) from vanalyzer 
+				where date_format(regdate, '%Y%m%d') = date_format(#{searchDay}, '%Y%m%d')
+				and (ipaddr != '61.74.145.67' or ipaddr='119.197.80.138' or ipaddr='121.135.160.87')
+				and path != 'null'
+				and ipaddr not like '211.249.42%' 
+				and (agent not like '%naver.me%' and agent not like '%google.com/bot%' and agent not like '%Daum%')
+		    	and path like '%google%'
+		) as total_google, (
+		select count(*) from vanalyzer 
+				where date_format(regdate, '%Y%m%d') = date_format(#{searchDay}, '%Y%m%d')
+				and (ipaddr != '61.74.145.67' or ipaddr='119.197.80.138' or ipaddr='121.135.160.87')
+				and path != 'null'
+				and ipaddr not like '211.249.42%' 
+				and (agent not like '%naver.me%' and agent not like '%google.com/bot%' and agent not like '%Daum%')
+		    	and path like '%daum%'
+		) as total_daum, (
+		select count(*) from vanalyzer 
+				where date_format(regdate, '%Y%m%d') = date_format(#{searchDay}, '%Y%m%d')
+				and (ipaddr != '61.74.145.67' or ipaddr='119.197.80.138' or ipaddr='121.135.160.87')
+				and path != 'null'
+				and ipaddr not like '211.249.42%' 
+				and (agent not like '%naver.me%' and agent not like '%google.com/bot%' and agent not like '%Daum%')
+		    	and (path like '%instagram%' or path like '%facebook%') 
+		) as total_sns, (
+		select ifnull(count(*), 0) from vanalyzer 
+				where date_format(regdate, '%Y%m%d') = date_format(#{searchDay}, '%Y%m%d')
+				and (ipaddr != '61.74.145.67' or ipaddr='119.197.80.138' or ipaddr='121.135.160.87')
+				and path != 'null'
+				and ipaddr not like '211.249.42%' 
+				and (agent not like '%naver.me%' and agent not like '%google.com/bot%' and agent not like '%Daum%')
+		   	and (path like '%kin.naver.com%') 
+		) as total_naver_kin
+		 from dual
+	</select>
+	
+	
+<!-- 	<select id="select_visiter" parameterType="java.util.HashMap" resultType="int">
+		SELECT 
+			count(idx)
+		FROM vanalyzer WHERE ipaddr = AND regdate
+	
+	</select> -->
+</mapper>

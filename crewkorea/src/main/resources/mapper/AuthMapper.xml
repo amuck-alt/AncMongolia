@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.crewfactory.main.dao.AuthDao">
+
+	<select id="select" parameterType="com.crewfactory.main.domain.AuthDomain" resultType="com.crewfactory.main.domain.AuthDomain">
+		SELECT 
+			idx, usernm, userid, section, team, recdate
+		FROM ck_manager_info
+	</select>
+	
+	<select id="selectTeam" parameterType="com.crewfactory.main.domain.AuthDomain" resultType="com.crewfactory.main.domain.AuthDomain">
+		SELECT 
+			idx, usernm, userid, section, team, recdate
+		FROM ck_manager_info
+		WHERE team = #{team};
+	</select>
+	
+	<select id="view" parameterType="int" resultType="com.crewfactory.main.domain.AuthDomain">
+		SELECT 
+			*
+		FROM ck_manager_info where idx = #{idx};
+	</select>
+	
+	<select id="login" parameterType="com.crewfactory.main.domain.AuthDomain" resultType="com.crewfactory.main.domain.AuthDomain">
+		SELECT 
+			*
+		FROM ck_manager_info WHERE userid=#{userid} AND userpw=#{userpw};
+	</select>
+	
+	<insert id="insert" parameterType="com.crewfactory.main.domain.AuthDomain">
+		INSERT INTO ck_manager_info (
+			idx, section, team, userid, usernm, userpw, regdate
+		) VALUES (
+			(select ifnull(max(idx)+1, 1) from ck_manager_info a),
+			#{ section },
+			#{ team },
+			#{ userid },
+			#{ usernm },
+			#{ userpw },
+			now()
+		);
+	</insert>
+	
+	<update id="update" parameterType="com.crewfactory.main.domain.AuthDomain">
+        UPDATE ck_manager_info
+			SET
+			section = #{section},
+			team = #{team},
+			userid = #{userid},
+			usernm = #{usernm},
+			userpw = #{userpw}
+		WHERE idx = #{idx};
+    </update>
+    
+    <update id="updateRecDate" parameterType="com.crewfactory.main.domain.AuthDomain">
+        UPDATE ck_manager_info
+			SET
+			recdate = now()
+		WHERE userid = #{userid};
+    </update>
+        
+    <delete id="delete" parameterType="int">
+        DELETE FROM ck_manager_info WHERE idx = #{idx}
+    </delete>
+    
+</mapper>

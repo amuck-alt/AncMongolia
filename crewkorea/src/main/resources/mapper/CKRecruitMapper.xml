@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.crewfactory.main.dao.CKRecruitDao">
+
+	<select id="selectAdmin" resultType="com.crewfactory.main.domain.CKRecruitDomain">
+		select 
+			idx, 
+			thumbnail, 
+			title, 
+			visit, 
+			stday, 
+			sttime,
+			endday,
+			endtime, 
+			description, 
+			content, 
+			regid, 
+			regdate 
+		from 
+			ck_recruit_info
+		order by idx desc
+	</select>
+	
+	<select id="selectTitle" parameterType="String" resultType="com.crewfactory.main.domain.CKRecruitDomain">
+		select 
+			idx,
+			title,
+			stday,
+			sttime,
+			endday,
+			endtime
+		from ck_recruit_info
+		order by idx desc
+	</select>
+	
+	<select id="selectMain" parameterType="String" resultType="com.crewfactory.main.domain.CKRecruitDomain">
+		select 
+			row_number() over(order by idx desc) as num,
+			idx,
+			title,
+			thumbnail,
+			stday,
+			sttime,
+			endday,
+			endtime,
+			concat(stday, ' ', sttime) as stdaytime,
+			concat(endday, ' ', endtime) as enddaytime
+		from ck_recruit_info
+		order by idx desc
+		limit 3
+	</select>
+	
+	<select id="selectTotal" parameterType="java.util.HashMap" resultType="int">
+		SELECT 
+			count(idx) as total
+		FROM ck_recruit_info
+		<trim prefix="WHERE" prefixOverrides="AND||OR">
+			<if test = "searchText != null">
+				AND title like '%'|| #{searchText} ||'%' OR content like '%'|| #{searchText} ||'%'
+			</if>
+		</trim>
+	</select>
+	
+	<select id="selectList" parameterType="java.util.HashMap" resultType="com.crewfactory.main.domain.CKRecruitDomain">
+		SELECT 
+			idx,
+			title,
+			thumbnail,
+			stday,
+			sttime,
+			endday,
+			endtime,
+			concat(stday, ' ', sttime) as stdaytime,
+			concat(endday, ' ', endtime) as enddaytime
+		FROM ck_recruit_info
+		<trim prefix="WHERE" prefixOverrides="AND||OR">
+			<if test = "searchText != null">
+				AND title like '%'|| #{searchText} ||'%' OR content like '%'|| #{searchText} ||'%'
+			</if>
+		</trim>
+		order by idx desc
+	</select>
+	
+	<select id="view" parameterType="int" resultType="com.crewfactory.main.domain.CKRecruitDomain">
+		SELECT 
+			*,
+			concat(stday, ' ', sttime) as stdaytime,
+			concat(endday, ' ', endtime) as enddaytime 
+		FROM ck_recruit_info where idx = #{idx}
+	</select>
+	
+	<insert id="insert" parameterType="com.crewfactory.main.domain.CKRecruitDomain">
+		INSERT INTO ck_recruit_info (
+			idx, 
+			thumbnail, 
+			title, 
+			visit, 
+			stday, 
+			sttime,
+			endday,
+			endtime, 
+			description, 
+			content, 
+			regid, 
+			regdate,
+			filename,
+			filepath,
+			resumeyn 
+		) VALUES (
+			(SELECT ifnull(max(idx)+1, 1) FROM ck_recruit_info a),
+			#{ thumbnail },
+			#{ title },
+			#{ visit },
+			#{ stday },
+			#{ sttime },
+			#{ endday },
+			#{ endtime },
+			#{ description },
+			#{ content },
+			#{ regid },
+			now(),
+			#{ filename },
+			#{ filepath },
+			#{ resumeyn }
+		)
+	</insert>
+	
+	<update id="update" parameterType="com.crewfactory.main.domain.CKRecruitDomain">
+        UPDATE ck_recruit_info SET
+			thumbnail = #{thumbnail},
+			title = #{title},
+			visit = #{visit},
+			stday = #{stday},
+			sttime = #{sttime},
+			endday = #{endday},
+			endtime = #{endtime}, 
+			description = #{description}, 
+			content = #{content},
+			filename = #{filename},
+			filepath = #{filepath},
+			resumeyn = #{resumeyn}
+		WHERE idx = #{idx};
+    </update>
+	
+    <delete id="delete" parameterType="int">
+        delete from ck_recruit_info where idx = #{idx}
+    </delete>
+
+</mapper>
