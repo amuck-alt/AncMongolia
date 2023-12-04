@@ -9,7 +9,7 @@
 		FROM ck_notice_info ORDER BY idx DESC LIMIT 3;
 	</select>
 	
-	<select id="selectAdmin" resultType="com.crewfactory.main.domain.NoticeDomain">
+	<select id="select" resultType="com.crewfactory.main.domain.NoticeDomain">
 		SELECT 
 			idx, section, title, visit, regdate, regid, thumbnail
 		FROM ck_notice_info;

@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.crewfactory.main.domain.AuthDomain;
 import com.crewfactory.main.domain.MessageDomain;
 import com.crewfactory.main.service.AuthService;
+import com.crewfactory.main.service.NoticeService;
 import com.crewfactory.main.service.ReservationService;
 import com.crewfactory.main.service.VanalyzerService;
 
@@ -39,6 +40,9 @@ public class AdminHomeController {
 	
 	@Autowired
 	ReservationService reserv;
+	
+	@Autowired
+	NoticeService notice;
 	
 	@RequestMapping(value="/ckeditor.do")
 	String ckeditor(Model model) throws Exception {
@@ -78,6 +82,7 @@ public class AdminHomeController {
 			model.addAttribute("total", vanalyzer.totalCount(searchMap));
 			model.addAttribute("recent", vanalyzer.selectRecent(searchMap));
 			model.addAttribute("resrv", reserv.selectIndex());
+			model.addAttribute("notice", notice.selectNew());
 
 			url = "/admin/index";
 		} else {

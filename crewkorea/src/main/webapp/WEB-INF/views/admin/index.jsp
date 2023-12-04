@@ -46,7 +46,7 @@ if(searchDay == null || searchDay == ""){
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-          <div class="row mb-2">
+          <div class="row mb-3">
           	<div class="col-md-12">
           		<div class="card">
           			<div class="card-body">
@@ -86,7 +86,7 @@ if(searchDay == null || searchDay == ""){
           </div>
           <div class="row">
             <div class="col-md-2">
-	            <div class="card mb-2">
+	            <div class="card mb-3">
 	                <div class="card-body text-center">
 	                  <!-- <img src="/admin/pack/naver-search-ico.png" width="40px"> -->
 	                  <h5 class="">네이버검색</h5>
@@ -140,7 +140,7 @@ if(searchDay == null || searchDay == ""){
           </div>
           
           
-          <div class="row">
+          <div class="row mt-1">
             <div class="col-md-6 stretch-card">
               <div class="card">
                 <div class="card-body">
@@ -186,10 +186,10 @@ if(searchDay == null || searchDay == ""){
                         </tr>
                       </thead>
                       <tbody>
-                        <c:forEach items="${resrv}" var="list">
+                        <c:forEach items="${notice}" var="list">
                         <tr>
-                            <td align="center" style="font-size: 13px; padding:15px 10px; text-align:center;"><a href="/manager/reservation/view.do?idx=${list.idx}">${list.cus_name}</a></td>
-                            <td align="center" style="font-size: 13px; padding:15px 10px; text-align:center;">${list.cus_age}</td>
+                            <td align="center" style="font-size: 13px; padding:15px 10px; text-align:center;"><a href="/manager/notice/view.do?idx=${list.idx}">${list.title}</a></td>
+                            <td align="center" style="font-size: 13px; padding:15px 10px; text-align:center;"><fmt:formatDate value="${list.regdate}" pattern="yyyy-MM-dd" /></td>
                         </tr>
                         </c:forEach>
                       </tbody>
@@ -204,7 +204,7 @@ if(searchDay == null || searchDay == ""){
           
           
           
-          <div class="row mt-2">
+          <div class="row mt-3">
             <div class="col-md-12 stretch-card">
               <div class="card">
                 <div class="card-body">

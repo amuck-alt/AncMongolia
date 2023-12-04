@@ -14,7 +14,7 @@
       <div class="main-panel">
         <div class="content-wrapper">
           
-		  <form action="/manager/announce/update.do" name="form" id="form" method="post" data-toggle="validator" enctype="multipart/form-data">          
+		  <form action="/manager/notice/update.do" name="form" id="form" method="post" data-toggle="validator" enctype="multipart/form-data">          
           <input type="hidden" name="idx" value="${result.idx }"/>
           <input type="hidden" name="regid" value="${sessionScope.ManagerInfo.userid}">
           <input type="hidden" name="regip" value="<%= request.getRemoteAddr() %>">
@@ -24,31 +24,13 @@
             <div class="col-md-9 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                    <div class="form-group">
-                      <label for="m_edulv">구분/조회수</label>
-                      <div class="input-group">
-                        <select class="form-control mr-2" name="section" id="section">
-                          <option value="notice" <c:if test="${result.section eq 'notice'}">selected</c:if>>공지</option>
-                          <option value="event" <c:if test="${result.section eq 'event'}">selected</c:if>>행사</option>
-                          <option value="special" <c:if test="${result.section eq 'special'}">selected</c:if>>특강</option>
-                          <option value="etc" <c:if test="${result.section eq 'etc'}">selected</c:if>>기타</option>
-                        </select>
-                        <div class="input-group-append">
-                          <input type="text" class="form-control" value="${result.visit}" name="visit" id="visit" disabled>
-                        </div>
-                      </div>
-                      <div class="help-block with-errors text-danger"></div>
-                    </div>
+                    
                     <div class="form-group">
                       <label for="title" class="control-label">제목</label>
                       <input type="text" class="form-control" value="${result.title }" name="title" id="title" placeholder="제목" data-error="제목을 입력하세요." required>
                       <div class="help-block with-errors text-danger"></div>
                     </div>
-                    <div class="form-group">
-                      <label for="description" class="control-label">설명(Description)</label>
-                      <textarea class="form-control" name="description" id="description" rows="5">${result.description}</textarea>
-                      <div class="help-block with-errors text-danger"></div>
-                    </div>
+                   
                     <div class="form-group">
                       <label for="editor" class="control-label">내용</label>
 	                  	<textarea class="form-control" name="content" id="editor">${result.content}</textarea>
@@ -56,7 +38,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary mr-2">저장</button>
 	                 <button type="button" onclick="deleteContent('${result.idx}')" class="btn btn-danger mr-2">삭제</button>
-                    <a href="/manager/announce/list.do" class="btn btn-light">취소</a>
+                    <a href="/manager/notice/list.do" class="btn btn-light">취소</a>
                 </div>
               </div>
             </div>
@@ -114,7 +96,7 @@
  	
  	function deleteContent(idx){
 		if(confirm("정말로 삭제하시겠습니까?") == true){
-			location.href="/manager/announce/delete.do?idx="+idx;	
+			location.href="/manager/notice/delete.do?idx="+idx;	
 		}else{
 			return;
 		}		

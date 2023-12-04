@@ -17,7 +17,7 @@
               <div class="d-flex justify-content-between flex-wrap">
                 <div class="d-flex align-items-end flex-wrap">
                   <div class="mr-md-3 mr-xl-5">
-                    <h3 class="under-line mx-1">공지사항관리@</h3>
+                    <h3 class="under-line mx-1">관리자공지사항관리@</h3>
                   </div>
                 </div>
                 <div class="d-flex justify-content-between align-items-end flex-wrap">
@@ -46,9 +46,7 @@
                       <thead>
                         <tr>
                             <th>#</th>
-                            <th>구분</th>
-                            <th>제목</th>
-                            <th>조회수</th>
+                            <th width="70%">제목</th>
                             <th>등록일</th>
                             <th>등록자</th>
                         </tr>
@@ -57,16 +55,7 @@
                         <c:forEach items="${result}" var="list">
                         <tr>
                             <td>${list.idx}</td>
-                            <td width="10%" class="pt-3 font-18 font-bold">
-							  <c:choose>
-							    <c:when test="${list.section eq 'notice'}">공지</c:when>
-							    <c:when test="${list.section eq 'event'}">행사</c:when>
-							    <c:when test="${list.section eq 'special'}">특강</c:when>
-							    <c:when test="${list.section eq 'etc'}">기타</c:when>
-							  </c:choose>
-							</td>
-                            <td><a href="/manager/announce/view.do?idx=${list.idx}">${list.title}</a></td>
-                            <td>${list.visit}</td>
+                            <td><a href="/manager/notice/view.do?idx=${list.idx}">${list.title}</a></td>
                             <td><fmt:formatDate value="${list.regdate}" pattern="yyyy-MM-dd" /></td>
                             <td>${list.regid}</td>
                         </tr>
@@ -102,7 +91,7 @@
 	});
  	
  	function goWrite(){
- 		document.location.href="/manager/announce/write.do";
+ 		document.location.href="/manager/notice/write.do";
  	}
  	
  </script>
