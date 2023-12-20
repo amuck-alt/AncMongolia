@@ -21,7 +21,7 @@ public class AdminFaqController {
 	@Autowired
 	FaqService service;
 	
-	@GetMapping("manager/faq.do")
+	@GetMapping("/manager/faq/list.do")
 	public String init(HttpServletRequest request, Model model) throws Exception {
 		String section = request.getParameter("section");
 		SearchDomain search = new SearchDomain();
@@ -33,36 +33,36 @@ public class AdminFaqController {
 		}
 		
 		model.addAttribute("result", service.select(search));
-		return "/mng/bbs/FaqList";
+		return "/admin/bbs/FaqList";
 	}
 	
-	@GetMapping("manager/faq/write.do")
+	@GetMapping("/manager/faq/write.do")
 	public String write(Model model) throws Exception {
-		return "/mng/bbs/FaqWrite";
+		return "/admin/bbs/FaqWrite";
 	}
 	
-	@PostMapping("manager/faq/insert.do")
+	@PostMapping("/manager/faq/insert.do")
 	public String insert(@ModelAttribute("@form") FaqDomain domain) throws Exception {
 		service.insert(domain);
-		return "redirect:/mng/faq";
+		return "redirect:/manager/faq/list.do";
 	}
 	
-	@GetMapping("manager/faq/view.do")
+	@GetMapping("/manager/faq/view.do")
 	public String view(@RequestParam(value="idx") int idx, Model model) throws Exception {
 		model.addAttribute("result", service.view(idx));			
-		return "/mng/bbs/FaqView";
+		return "/admin/bbs/FaqView";
 	}
 	
-	@PostMapping("manager/faq/update.do")
+	@PostMapping("/manager/faq/update.do")
 	public String update(@ModelAttribute("@form") FaqDomain domain) throws Exception {
 		service.update(domain);
-		return "redirect:/mng/faq";
+		return "redirect:/admin/faq/list.do";
 	}
 	
-	@GetMapping("/mng/faq/delete.do")
+	@GetMapping("/manager/faq/delete.do")
 	public String delete(@RequestParam(value="idx") int idx) throws Exception {
 		service.delete(idx);
-		return "redirect:/mng/faq";
+		return "redirect:/manager/faq/list.do";
 	}
 
 }

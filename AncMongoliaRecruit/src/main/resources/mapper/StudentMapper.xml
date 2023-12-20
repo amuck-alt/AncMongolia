@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.crewfactory.main.dao.StudentDao">
+
+	<select id="select" parameterType="com.crewfactory.main.domain.StudentDomain" resultType="com.crewfactory.main.domain.StudentDomain">
+		SELECT 
+			*
+		FROM mg_student_info
+		WHERE 1 = 1
+		<if test="status != ''">
+			AND status = #{status}
+		</if>
+		<if test="curriculum != ''">
+			AND curriculum = #{curriculum}
+		</if>
+		<if test="korname != ''">
+			AND korname = #{korname}
+		</if>
+		<if test="mobile != ''">
+			AND replace(mobile, '-', '') like concat('%', #{mobile}, '%')
+		</if>
+		<if test="mento != ''">
+			AND mento like concat('%', #{mento}, '%')
+		</if>
+		ORDER BY idx DESC 
+	</select>
+	
+	<select id="view" parameterType="int" resultType="com.crewfactory.main.domain.StudentDomain">
+		SELECT 
+			*
+		FROM mg_student_info where idx = #{idx};
+	</select>
+	
+	<insert id="insert" parameterType="com.crewfactory.main.domain.StudentDomain">
+		INSERT INTO mg_student_info (
+			idx, 
+			korname, 
+			engname, 
+			studentnum, 
+			mngteam, 
+			mento, 
+			regday, 
+			curriculum, 
+			status,
+			regsection,
+			photo, 
+			mobile, 
+			email, 
+			birthday, 
+			height, 
+			weight, 
+			gender, 
+			age, 
+			address, 
+			edulv, 
+			gradlv, 
+			langlv1, 
+			langlv2,
+			skilllv, 
+			memo, 
+			regid, 
+			regdate
+		) VALUES (
+			(select ifnull(max(idx)+1, 1) from mg_student_info a), 
+			#{korname}, 
+			#{engname}, 
+			#{studentnum}, 
+			#{mngteam}, 
+			#{mento}, 
+			#{regday}, 
+			#{curriculum}, 
+			#{status},
+			#{regsection},
+			#{photo}, 
+			#{mobile}, 
+			#{email}, 
+			#{birthday}, 
+			#{height}, 
+			#{weight}, 
+			#{gender}, 
+			#{age}, 
+			#{address}, 
+			#{edulv}, 
+			#{gradlv}, 
+			#{langlv1}, 
+			#{langlv2},
+			#{skilllv}, 
+			#{memo}, 
+			#{regid}, 
+			now()
+		)
+	</insert>
+	
+	<update id="update" parameterType="com.crewfactory.main.domain.StudentDomain">
+        UPDATE mg_student_info SET 
+        	korname=#{korname}, 
+        	engname=#{engname}, 
+        	studentnum=#{studentnum}, 
+        	mngteam=#{mngteam}, 
+        	mento=#{mento}, 
+        	regday=#{regday}, 
+        	curriculum=#{curriculum}, 
+        	regsection=#{regsection},
+        	status=#{status},
+        	photo=#{photo}, 
+        	mobile=#{mobile}, 
+        	email=#{email}, 
+        	birthday=#{birthday}, 
+        	height=#{height}, 
+        	weight=#{weight}, 
+        	gender=#{gender}, 
+        	age=#{age}, 
+        	address=#{address}, 
+        	edulv=#{edulv}, 
+        	gradlv=#{gradlv}, 
+        	langlv1=#{langlv1}, 
+        	langlv2=#{langlv2}, 
+        	skilllv=#{skilllv}, 
+        	memo=#{memo}, 
+        	regid=#{regid}, 
+        	regdate=now()
+        WHERE idx = #{idx}
+    </update>
+        
+    <delete id="delete" parameterType="int">
+        DELETE FROM mg_student_info WHERE idx = #{idx}
+    </delete>
+    
+    <insert id="insertDiary" parameterType="com.crewfactory.main.domain.StudentDomain">
+		INSERT INTO mg_student_note_info
+			(idx, studentidx, note, regid, regdate)
+		VALUES ((select ifnull(max(idx)+1, 1) from mg_student_note_info a), #{studentidx}, #{note}, #{regid}, now());
+	</insert>
+	
+	<select id="selectDiary" parameterType="int" resultType="com.crewfactory.main.domain.StudentDomain">
+		SELECT 
+			*
+		FROM mg_student_note_info where studentidx = #{idx} order by idx desc
+	</select>
+
+</mapper>

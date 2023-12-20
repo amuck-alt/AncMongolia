@@ -96,6 +96,7 @@
                       <thead>
                         <tr style="padding:0px 0px;">
                             <th align="center" style="font-size: 13px; padding:15px 10px; text-align:center;">수험번호</th>
+                            <th align="center" style="font-size: 13px; padding:15px 10px; text-align:center;"></th>
                             <th align="center" style="font-size: 13px; padding:15px 10px; text-align:center;">한글이름</th>
                             <th align="center" style="font-size: 13px; padding:15px 10px; text-align:center;">영문이름</th>
                             <th align="center" style="font-size: 13px; padding:15px 10px; text-align:center;">사진</th>
@@ -117,7 +118,10 @@
                         <c:forEach items="${result}" var="list">
                         <tr style="padding:0px 0px;">
                         	<td align="center" width="5%" style="font-size: 13px; padding:0px 0px; text-align:center;"><a href="/manager/volunteer/view.do?idx=${ list.idx }">${list.studentnum}</a></td>
-                        	<td align="center" width="5%" style="font-size: 13px; padding:0px 0px; text-align:center;"><a href="/manager/volunteer/view.do?idx=${ list.idx }">${list.korname}</a></td>
+                        	<td align="center" width="2%" style="font-size: 13px; padding:0px 0px; text-align:center;"><c:if test="${list.studentcnt ne null}"><a href="/manager/student/view.do?idx=${list.studentcnt }"><button class="btn btn-sm btn-danger px-1 py-1" style="font-size:11px;">재</button></a></c:if></td>
+                        	<td align="center" width="5%" style="font-size: 13px; padding:0px 0px; text-align:center;">
+                        		<a href="/manager/volunteer/view.do?idx=${ list.idx }">${list.korname}</a>
+                        	</td>
                         	<td align="center" width="6%" style="font-size: 13px; padding:0px 0px;">${list.engname}</td>
                             <td align="center" width="2%" style="font-size: 13px; padding:0px 0px;"><a href="http://www.crewkorea.com/${list.photo}" target="_blank"><img src="${list.photo}" style="width:30px; border-radius:0%;"></a></td>
                             <td align="center" width="2%" style="font-size: 13px; padding:0px 0px;">

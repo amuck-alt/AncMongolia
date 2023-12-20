@@ -23,9 +23,9 @@
                     <div class="form-group">
                       <label for="m_edulv">구분</label>
                         <select class="form-control mr-2" name="section" id="section">
-                          <option value="super" <c:if test="${result.section eq 'super'}">selected</c:if>>최고관리자</option>
-                          <option value="admin" <c:if test="${result.section eq 'admin'}">selected</c:if>>팀장</option>
-                          <option value="user" <c:if test="${result.section eq 'user'}">selected</c:if>>일반</option>
+                          <option value="super" <c:if test="${result.section eq 'super'}">selected</c:if>>전체관리자</option>
+                          <option value="recruit" <c:if test="${result.section eq 'recruit'}">selected</c:if>>채용관리</option>
+                          <option value="student" <c:if test="${result.section eq 'student'}">selected</c:if>>학생관리</option>
                         </select>
                       </div>
                       <div class="form-group">

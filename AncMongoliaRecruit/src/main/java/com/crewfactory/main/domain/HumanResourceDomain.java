@@ -67,8 +67,20 @@ public class HumanResourceDomain {
 	
 	private String intv1;
 	private String intv2;
+	
+	private String studentcnt;
 
 	public HumanResourceDomain() {}
+
+
+	public String getStudentcnt() {
+		return studentcnt;
+	}
+
+
+	public void setStudentcnt(String studentcnt) {
+		this.studentcnt = studentcnt;
+	}
 
 
 	public String getStudentnum() {

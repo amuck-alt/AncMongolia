@@ -5,10 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.crewfactory.main.dao.FaqDao;
 import com.crewfactory.main.dao.ReservationDao;
 import com.crewfactory.main.domain.ReservationDomain;
-import com.crewfactory.main.domain.SearchDomain;
+
 
 @Service
 public class ReservationService {
@@ -32,12 +31,20 @@ public class ReservationService {
 		return dao.update(domain);
 	}
 	
-	public boolean updateMemo(ReservationDomain domain) throws Exception {
-		return dao.updateMemo(domain);
-	}
-	
 	public boolean delete(int idx) throws Exception {
 		return dao.delete(idx);
+	}
+	
+	public List <ReservationDomain> selectMemo (int idx) throws Exception {
+		return dao.selectMemo(idx);
+	}
+	
+	public boolean insertMemo (ReservationDomain domain) throws Exception {
+		return dao.insertMemo(domain);
+	}
+	
+	public List <ReservationDomain> selectIndex () throws Exception {
+		return dao.selectIndex();
 	}
 
 }

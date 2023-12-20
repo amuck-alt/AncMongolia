@@ -26,7 +26,6 @@
 		select 
 			idx,
 			title,
-			description,
 			stday,
 			sttime,
 			endday,
@@ -41,7 +40,6 @@
 			idx,
 			title,
 			thumbnail,
-			description,
 			stday,
 			sttime,
 			endday,
@@ -69,7 +67,6 @@
 			idx,
 			title,
 			thumbnail,
-			description,
 			stday,
 			sttime,
 			endday,

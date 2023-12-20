@@ -18,6 +18,7 @@
             </a>
           </li>
           </c:if>
+          <c:if test="${sessionScope.ManagerInfo.section eq 'super' || sessionScope.ManagerInfo.section eq 'recruit'}">
           <li class="nav-item <c:if test="${ param.act eq 'c'}">active</c:if>">
             <a class="nav-link" data-toggle="collapse" href="#mem" aria-expanded="false" aria-controls="mem">
               <i class="mdi mdi-account menu-icon"></i>
@@ -43,7 +44,7 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#recruit" aria-expanded="false" aria-controls="recruit">
+            <a class="nav-link" data-toggle="collapse" href="#recruit" aria-expanded="false" aria-controls="bbs">
               <i class="mdi mdi-view-headline menu-icon"></i>
               <span class="menu-title">채용관리</span>
               <i class="menu-arrow"></i>
@@ -56,6 +57,8 @@
               </ul>
             </div>
           </li>
+          </c:if>
+          <c:if test="${sessionScope.ManagerInfo.section eq 'super' || sessionScope.ManagerInfo.section eq 'student'}">
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#student" aria-expanded="false" aria-controls="student">
               <i class="mdi mdi-view-headline menu-icon"></i>
@@ -64,11 +67,13 @@
             </a>
             <div class="collapse" id="student">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="/manager/reservation/list.do">상담예약관리</a></li>
-				<li class="nav-item"><a class="nav-link" href="/manager/student/list.do">재학생관리</a></li>
+              	<li class="nav-item"><a class="nav-link" href="/manager/notice/list.do">공지사항</a></li>
+                <li class="nav-item"><a class="nav-link" href="/manager/reservation/list.do?cons_status=&cons_startday=&cons_endday=&cons_manager=">상담예약관리</a></li>
+				<li class="nav-item"><a class="nav-link" href="/manager/student/list.do?status=&curriculum=&korname=&mobile=&mento=">재학생관리</a></li>
               </ul>
             </div>
           </li>
+          </c:if>
         </ul>
       </nav>
       <!-- partial -->

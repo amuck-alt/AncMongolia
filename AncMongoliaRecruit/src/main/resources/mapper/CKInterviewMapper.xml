@@ -16,7 +16,7 @@
 			A.MNGTEL, 
 			A.MNGMEMO,
 			COUNT(CASE WHEN A.ITVCODE = '1차' THEN B.KORNAME ELSE C.KORNAME END) AS INTVCOUNT 
-		FROM ck_interview_info A
+		FROM mg_interview_info A
 		LEFT OUTER JOIN ck_recruit_volunteer B ON B.HOPEINTV1 = A.IDX 
 		LEFT OUTER JOIN ck_recruit_volunteer C ON C.HOPEINTV2 = A.IDX 
 		WHERE A.RECRUITIDX = #{CATENUM}
@@ -38,7 +38,7 @@
 			A.MNGTEL, 
 			A.MNGMEMO,
 			COUNT(B.CATENUM) AS INTVCOUNT 
-		FROM ck_interview_info A
+		FROM mg_interview_info A
 		LEFT OUTER JOIN ck_recruit_volunteer B ON B.HOPEINTV1 = A.IDX 
 		WHERE A.RECRUITIDX = #{CATENUM}
 		AND A.ITVCODE = '1차'
@@ -60,7 +60,7 @@
 			A.MNGTEL, 
 			A.MNGMEMO,
 			COUNT(B.CATENUM) AS INTVCOUNT 
-		FROM ck_interview_info A
+		FROM mg_interview_info A
 		LEFT OUTER JOIN ck_recruit_volunteer B ON B.HOPEINTV2 = A.IDX 
 		WHERE A.RECRUITIDX = #{CATENUM}
 		AND A.ITVCODE = '2차'
@@ -72,7 +72,7 @@
 		SELECT 
 			IDX,
 			CONCAT(ITVDAY, ' ', ITVTIME, '시 ~ ', ITVTIMEEND, '시') AS ITVDAY
-		FROM ck_interview_info 
+		FROM mg_interview_info 
 		WHERE RECRUITIDX = #{CATENUM}
 		AND ITVCODE = '1차'
 		ORDER BY CONCAT(ITVDAY, ' ', ITVTIME, '시') ASC
@@ -82,7 +82,7 @@
 		SELECT
 			IDX, 
 			CONCAT(ITVDAY, ' ', ITVTIME, '시 ~ ', ITVTIMEEND, '시') AS ITVDAY
-		FROM ck_interview_info 
+		FROM mg_interview_info 
 		WHERE RECRUITIDX = #{CATENUM}
 		AND ITVCODE = '2차'
 		ORDER BY CONCAT(ITVDAY, ' ', ITVTIME, '시') ASC
@@ -91,15 +91,15 @@
 	<select id="view" parameterType="int" resultType="com.crewfactory.main.domain.CKInterviewDomain">
 		SELECT 
 			*
-		FROM ck_interview_info 
+		FROM mg_interview_info 
 		WHERE idx = #{idx}
 	</select>	
 	
 	<insert id="insert" parameterType="com.crewfactory.main.domain.CKInterviewDomain">
-		INSERT INTO ck_interview_info (
+		INSERT INTO mg_interview_info (
 			idx, recruitidx, itvcode, limitcount, itvlocation, itvday, itvtime, itvtimeend, mngmemo
 		) VALUES (
-			(select ifnull(max(idx)+1, 1) from ck_interview_info a),
+			(select ifnull(max(idx)+1, 1) from mg_interview_info a),
 			#{ recruitidx },
 			#{ itvcode },
 			#{ limitcount },
@@ -112,7 +112,7 @@
 	</insert>
 	
 	<update id="update" parameterType="com.crewfactory.main.domain.CKInterviewDomain">
-        UPDATE ck_interview_info SET
+        UPDATE mg_interview_info SET
 			itvcode = #{ itvcode },
 			limitcount = #{ limitcount },
 			itvlocation = #{ itvlocation },
@@ -124,6 +124,6 @@
     </update>
         
     <delete id="delete" parameterType="int">
-        DELETE FROM ck_interview_info WHERE idx = #{idx}
+        DELETE FROM mg_interview_info WHERE idx = #{idx}
     </delete>
 </mapper>

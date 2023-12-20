@@ -38,8 +38,8 @@
             </a>
             <div class="collapse" id="mem">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="/manager/member.do?team=${sessionScope.ManagerInfo.team}">Member</a></li>
-                <li class="nav-item"><a class="nav-link" href="/manager/counsel.do?team=${sessionScope.ManagerInfo.team}">Counsel</a></li>
+                <li class="nav-item"><a class="nav-link" href="/manager/member/list.do?team=${sessionScope.ManagerInfo.team}">Member</a></li>
+                <li class="nav-item"><a class="nav-link" href="/manager/counsel/list.do?team=${sessionScope.ManagerInfo.team}">Counsel</a></li>
               </ul>
             </div>
           </li>
@@ -71,7 +71,7 @@
                 <li class="nav-item"><a class="nav-link" href="/manager/weare/list.do?team=${sessionScope.ManagerInfo.team}">ANC People</a></li>
                 <!-- <li class="nav-item"><a class="nav-link" href="/manager/blog/Wave.do?section=wave">그루웨이브</a></li> -->
                 <li class="nav-item"><a class="nav-link" href="/manager/moment/list.do?section=moment&team=${sessionScope.ManagerInfo.team}">Photo Gallery</a></li>
-                <li class="nav-item"><a class="nav-link" href="/manager/interview/list.do?team=${sessionScope.ManagerInfo.team}">Interview</a></li>
+                <%-- <li class="nav-item">a class="nav-link" href="/manager/interview/list.do?team=${sessionScope.ManagerInfo.team}">Interview(Not Use)</a></li> --%>
               </ul>
             </div>
           </li>

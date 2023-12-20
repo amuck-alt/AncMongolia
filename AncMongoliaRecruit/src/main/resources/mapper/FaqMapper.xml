@@ -6,7 +6,7 @@
 	<select id="select" parameterType="com.crewfactory.main.domain.SearchDomain" resultType="com.crewfactory.main.domain.FaqDomain">
 		SELECT 
 			*
-		FROM faq
+		FROM mg_faq_info
 		<trim prefix="WHERE" prefixOverrides="AND||OR">
 			<if test = "searchSection != 'all'">
 				AND section = #{searchSection}
@@ -23,11 +23,11 @@
 	<select id="view" parameterType="int" resultType="com.crewfactory.main.domain.FaqDomain">
 		SELECT 
 			*
-		FROM faq where idx = #{idx};
+		FROM mg_faq_info where idx = #{idx};
 	</select>
 	
 	<insert id="insert" parameterType="com.crewfactory.main.domain.FaqDomain">
-		INSERT INTO faq (
+		INSERT INTO mg_faq_info (
 			idx,
 			section,
 			keyword,
@@ -38,7 +38,7 @@
 			regip,
 			regdate
 		) VALUES (
-			(select ifnull(max(idx)+1, 1) from faq a),
+			(select ifnull(max(idx)+1, 1) from mg_faq_info a),
 			#{section},
 			#{keyword},
 			#{question},
@@ -51,7 +51,7 @@
 	</insert>
 	
 	<update id="update" parameterType="com.crewfactory.main.domain.FaqDomain">
-        UPDATE faq
+        UPDATE mg_faq_info
 			SET
 			section=#{section},
 			keyword=#{keyword},
@@ -64,7 +64,7 @@
     </update>
         
     <delete id="delete" parameterType="int">
-        DELETE FROM faq WHERE idx = #{idx}
+        DELETE FROM mg_faq_info WHERE idx = #{idx}
     </delete>
 
 </mapper>

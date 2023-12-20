@@ -35,27 +35,27 @@
 	
 	<select id="ov_count" parameterType="java.util.HashMap" resultType="com.crewfactory.main.domain.CounterDomain">
 		select
-			(select count(idx) from mg_vanalyzer where date_format(regdate, '%Y%m%d') = #{searchDay} and (ipaddr != '61.74.145.67' or ipaddr='119.197.80.138' or ipaddr='121.135.160.87') and ipaddr not like '211.249.42%' and (agent not like '%naver.me%' and agent not like '%google.com/bot%' and agent not like '%Daum%')) as ov_visiter_count,
-			(select count(idx) from mg_vanalyzer where date_format(regdate, '%Y%m%d') = #{searchDay} and (ipaddr != '61.74.145.67' or ipaddr='119.197.80.138' or ipaddr='121.135.160.87') and (agent like '%android%' or agent like '%iphone%') and ipaddr not like '211.249.42%' and (agent not like '%naver.me%' and agent not like '%google.com/bot%' and agent not like '%Daum%')) as ov_visiter_count_m,
-			(select count(idx) from mg_vanalyzer where date_format(regdate, '%Y%m%d') = #{searchDay} and (ipaddr != '61.74.145.67' or ipaddr='119.197.80.138' or ipaddr='121.135.160.87') and (agent not like '%android%' and agent not like '%iphone%') and ipaddr not like '211.249.42%' and (agent not like '%naver.me%' and agent not like '%google.com/bot%' and agent not like '%Daum%')) as ov_visiter_count_pc,
-			(select count(idx) from ck_counsel_info where date_format(regdate, '%Y%m%d') = #{searchDay} ) as ov_counsel_count_check,
+			(select count(1) from mg_vanalyzer where date_format(regdate, '%Y%m%d') = #{searchDay} and (ipaddr != '61.74.145.67' or ipaddr='119.197.80.138' or ipaddr='121.135.160.87') and ipaddr not like '211.249.42%' and (agent not like '%naver.me%' and agent not like '%google.com/bot%' and agent not like '%Daum%')) as ov_visiter_count,
+			(select count(1) from mg_vanalyzer where date_format(regdate, '%Y%m%d') = #{searchDay} and (ipaddr != '61.74.145.67' or ipaddr='119.197.80.138' or ipaddr='121.135.160.87') and (agent like '%android%' or agent like '%iphone%') and ipaddr not like '211.249.42%' and (agent not like '%naver.me%' and agent not like '%google.com/bot%' and agent not like '%Daum%')) as ov_visiter_count_m,
+			(select count(1) from mg_vanalyzer where date_format(regdate, '%Y%m%d') = #{searchDay} and (ipaddr != '61.74.145.67' or ipaddr='119.197.80.138' or ipaddr='121.135.160.87') and (agent not like '%android%' and agent not like '%iphone%') and ipaddr not like '211.249.42%' and (agent not like '%naver.me%' and agent not like '%google.com/bot%' and agent not like '%Daum%')) as ov_visiter_count_pc,
+			(select count(1) from mg_counsel_info where date_format(regdate, '%Y%m%d') = #{searchDay} ) as ov_counsel_count_check,
 			0 as ov_membership_count_new
 		from dual	
 	</select>
 	
 	<select id="ov_count_monthly" parameterType="java.util.HashMap" resultType="com.crewfactory.main.domain.CounterDomain">
 		select
-			(select count(idx) from mg_vanalyzer where date_format(regdate, '%Y%m') = #{searchMonth} and (ipaddr != '61.74.145.67' or ipaddr='119.197.80.138' or ipaddr='121.135.160.87') and ipaddr not like '211.249.42%') as ov_visiter_count,
-			(select count(idx) from mg_vanalyzer where date_format(regdate, '%Y%m') = #{searchMonth} and (ipaddr != '61.74.145.67' or ipaddr='119.197.80.138' or ipaddr='121.135.160.87') and (agent like '%android%' or agent like '%iphone%') and ipaddr not like '211.249.42%') as ov_visiter_count_m,
-			(select count(idx) from mg_vanalyzer where date_format(regdate, '%Y%m') = #{searchMonth} and (ipaddr != '61.74.145.67' or ipaddr='119.197.80.138' or ipaddr='121.135.160.87') and (agent not like '%android%' and agent not like '%iphone%') and ipaddr not like '211.249.42%') as ov_visiter_count_pc,
-			(select count(idx) from ck_counsel_info where date_format(regdate, '%Y%m') = #{searchMonth} ) as ov_counsel_count_check,
+			(select count(1) from mg_vanalyzer where date_format(regdate, '%Y%m') = #{searchMonth} and (ipaddr != '61.74.145.67' or ipaddr='119.197.80.138' or ipaddr='121.135.160.87') and ipaddr not like '211.249.42%') as ov_visiter_count,
+			(select count(1) from mg_vanalyzer where date_format(regdate, '%Y%m') = #{searchMonth} and (ipaddr != '61.74.145.67' or ipaddr='119.197.80.138' or ipaddr='121.135.160.87') and (agent like '%android%' or agent like '%iphone%') and ipaddr not like '211.249.42%') as ov_visiter_count_m,
+			(select count(1) from mg_vanalyzer where date_format(regdate, '%Y%m') = #{searchMonth} and (ipaddr != '61.74.145.67' or ipaddr='119.197.80.138' or ipaddr='121.135.160.87') and (agent not like '%android%' and agent not like '%iphone%') and ipaddr not like '211.249.42%') as ov_visiter_count_pc,
+			(select count(1) from mg_counsel_info where date_format(regdate, '%Y%m') = #{searchMonth} ) as ov_counsel_count_check,
 			0 as ov_membership_count_new
 		from dual	
 	</select>
 	
 	<select id="selectRecent" parameterType="java.util.HashMap" resultType="com.crewfactory.main.domain.VanalyzerDomain">
 		select idx, ipaddr, current, keyword, domain, path, regdate,
-		(select count(*) from ck_counsel_info where regip=ipaddr and date_format(regdate, '%Y%m%d') = date_format(#{searchDay}, '%Y%m%d')) as counsel
+		(select count(*) from mg_counsel_info where regip=ipaddr and date_format(regdate, '%Y%m%d') = date_format(#{searchDay}, '%Y%m%d')) as counsel
 		from mg_vanalyzer 
 		where date_format(regdate, '%Y%m%d') = date_format(#{searchDay}, '%Y%m%d')
 		and (ipaddr != '61.74.145.67' or ipaddr='119.197.80.138' or ipaddr='121.135.160.87')

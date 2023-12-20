@@ -22,7 +22,7 @@
 <div class="container-fluid">
 	<div class="row sm-row site-map-row my-5">
 		<div class="col-12 py-4 text-center">
-			<div class="font-26 mb-1" id="mobile-100-percent">공지사항</div>
+			<div class="font-26 mb-1" id="mobile-100-percent">Мэдэгдэл</div>
 			<div class="py-2 line-2-black" style="width:170px; margin:0 auto; margin-bottom: 10px;"></div>
 		</div>
 	</div>
@@ -38,7 +38,7 @@
 				<input type="hidden" name="startPage" id="startPage" value="" />
 				<input type="hidden" name="visiblePages" id="visiblePages" value="" />
 				<div class="input-group search-row">
-					<input class="form-control search-bar" name="searchText" id="searchText" type="text" placeholder="검색어를 입력하세요" value="${param.searchText}">
+					<input class="form-control search-bar" name="searchText" id="searchText" type="text" placeholder="Хайлтын үгээ оруулна уу" value="${param.searchText}">
 					<div class="input-group-append">
 						<button class="btn btn-primary" name="searchBtn" id="searchBtn"><img class="faq-search-btn" src="/images/ico-search-wh.png"></button>
 					</div>
@@ -79,8 +79,8 @@
 					  <span class="font-20 align=middle py-4">
 					    <a href="/news/view.do?idx=${list.idx}&startPage=${param.startPage}&visiblePages=${param.visiblePages}&searchText=${param.searchText}&section=${param.section}">${ list.title }</a>
 					  </span>
-					  <span class="font-18 mobile-hidden float-right"><fmt:formatDate value="${list.regdate}" pattern="yyyy-MM-dd"/></span>					  
-					</td> 
+					</td>
+					<td width="15%"><span class="font-18 mobile-hidden float-right"><fmt:formatDate value="${list.regdate}" pattern="yyyy-MM-dd"/></span></td> 
 				</tr>
 				</c:forEach >
 			</tbody>

@@ -1,5 +1,7 @@
 package com.crewfactory.main.domain;
 
+import java.util.Date;
+
 public class ReservationDomain {
 	
 	private int idx;
@@ -15,19 +17,66 @@ public class ReservationDomain {
 	private String rec_manager_nm;
 	private String cons_manager_nm;
 	private String regid;
-	private String regdate;
+	private Date regdate;
+	private Date updatedate;
 	
-	private int cons_idx;
-	private String cons_memo;
+	private String consultidx;
+	private String consultcode;
+	private String note;
 	
+	private String customer;
+	private String cons_startday;
+	private String cons_endday;
 	
-	
-	
-	public int getCons_idx() {
-		return cons_idx;
+		
+	public String getCons_startday() {
+		return cons_startday;
 	}
-	public void setCons_idx(int cons_idx) {
-		this.cons_idx = cons_idx;
+	public void setCons_startday(String cons_startday) {
+		this.cons_startday = cons_startday;
+	}
+	public String getCons_endday() {
+		return cons_endday;
+	}
+	public void setCons_endday(String cons_endday) {
+		this.cons_endday = cons_endday;
+	}
+	public String getCustomer() {
+		return customer;
+	}
+	public void setCustomer(String customer) {
+		this.customer = customer;
+	}
+	public Date getUpdatedate() {
+		return updatedate;
+	}
+	public void setUpdatedate(Date updatedate) {
+		this.updatedate = updatedate;
+	}
+	public Date getRegdate() {
+		return regdate;
+	}
+	public void setRegdate(Date regdate) {
+		this.regdate = regdate;
+	}
+	public String getConsultcode() {
+		return consultcode;
+	}
+	public void setConsultcode(String consultcode) {
+		this.consultcode = consultcode;
+	}
+	public String getConsultidx() {
+		return consultidx;
+	}
+	public void setConsultidx(String consultidx) {
+		this.consultidx = consultidx;
+	}
+	
+	public String getNote() {
+		return note;
+	}
+	public void setNote(String note) {
+		this.note = note;
 	}
 	public String getRec_manager_nm() {
 		return rec_manager_nm;
@@ -52,12 +101,6 @@ public class ReservationDomain {
 	}
 	public void setCons_manager_nm(String cons_manager_nm) {
 		this.cons_manager_nm = cons_manager_nm;
-	}
-	public String getCons_memo() {
-		return cons_memo;
-	}
-	public void setCons_memo(String cons_memo) {
-		this.cons_memo = cons_memo;
 	}
 	public int getIdx() {
 		return idx;
@@ -113,11 +156,15 @@ public class ReservationDomain {
 	public void setRegid(String regid) {
 		this.regid = regid;
 	}
-	public String getRegdate() {
-		return regdate;
-	}
-	public void setRegdate(String regdate) {
-		this.regdate = regdate;
+	
+	@Override
+	public String toString() {
+		return "ReservationDomain [idx=" + idx + ", cons_status=" + cons_status + ", cus_name=" + cus_name
+				+ ", cus_age=" + cus_age + ", cus_mobile=" + cus_mobile + ", rec_manager=" + rec_manager + ", cons_day="
+				+ cons_day + ", cons_time=" + cons_time + ", cons_manager=" + cons_manager + ", cons_team=" + cons_team
+				+ ", rec_manager_nm=" + rec_manager_nm + ", cons_manager_nm=" + cons_manager_nm + ", regid=" + regid
+				+ ", regdate=" + regdate + ", consultidx=" + consultidx + ", consultcode=" + consultcode + ", note="
+				+ note + "]";
 	}
 	
 	

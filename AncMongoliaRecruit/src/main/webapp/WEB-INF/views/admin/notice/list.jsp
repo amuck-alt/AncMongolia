@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+
 <%@ include file = "../include/header.jsp" %>
 
 <body>   
@@ -16,10 +17,10 @@
               <div class="d-flex justify-content-between flex-wrap">
                 <div class="d-flex align-items-end flex-wrap">
                   <div class="mr-md-3 mr-xl-5">
-                    <h3 class="under-line mx-1">권한관리@</h3>
+                    <h3 class="under-line mx-1">관리자공지사항관리@</h3>
                   </div>
                 </div>
-				<div class="d-flex justify-content-between align-items-end flex-wrap">
+                <div class="d-flex justify-content-between align-items-end flex-wrap">
                   <button type="button" class="btn btn-danger bg-white btn-icon mr-3 mt-2 mt-xl-0" onclick="goWrite()">
                     <i class="mdi mdi-plus text-muted"></i>
                   </button>
@@ -41,40 +42,22 @@
               <div class="card">
                 <div class="card-body">
                   <div class="table-responsive">
-                    <table id="data-table" class="table table-striped table-bordered">
+                    <table id="notice" class="table table-striped table-bordered" style="width:100%;">
                       <thead>
                         <tr>
-                            <th>권한</th>
-                            <th>소속팀</th>
-                            <th>이름</th>
-                            <th>아이디</th>
-                            <th>최근접속일</th>
+                            <th>#</th>
+                            <th width="70%">제목</th>
+                            <th>등록일</th>
+                            <th>등록자</th>
                         </tr>
                       </thead>
                       <tbody>
                         <c:forEach items="${result}" var="list">
                         <tr>
-                            <td>
-                            	<c:choose>
-                            		<c:when test="${ list.section eq 'super'}">전체관리자</c:when>
-                            		<c:when test="${ list.section eq 'recruit'}">채용관리</c:when>
-                            		<c:when test="${ list.section eq 'student'}">학생관리</c:when>
-                            	</c:choose>
-                            </td>
-                            <td>
-                            	<c:choose>
-                            		<c:when test="${ list.team eq 'operator'}">경영지원팀</c:when>
-                            		<c:when test="${ list.team eq 'cabin'}">승무팀</c:when>
-                            		<c:when test="${ list.team eq 'goone'}">항운1팀</c:when>
-                            		<c:when test="${ list.team eq 'gotwo'}">항운2팀</c:when>
-                            		<c:when test="${ list.team eq 'ground'}">지상직/여행사팀</c:when>
-                            		<c:when test="${ list.team eq 'incheon'}">인천</c:when>
-                            		<c:when test="${ list.team eq 'professor'}">교수부</c:when>
-                            	</c:choose>
-                            </td>
-                            <td><a href="/manager/auth/AuthView.do?idx=${list.idx}">${list.usernm}</a></td>
-                            <td>${list.userid}</td>
-                            <td><fmt:formatDate value="${list.recdate}" pattern="yyyy-MM-dd HH:MM" /></td>
+                            <td>${list.idx}</td>
+                            <td><a href="/manager/notice/view.do?idx=${list.idx}">${list.title}</a></td>
+                            <td><fmt:formatDate value="${list.regdate}" pattern="yyyy-MM-dd" /></td>
+                            <td>${list.regid}</td>
                         </tr>
                         </c:forEach>
                       </tbody>
@@ -101,14 +84,16 @@
 
 <script>
  	
-$(document).ready(function() {
-  	$('#data-table').DataTable();
-});
-	
-function goWrite(){
-	document.location.href="/manager/auth/AuthWrite.do";
-}
+ 	$(document).ready(function() {
+    	$('#notice').DataTable({
+    		"order": [[0, 'desc']]
+    	});
+	});
  	
-</script>
+ 	function goWrite(){
+ 		document.location.href="/manager/notice/write.do";
+ 	}
+ 	
+ </script>
 
 

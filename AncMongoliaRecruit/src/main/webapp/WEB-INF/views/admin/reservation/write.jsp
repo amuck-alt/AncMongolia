@@ -19,7 +19,7 @@
 		  <form action="/manager/reservation/insert.do" name="form" id="form" method="post" data-toggle="validator" enctype="multipart/form-data">          
           <input type="hidden" name="regid" value="${sessionScope.ManagerInfo.userid}">
           <input type="hidden" name="regip" value="<%= request.getRemoteAddr() %>">
-          <input type="hidden" name="cons_status" value="상담예약">
+          <input type="hidden" name="cons_status" value="00">
           <div class="row">
             <div class="col-md-4 grid-margin stretch-card">
               <div class="card" style="background-color:#CCFFFF;">
@@ -47,7 +47,7 @@
                     </div>
                     <div class="form-group">
                       <label for="title" class="control-label">상담접수자</label>
-                      <input type="text" class="form-control" value="" name="rec_manager" id="rec_manager" placeholder="상담접수자" data-error="상담접수자를 입력하세요." required>
+                      <input type="text" class="form-control" value="<c:out value="${sessionScope.ManagerInfo.usernm }"/>" name="rec_manager" id="rec_manager" placeholder="상담접수자" data-error="상담접수자를 입력하세요." required>
                       <div class="help-block with-errors text-danger"></div>
                     </div>
                     <div class="form-group">

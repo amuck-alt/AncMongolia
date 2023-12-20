@@ -16,6 +16,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +25,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.crewfactory.main.domain.AuthDomain;
 import com.crewfactory.main.domain.MessageDomain;
 import com.crewfactory.main.service.AuthService;
+import com.crewfactory.main.service.NoticeService;
+import com.crewfactory.main.service.ReservationService;
 import com.crewfactory.main.service.VanalyzerService;
 
 @Controller
@@ -35,6 +39,12 @@ public class AdminHomeController {
 	
 	@Autowired
 	VanalyzerService vanalyzer;
+	
+	@Autowired
+	ReservationService reserv;
+	
+	@Autowired
+	NoticeService notice;
 	
 	@RequestMapping(value="/ckeditor.do")
 	String ckeditor(Model model) throws Exception {
@@ -73,6 +83,8 @@ public class AdminHomeController {
 			
 			model.addAttribute("total", vanalyzer.totalCount(searchMap));
 			model.addAttribute("recent", vanalyzer.selectRecent(searchMap));
+			model.addAttribute("resrv", reserv.selectIndex());
+			model.addAttribute("notice", notice.selectNew());
 
 			url = "/admin/index";
 		} else {
@@ -82,21 +94,19 @@ public class AdminHomeController {
 		return url;
 	}
 	
-	@RequestMapping(value="/manager/login.do", method=RequestMethod.POST)
-	String login (HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
-		AuthDomain domain = new AuthDomain();
-		domain.setUserid(request.getParameter("userid"));
-		domain.setUserpw(request.getParameter("userpw"));
+	@PostMapping(value="/manager/login.do")
+	String login (@ModelAttribute("login") AuthDomain domain, HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
 		
-		AuthDomain auth_domain = auth.login(domain);
+		logger.info("auth_domain ================ " + domain.toString());
+
 		HttpSession session = request.getSession();
 		
-		//logger.info("auth_domain ================ " + auth_domain.toString());
+		AuthDomain auth_domain = auth.login(domain);
 		
-		if(!"".equals(auth_domain.getUserid())) {
+		if(auth_domain != null) {
 			session.setAttribute("ManagerInfo", auth_domain);
 			session.setAttribute("ManagerList", auth.selectTeam(auth_domain));
-		}
+		} 
 		
 		if(session.getAttribute("ManagerInfo") == null) {
 			model.addAttribute("msg", "false");
@@ -104,7 +114,7 @@ public class AdminHomeController {
 			model.addAttribute("msg", "true");
 			auth.updateRecDate(auth_domain);
 		}		
-		return "admin/login";
+		return "/admin/login";
 	}
 	
 	@RequestMapping(value="/manager/logout.do")
@@ -115,7 +125,7 @@ public class AdminHomeController {
 
 		logger.info("logout =================== " + session.toString() );
 				
-		return "admin/login";
+		return "/admin/login";
 	}
 	
 	@RequestMapping(value="/manager/ok.do", method=RequestMethod.GET)
@@ -131,7 +141,7 @@ public class AdminHomeController {
 		domain.setSection(section);
 		model.addAttribute("result", domain);		
 		
-		return "admin/Message";
+		return "/admin/Message";
 	}
 
 }

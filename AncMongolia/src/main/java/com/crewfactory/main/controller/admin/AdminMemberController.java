@@ -23,40 +23,40 @@ public class AdminMemberController {
 	@Autowired
 	MemberService service;
 	
-	@RequestMapping(value="/mng/member.do", method=RequestMethod.GET)
+	@RequestMapping(value="/manager/member/list.do", method=RequestMethod.GET)
 	public String member(Model model) throws Exception {
 		model.addAttribute("result", service.select() );
-		return "/mng/member/MemberList";
+		return "/admin/member/MemberList";
 	}
 	
-	@RequestMapping(value="/mng/member/view.do", method=RequestMethod.GET)
+	@RequestMapping(value="/manager/member/view.do", method=RequestMethod.GET)
 	public String memview(@RequestParam(value="idx") int idx, Model model) throws Exception {
 		model.addAttribute("result", service.view(idx));			
 		
-		return "/mng/member/MemberView";
+		return "/admin/member/MemberView";
 	}
 	
-	@RequestMapping(value="/mng/member/write.do", method=RequestMethod.GET)
+	@RequestMapping(value="/manager/member/write.do", method=RequestMethod.GET)
 	public String memwrite() throws Exception {			
-		return "/mng/member/MemberWrite";
+		return "/admin/member/MemberWrite";
 	}
 	
-	@RequestMapping(value="/mng/member/insert.do", method=RequestMethod.POST)
+	@RequestMapping(value="/manager/member/insert.do", method=RequestMethod.POST)
 	public String meminsert(@ModelAttribute("@member") MemberDomain md) throws Exception {
 		service.insert(md);
-		return "redirect:/mng/member.do";
+		return "redirect:/manager/member/list.do";
 	}
 	
-	@RequestMapping(value="/mng/member/update.do", method=RequestMethod.POST)
+	@RequestMapping(value="/manager/member/update.do", method=RequestMethod.POST)
 	public String memupdate(@ModelAttribute("@member") MemberDomain md, HttpServletRequest request) throws Exception {
 		logger.info("member update ===============" + md.toString());
 		service.update(md);
-		return "redirect:/mng/member.do";
+		return "redirect:/manager/member/list.do";
 	}
 	
-	@RequestMapping(value="/mng/member/delete.do", method=RequestMethod.GET)
+	@RequestMapping(value="/manager/member/delete.do", method=RequestMethod.GET)
 	public String memdelete(@RequestParam(value="idx") int idx) throws Exception {
 		service.delete(idx);
-		return "redirect:/mng/member.do";
+		return "redirect:/manager/member/list.do";
 	}
 }

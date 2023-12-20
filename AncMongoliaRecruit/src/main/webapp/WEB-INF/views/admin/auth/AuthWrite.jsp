@@ -22,9 +22,9 @@
                     <div class="form-group">
                       <label for="section">권한</label>
                         <select class="form-control mr-2" name="section" id="section">
-                          <option value="super">최고관리자</option>
-                          <option value="designer">디자이너</option>
-                          <option value="user" selected>일반</option>
+                          <option value="super">전체관리자</option>
+                          <option value="recruit">채용관리</option>
+                          <option value="student" selected>학생관리</option>
                         </select>
                       </div>
                       <div class="form-group">

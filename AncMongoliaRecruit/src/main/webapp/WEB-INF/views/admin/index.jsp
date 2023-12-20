@@ -46,7 +46,7 @@ if(searchDay == null || searchDay == ""){
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-          <div class="row mb-2">
+          <div class="row mb-3">
           	<div class="col-md-12">
           		<div class="card">
           			<div class="card-body">
@@ -55,11 +55,9 @@ if(searchDay == null || searchDay == ""){
           					<li class="float-left" style="margin-left:50px;">
           						<p class="mb-2">Start Date</p>
           						<div class="dropdown">
-          						<h3 class="mb-0 d-inline-block">
                               <a class="btn btn-secondary dropdown-toggle p-0 bg-transparent border-0 text-dark shadow-none font-weight-medium" href="#" role="button" id="dropdownMenuLinkA" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <%=searchDay%>
+                                <h3 class="mb-0 d-inline-block"><%=searchDay%></h3>
                               </a>
-                              </h3>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkA">
                                 <a class="dropdown-item" href="/manager/index.do?opt=today&searchDay=">오늘</a>
                                 <a class="dropdown-item" href="/manager/index.do?opt=yesterday&searchDay=<%=yesterDay%>">1일전</a>
@@ -88,7 +86,7 @@ if(searchDay == null || searchDay == ""){
           </div>
           <div class="row">
             <div class="col-md-2">
-	            <div class="card mb-2">
+	            <div class="card mb-3">
 	                <div class="card-body text-center">
 	                  <!-- <img src="/admin/pack/naver-search-ico.png" width="40px"> -->
 	                  <h5 class="">네이버검색</h5>
@@ -140,7 +138,73 @@ if(searchDay == null || searchDay == ""){
 	            </div>
             </div>
           </div>
-          <div class="row">
+          
+          
+          <div class="row mt-1">
+            <div class="col-md-6 stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-title">금일예약현황</p>
+                  <div class="table-responsive">
+                    <table id="tabler1" class="table table-striped table-bordered table-sm">
+                      <thead>
+                        <tr style="padding:0px 0px; background-color:#0066cc;">
+                        	<th width="22%" align="center" style="font-size: 13px; padding:15px 10px; text-align:center;">이름</th>
+                            <th width="6%" align="center" style="font-size: 13px; padding:15px 10px; text-align:center;">나이</th>
+                            <th width="25%" style="font-size: 13px; padding:15px 10px; text-align:center;">연락처</th>
+                            <th width="25%" style="font-size: 13px; padding:15px 10px; text-align:center;">상담일시</th>
+                            <th width="22%" style="font-size: 13px; padding:15px 10px; text-align:center;">상담사</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <c:forEach items="${resrv}" var="list">
+                        <tr>
+                            <td align="center" style="font-size: 13px; padding:15px 10px; text-align:center;"><a href="/manager/reservation/view.do?idx=${list.idx}">${list.cus_name}</a></td>
+                            <td align="center" style="font-size: 13px; padding:15px 10px; text-align:center;">${list.cus_age}</td>
+                            <td align="center" style="font-size: 13px; padding:15px 10px; text-align:center;">${list.cus_mobile}</td>
+                            <td align="center" style="font-size: 13px; padding:15px 10px; text-align:center;">${list.cons_time}</td>
+                            <td align="center" style="font-size: 13px; padding:15px 10px; text-align:center;">${list.cons_manager}</td>
+                        </tr>
+                        </c:forEach>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-md-6 stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-title">공지사항</p>
+                  <div class="table-responsive">
+                    <table id="tabler2" class="table table-striped table-bordered table-sm">
+                      <thead>
+                        <tr style="padding:0px 0px; background-color:#0066cc;">
+                        	<th width="22%" align="center" style="font-size: 13px; padding:15px 10px; text-align:center;">제목</th>
+                            <th width="6%" align="center" style="font-size: 13px; padding:15px 10px; text-align:center;">등록일자</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <c:forEach items="${notice}" var="list">
+                        <tr>
+                            <td align="center" style="font-size: 13px; padding:15px 10px; text-align:center;"><a href="/manager/notice/view.do?idx=${list.idx}">${list.title}</a></td>
+                            <td align="center" style="font-size: 13px; padding:15px 10px; text-align:center;"><fmt:formatDate value="${list.regdate}" pattern="yyyy-MM-dd" /></td>
+                        </tr>
+                        </c:forEach>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+          
+          
+          
+          
+          <div class="row mt-3">
             <div class="col-md-12 stretch-card">
               <div class="card">
                 <div class="card-body">
@@ -279,5 +343,14 @@ $(document).ready(function() {
 		"order": [[0, 'desc']],
 		"iDisplayLength": 200
 	});
+	
+	$('#tabler1').DataTable({
+		"order": [[3, 'desc']],
+	});
+	
+	$('#tabler2').DataTable({
+		"order": [[1, 'desc']],
+	});
+	
 });
 </script>

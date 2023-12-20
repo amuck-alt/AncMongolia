@@ -80,6 +80,12 @@ public class AuthDomain {
 	public void setRecdate(Date recdate) {
 		this.recdate = recdate;
 	}
+
+	@Override
+	public String toString() {
+		return "AuthDomain [idx=" + idx + ", section=" + section + ", team=" + team + ", userid=" + userid + ", usernm="
+				+ usernm + ", userpw=" + userpw + ", regdate=" + regdate + ", recdate=" + recdate + "]";
+	}
 	
 	
 
