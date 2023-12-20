@@ -16,7 +16,7 @@
               <div class="d-flex justify-content-between flex-wrap">
                 <div class="d-flex align-items-end flex-wrap">
                   <div class="mr-md-3 mr-xl-5">
-                    <h3 class="under-line mx-1">권한관리@</h3>
+                    <h3 class="under-line mx-1">Manager Management@</h3>
                   </div>
                 </div>
 				<div class="d-flex justify-content-between align-items-end flex-wrap">
