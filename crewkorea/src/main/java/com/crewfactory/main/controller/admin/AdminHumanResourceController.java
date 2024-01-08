@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -200,7 +199,17 @@ public class AdminHumanResourceController {
 		//바디 
 		for( HumanResourceDomain info : list) { 
 			Row bodyRow = excel.createRow(nRow++, 20f);
-			excel.appendCell(bodyRow, "cell_normal_centered", info.getStudentnum());
+			String studentNumber = "";
+			String studentCnt = info.getStudentcnt();
+			String studentNum = info.getStudentnum();
+			if("member".equals(studentCnt)) {
+				studentNumber = studentNum + "(재)";
+			} else if("refund".equals(studentCnt)) {
+				studentNumber = studentNum + "(환불)";
+			} else {
+				studentNumber = studentNum;
+			}
+			excel.appendCell(bodyRow, "cell_normal_centered", studentNumber);
 			excel.appendCell(bodyRow, "cell_normal_centered", info.getKorname());
 			excel.appendCell(bodyRow, "cell_normal_centered", info.getEngname());
 			excel.appendCell(bodyRow, "cell_normal_centered", info.getPhonenum());

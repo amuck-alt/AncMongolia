@@ -132,7 +132,7 @@
 					<div class="form-group">
 						<label for="input-gender">첨부파일</label>
 						<div class="input-group">
-							<input type="file" class="form-control input-group-append" name="resume" id="resume" required>
+							<input type="file" class="form-control input-group-append" name="resume" id="resume" onchange="return filechk(this);" required>
 						</div>
 						<div class="help-block with-errors text-danger"></div>
 					</div>
@@ -352,7 +352,7 @@
 	}
 	
 	function onFormSbmt() {
-	
+		
 		if($('input[name=photo]').val() == "") {
 			alert("프로필사진을 첨부하세요");
 			return false;
@@ -360,6 +360,33 @@
 			return true;
 		}
 	}
+	
+	
+	function filechk(obj){
+		var fileSize = obj.files[0].size;
+		var maxSize = 3 * 1024 * 1024; //100mb
+		var ext = $(obj).val().split(".").pop().toLowerCase();       
+		
+		//파일명에 특수문자 검사 (정규 표현식 사용)
+		var fileName = $(obj).val().split("\\").pop(); // 파일 경로에서 파일명 추출
+		var specialChars = /[*|\":<>[\]{}`\\()';@&$]/; // 특수문자를 나타내는 정규 표현식
+
+		//파일용량 체크
+		if(fileSize > maxSize){ 
+			alert("파일 크기가 너무 큽니다. 최대 크기는 3MB입니다.");
+			$(obj).val('');
+			return false;
+		}
+
+		//파일명에 특수문자 체크
+		if (specialChars.test(fileName)) {
+			alert("파일명에 특수문자가 포함되어 있습니다. 특수문자를 제거해주세요.");
+			$(obj).val(''); // 파일 선택 필드 초기화
+			return false;
+		}
+	}
+	
+
 
 </script>
 

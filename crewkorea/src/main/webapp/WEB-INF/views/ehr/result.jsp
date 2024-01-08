@@ -259,21 +259,30 @@ $(document).ready(function(){
 			</div>
 		</div>
 		<!-- 개인프로필입력 끝 -->
-		<input type="file" class="form-control input-group-append" name="editresume" id="editresume" style="display:none;">
-		<%-- <div class="col-12 my-2">
+		<c:choose>
+		<c:when test="${result.resumeyn eq 'Y'}">
+		<!-- <input type="file" class="form-control input-group-append" name="editresume" id="editresume" style="display:none;"> -->
+		<div class="col-12 my-2">
 			<div class="col-12 my-2 font-bold font-20">지원서파일등록</div>
 			<div class="card my-2 col-12 bg-ke">
 				<div class="card-body">
 					<div class="form-group">
-						<label for="input-gender">이력서첨부</label><label class="mx-2 font-red">(유니스카이 지정 서식 업로드)</label><label class="font-red"><a href="/data/download.do?filepath=${result.resume}&filename=${result.resumename}">${result.resumename }</a></label>
+						<label for="input-gender">이력서첨부</label>
+						<!-- <label class="mx-2 font-red">(유니스카이 지정 서식 업로드)</label> -->
+						<label class="font-red"><a href="/data/download.do?filepath=${result.resume}&filename=${result.resumename}">${result.resumename }</a></label>
 						<div class="input-group">
-							<input type="file" class="form-control input-group-append" name="editresume" id="editresume">
+							<input type="file" class="form-control input-group-append" name="editresume" id="editresume" onchange="return filechk(this);">
 						</div>
 						<div class="help-block with-errors text-danger"></div>
 					</div>
 				</div>
 			</div>
-		</div> --%>
+		</div>
+		</c:when>
+		<c:otherwise>
+			<input type="file" name="editresume" id="editresume" value="" style="display:none;">
+		</c:otherwise>
+		</c:choose>
 		<!-- 상세정보입력 시작 -->
 		<div class="col-12 my-2">
 			<div class="col-12 my-2 font-bold font-20">상세정보</div>
@@ -428,6 +437,30 @@ $(document).ready(function(){
         var name = "print";
         var option = "width=1024, height=768, top=100, left=200, location=no, scrollbars=no"
         window.open(url, name, option);
+	}
+	
+	function filechk(obj){
+		var fileSize = obj.files[0].size;
+		var maxSize = 3 * 1024 * 1024; //100mb
+		var ext = $(obj).val().split(".").pop().toLowerCase();       
+		
+		//파일명에 특수문자 검사 (정규 표현식 사용)
+		var fileName = $(obj).val().split("\\").pop(); // 파일 경로에서 파일명 추출
+		var specialChars = /[*|\":<>[\]{}`\\()';@&$]/; // 특수문자를 나타내는 정규 표현식
+
+		//파일용량 체크
+		if(fileSize > maxSize){ 
+			alert("파일 크기가 너무 큽니다. 최대 크기는 3MB입니다.");
+			$(obj).val('');
+			return false;
+		}
+
+		//파일명에 특수문자 체크
+		if (specialChars.test(fileName)) {
+			alert("파일명에 특수문자가 포함되어 있습니다. 특수문자를 제거해주세요.");
+			$(obj).val(''); // 파일 선택 필드 초기화
+			return false;
+		}
 	}
 
 </script>

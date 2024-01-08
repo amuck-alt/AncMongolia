@@ -262,7 +262,7 @@ public class HumanResourceController {
 	
 	@RequestMapping(value="/ehr/result.do", method=RequestMethod.POST)
 	public String result (HttpServletRequest request, Model model) throws Exception {
-		logger.info("==================================================");
+		
 		String srhCateNum = request.getParameter("srhcatenum");
 		String srhKorName = request.getParameter("srhkorname");
 		String srhPhoneAgency = request.getParameter("srhphoneagency");
