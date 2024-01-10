@@ -16,7 +16,7 @@
           
 		  <form action="/manager/weare/insert.do" name="blog" method="post" data-toggle="validator" enctype="multipart/form-data">          
           <input type="hidden" name="idx" value="${ result.idx }"/>
-          <input type="hidden" name="section" value="${ result.section }"/>
+          <input type="hidden" name="section" value="blog"/>
           <input type="hidden" name="thumb" value="${ result.thumbnail }"/>
           <input type="hidden" name="reurl" value="/manager/weare/list.do">
           <input type="hidden" name="regid" value="${sessionScope.ManagerInfo.userid}">

@@ -16,9 +16,9 @@
       <div class="main-panel">
         <div class="content-wrapper">
           
-		  <form action="/manager/blog/WeAreUpdate.do" name="blog" method="post" data-toggle="validator" enctype="multipart/form-data">          
+		  <form action="/manager/weare/update.do" name="blog" method="post" data-toggle="validator" enctype="multipart/form-data">          
           <input type="hidden" name="idx" value="${ result.idx }"/>
-          <input type="hidden" name="section" value="${ result.section }"/>
+          <input type="hidden" name="section" value="blog"/>
           <input type="hidden" name="thumb" value="${ result.thumbnail }"/>
           <input type="hidden" name="reurl" value="/manager/blog/WeAre.do">
           <div class="row">
@@ -115,7 +115,7 @@
 	                  <div class="col-12 form-group">  
 						<button type="submit" class="btn btn-primary mr-2" id="blogSave">저장</button>
 						<button type="button" class="btn btn-danger mr-2" onclick="delPost(${ result.idx });">삭제</button>
-						<a href="/manager/blog/WeAre.do?section=blog" class="btn btn-light">취소</a>
+						<a href="/manager/weare/list.do?section=blog" class="btn btn-light">취소</a>
 	                  </div>
 	                </div><!-- end row -->
 				</div><!-- end card body -->
@@ -181,7 +181,7 @@
 	
 	function delPost(idx){
 		if(confirm("정말로 삭제하시겠습니까?") == true){
-			location.href = "/manager/blog/WeAreDelete.do?idx="+idx;
+			location.href = "/manager/weare/delete.do?idx="+idx;
 		}else{
 			return;
 		}		

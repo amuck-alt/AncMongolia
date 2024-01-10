@@ -3,7 +3,7 @@
 <mapper namespace="com.crewfactory.main.dao.CounterDao">
 	
 	<update id="update_count_announce" parameterType="int">
-		UPDATE ck_news_info
+		UPDATE mg_news_info
 		SET
 		visit = visit + 1
 		WHERE idx = #{idx};
