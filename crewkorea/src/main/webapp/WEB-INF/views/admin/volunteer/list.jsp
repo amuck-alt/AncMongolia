@@ -118,14 +118,14 @@
                         <c:forEach items="${result}" var="list">
                         <tr style="padding:0px 0px;">
                         	<td align="center" width="5%" style="font-size: 13px; padding:0px 0px; text-align:center;"><a href="/manager/volunteer/view.do?idx=${ list.idx }">${list.studentnum}</a></td>
-                        	<td align="center" width="2%" style="font-size: 13px; padding:0px 0px; text-align:center;">
+                        	<td align="center" width="3%" style="font-size: 13px; padding:0px 0px; text-align:center;">
                         		<c:choose>
                         			<c:when test="${list.studentcnt eq 'member'}"><a href="/manager/student/view.do?idx=${list.studentidx }"><button class="btn btn-sm btn-primary px-1 py-1" style="font-size:11px;">재학생</button></a></c:when>
                         			<c:when test="${list.studentcnt eq 'refund'}"><a href="/manager/student/view.do?idx=${list.studentidx }"><button class="btn btn-sm btn-danger px-1 py-1" style="font-size:11px;">환불</button></a></c:when>
                         			<c:when test="${list.studentcnt eq 'short'}"><a href="/manager/student/view.do?idx=${list.studentidx }"><button class="btn btn-sm btn-primary px-1 py-1" style="font-size:11px;">재학생</button></a></c:when>
                         			<c:when test="${list.studentcnt eq 'hold'}"><a href="/manager/student/view.do?idx=${list.studentidx }"><button class="btn btn-sm btn-warning px-1 py-1" style="font-size:11px;">보류</button></a></c:when>
                         			<c:when test="${list.studentcnt eq 'rereg'}"><a href="/manager/student/view.do?idx=${list.studentidx }"><button class="btn btn-sm btn-primary px-1 py-1" style="font-size:11px;">재학생</button></a></c:when>
-                        			<c:when test="${list.studentcnt eq 'black'}"><a href="/manager/student/view.do?idx=${list.studentidx }"><button class="btn btn-sm btn-danger px-1 py-1" style="font-size:11px;">블랙</button></a></c:when>
+                        			<c:when test="${list.studentcnt eq 'black'}"><a href="/manager/student/view.do?idx=${list.studentidx }"><button class="btn btn-sm btn-danger px-1 py-1" style="font-size:11px;">악성고객</button></a></c:when>
                         			<c:otherwise></c:otherwise>
                         		</c:choose>
                         		<%-- <c:if test="${list.studentcnt ne null}"><a href="/manager/student/view.do?idx=${list.studentcnt }"><button class="btn btn-sm btn-danger px-1 py-1" style="font-size:11px;">재</button></a></c:if> --%>

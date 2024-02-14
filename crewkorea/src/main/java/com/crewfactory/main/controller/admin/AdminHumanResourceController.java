@@ -203,9 +203,17 @@ public class AdminHumanResourceController {
 			String studentCnt = info.getStudentcnt();
 			String studentNum = info.getStudentnum();
 			if("member".equals(studentCnt)) {
-				studentNumber = studentNum + "(재)";
+				studentNumber = studentNum + "(정회원)";
+			} else if("short".equals(studentCnt)) {
+				studentNumber = studentNum + "(단기회원)";
 			} else if("refund".equals(studentCnt)) {
 				studentNumber = studentNum + "(환불)";
+			} else if("hold".equals(studentCnt)) {
+				studentNumber = studentNum + "(보류)";
+			} else if("rereg".equals(studentCnt)) {
+				studentNumber = studentNum + "(재등록)";
+			} else if("black".equals(studentCnt)) {
+				studentNumber = studentNum + "(악성고객)";
 			} else {
 				studentNumber = studentNum;
 			}
