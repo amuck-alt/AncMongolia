@@ -32,7 +32,7 @@
           </div>
 		<form name="form" action="/manager/student/update.do" name="form" id="form" method="post" data-toggle="validator" enctype="multipart/form-data">          
         <input type="hidden" name="idx" value="${result.idx }"/>
-        <input type="hidden" name="regid" value="${sessionScope.ManagerInfo.userid}">
+        <input type="hidden" name="regid" value="${sessionScope.ManagerInfo.usernm}">
         <input type="hidden" name="photo" value="${result.photo}"/>
         <div class="row">
         <!-- 개인프로필입력 시작 -->		
@@ -46,7 +46,7 @@
 							<div class="col-md-3">
 								<div class="py-1">
 		               				<c:choose>
-		               					<c:when test="${result.photo ne ''}"><img src="${result.photo}" class="wrapper-tn" id="wrapper-tn" style="width:100%;"></c:when>
+		               					<c:when test="${result.photo ne ''}"><a href="http://www.crewkorea.com/${result.photo}" target="_blank"><img src="${result.photo}" class="wrapper-tn" id="wrapper-tn" style="width:100%;"></a></c:when>
 		               					<c:otherwise><img src="/admin/images/no-student-img.png" class="wrapper-tn" id="wrapper-tn" style="width:100%;"></c:otherwise>
 		               				</c:choose>
 		               				
@@ -71,8 +71,8 @@
 										<td width="15%" class="text-center bg-light" style="font-size: 14px">성별</td>
 										<td width="25%" class="px-2 py-2">
 											<select class="form-control" name="gender" id="gender" style="height:30px;padding:0.3rem;" required>
-												<option value="female">여</option>
-												<option value="male">남</option>
+												<option value="female" <c:if test="${result.gender eq 'female'}">selected</c:if>>여</option>
+												<option value="male" <c:if test="${result.gender eq 'male'}">selected</c:if>>남</option>
 											</select>
 										</td>
 									</tr>
@@ -83,6 +83,7 @@
 											<select class="form-control col-8" name="curriculum" id="curriculum" style="height:30px;padding:0.3rem;" required>
 												<option value="domestic" <c:if test="${result.curriculum eq 'domestic'}">selected</c:if>>국내승무원</option>
 												<option value="overseas" <c:if test="${result.curriculum eq 'overseas'}">selected</c:if>>국외승무원</option>
+												<option value="allinone" <c:if test="${result.curriculum eq 'allinone'}">selected</c:if>>종합승무원</option>
 												<option value="university" <c:if test="${result.curriculum eq 'university'}">selected</c:if>>항공운항과</option>
 												<option value="ground" <c:if test="${result.curriculum eq 'ground'}">selected</c:if>>지상직</option>
 												<option value="hotel" <c:if test="${result.curriculum eq 'hotel'}">selected</c:if>>호텔</option>
@@ -119,8 +120,8 @@
 									</tr>
 									<tr>
 										<td width="15%" class="text-center bg-light" style="font-size: 14px">재학현황</td>
-										<td width="25%" colspan="3" class="px-2 py-2">
-											<select class="form-control col-4" name="status" id="status" style="height:30px;padding:0.3rem;background-color:#d7f8fc;">
+										<td width="25%" class="px-2 py-2">
+											<select class="form-control col-12" name="status" id="status" style="height:30px;padding:0.3rem;background-color:#d7f8fc;">
 												<option value="member" <c:if test="${result.status eq 'member'}">selected</c:if>>정회원</option>
 												<option value="short" <c:if test="${result.status eq 'short'}">selected</c:if>>단기회원</option>
 												<option value="refund" <c:if test="${result.status eq 'refund'}">selected</c:if>>환불</option>
@@ -128,6 +129,13 @@
 												<option value="rereg" <c:if test="${result.status eq 'rereg'}">selected</c:if>>재등록</option>
 												<option value="black" <c:if test="${result.status eq 'black'}">selected</c:if>>악성고객</option>
 											</select>
+										</td>
+										<td width="15%" class="text-center bg-light" style="font-size: 14px">납부현황</td>
+										<td width="25%" class="px-2 py-2">
+											<div class="input-group">
+												<input type="text" class="form-control" name="paystatus" id="paystatus" value="${result.paystatus}" style="height:30px;">
+												<span class="ml-1 mt-1" style="font-size: 14px">원</span>
+											</div>
 										</td>
 									</tr>
 								</table>
@@ -155,7 +163,7 @@
 								</tr>
 								<tr class="col-12">
 									<td width="10%" class="text-center bg-light" style="font-size: 14px">학력(학교)</td>
-									<td colspan="3" width="15%" class="px-2 py-2"><input type="text" class="form-control" name="edulv" id="edulv" value="${result.gradlv}" style="height:30px;"></td>
+									<td colspan="3" width="15%" class="px-2 py-2"><input type="text" class="form-control" name="edulv" id="edulv" value="${result.edulv}" style="height:30px;"></td>
 									<td width="10%" class="text-center bg-light" style="font-size: 14px">졸업여부</td>
 									<td colspan="3" width="15%" class="px-2 py-2">
 										<select class="form-control" name="gradlv" id="gradlv" style="height:30px;padding:0.3rem;" required>
@@ -179,7 +187,9 @@
 							</table>
 							<div class="mt-2 text-right form-group">  
 								<button type="submit" class="btn btn-primary mr-2" id="blogSave">저장</button>
-								<%-- <button type="button" class="btn btn-danger mr-2" onclick="delPost('${ result.idx }', '${result.catenum }');">삭제</button> --%>
+								<c:if test="${sessionScope.ManagerInfo.section eq 'super'}">
+									<button type="button" class="btn btn-danger mr-2" onclick="delPost('${ result.idx }');">삭제</button>
+								</c:if>
 								<a href="/manager/student/list.do?status=&curriculum=&korname=&mobile=&mento=" class="btn btn-light">취소</a>
 							</div>			
 							
@@ -195,7 +205,7 @@
         
         <form action="/manager/student/diary/insert.do" name="diary" id="diary" method="post" data-toggle="validator">
         <input type="hidden" name="studentidx" value="${result.idx }"/>
-        <input type="hidden" name="regid" value="${sessionScope.ManagerInfo.userid}">
+        <input type="hidden" name="regid" value="${sessionScope.ManagerInfo.usernm}">
         <input type="hidden" name="thumbnail" value="${result.photo}"/>  
           <div class="row">
 	        <!-- 관리일지 시작 -->		
@@ -271,13 +281,8 @@
 
 <script>
 
-	function downloadExcel() {
-		$("#search").attr("action", "/manager/volunteer/download.do");
-		$("#search").submit();
-	}
-
-	function delPost(idx, catenum) {
-		location.href="/manager/volunteer/delete.do?idx="+ idx +"&catenum="+catenum;
+	function delPost(idx) {
+		location.href="/manager/student/delete.do?idx="+idx;
 	}
  	
  </script>
@@ -286,6 +291,10 @@
 
 	$(document).ready(function() {
 	 	$("#form").validator();	//폼발리데이터
+	 	
+	 	$("#paystatus").on("keyup", function(){
+	 		$(this).val($(this).val().replace(/[^-0-9]/g, '').replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'));
+	 	});
 	}); 	
 
 	

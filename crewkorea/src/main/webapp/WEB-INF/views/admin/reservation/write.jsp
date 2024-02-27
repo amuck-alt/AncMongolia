@@ -54,7 +54,12 @@
                       <label for="title" class="control-label">담당팀</label>
                       <input type="text" class="form-control" value="" name="cons_team" id="cons_team" placeholder="담당팀" data-error="담당팀을 입력하세요." required>
                       <div class="help-block with-errors text-danger"></div>
-                    </div>        
+                    </div>
+                    <div class="form-group">
+                      <label for="title" class="control-label">상담담당자</label>
+                      <input type="text" class="form-control" value="" name="cons_manager" id="cons_manager" placeholder="상담담당자" data-error="상담담당자를 입력하세요.">
+                      <div class="help-block with-errors text-danger"></div>
+                    </div>                  
                     <button type="submit" class="btn btn-primary mr-2">저장</button>
                     <a href="/manager/reservation/list.do" class="btn btn-light">취소</a>
                 </div>

@@ -4,18 +4,22 @@
 <mapper namespace="com.crewfactory.main.dao.ReservationDao">
 
 	<select id="select" parameterType="com.crewfactory.main.domain.ReservationDomain" resultType="com.crewfactory.main.domain.ReservationDomain">
+		<![CDATA[
 		SELECT 
 			a.*,
 			(select b.note from ck_consult_note_info b where b.consultidx = a.idx order by b.idx desc limit 1) as note,
 			(select b.regdate from ck_consult_note_info b where b.consultidx = a.idx order by b.idx desc limit 1) as updatedate
 		FROM ck_consult_info a
 		WHERE 1 = 1
-		
-<if test="cons_status != ''">
+		]]>
+			<if test="cons_status != ''">
 				AND a.cons_status = #{cons_status}
 			</if>
  			<if test="cons_startday != ''">
-				AND replace(a.cons_day, '-', '') BETWEEN replace(#{cons_startday}, '-', '') AND replace(#{cons_endday}, '-', '') 
+				<![CDATA[ AND STR_TO_DATE(a.cons_day, '%Y-%m-%d') >= STR_TO_DATE(#{cons_startday}, '%Y-%m-%d') ]]>
+			</if>
+			<if test="cons_endday != ''">
+				<![CDATA[ AND STR_TO_DATE(a.cons_day, '%Y-%m-%d') <= STR_TO_DATE(#{cons_endday}, '%Y-%m-%d') ]]>
 			</if>
 			<if test="cons_manager != ''">
 				AND a.cons_manager = #{cons_manager}
@@ -23,7 +27,7 @@
 			<!-- <if test="customer != ''">
 				AND a.cus_name like '%'||#{customer}||'%'
 			</if> -->
-		ORDER BY a.cons_day DESC, a.cons_time DESC
+		ORDER BY a.cons_status asc, a.cons_day DESC, a.cons_time DESC
 	</select>
 	
 	<select id="view" parameterType="int" resultType="com.crewfactory.main.domain.ReservationDomain">
@@ -39,8 +43,33 @@
 	</select>
 	
 	<insert id="insert" parameterType="com.crewfactory.main.domain.ReservationDomain">
-		INSERT INTO ck_consult_info (idx, cons_status, cus_name, cus_age, cus_mobile, rec_manager, cons_day, cons_time, cons_team, regid, regdate)
-		VALUES((select ifnull(max(idx)+1, 1) from ck_consult_info a), #{cons_status}, #{cus_name}, #{cus_age}, #{cus_mobile}, #{rec_manager}, #{cons_day}, #{cons_time}, #{cons_team}, #{regid}, now())
+		INSERT INTO ck_consult_info (
+			idx, 
+			cons_status, 
+			cus_name, 
+			cus_age, 
+			cus_mobile, 
+			rec_manager, 
+			cons_day, 
+			cons_time, 
+			cons_team,
+			cons_manager, 
+			regid, 
+			regdate
+		) VALUES (
+			(select ifnull(max(idx)+1, 1) from ck_consult_info a), 
+			#{cons_status}, 
+			#{cus_name}, 
+			#{cus_age}, 
+			#{cus_mobile}, 
+			#{rec_manager}, 
+			#{cons_day}, 
+			#{cons_time}, 
+			#{cons_team},
+			#{cons_manager}, 
+			#{regid}, 
+			now()
+		)
 	</insert>
 	
 	<update id="update" parameterType="com.crewfactory.main.domain.ReservationDomain">
@@ -51,6 +80,13 @@
 			cons_time = #{cons_time},
 			cons_team = #{cons_team},
 			cons_manager = #{cons_manager}	
+		WHERE idx = #{idx};
+    </update>
+    
+   	<update id="updateEnd" parameterType="com.crewfactory.main.domain.ReservationDomain">
+        UPDATE ck_consult_info
+		SET
+			cons_status = '99'
 		WHERE idx = #{idx};
     </update>
         

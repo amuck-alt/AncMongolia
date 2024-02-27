@@ -130,5 +130,12 @@ public class AdminReservationController {
 		service.insertMemo(domain);
 		return "redirect:/manager/reservation/view.do?idx="+domain.getIdx();
 	}
+	
+	@PostMapping("/manager/reservation/updateEnd.do")
+	public String updateEnd (@ModelAttribute("@endForm") ReservationDomain domain, Model model) throws Exception {
+		service.updateEnd(domain);
+		service.insertMemo(domain);
+		return "redirect:/manager/index.do";
+	}
 
 }

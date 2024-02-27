@@ -11,6 +11,7 @@ public interface ReservationDao {
 	public ReservationDomain view (int idx) throws Exception;
 	public boolean insert (ReservationDomain domain) throws Exception;
 	public boolean update (ReservationDomain domain) throws Exception;
+	public boolean updateEnd (ReservationDomain domain) throws Exception;
 	public boolean delete (int idx) throws Exception;
 	
 	public List <ReservationDomain> selectMemo (int idx) throws Exception;

@@ -76,6 +76,7 @@
 											<select class="form-control col-8" name="curriculum" id="curriculum" style="height:30px;padding:0.3rem;">
 												<option value="domestic" <c:if test="${result.curriculum eq 'domestic'}">selected</c:if>>국내승무원</option>
 												<option value="overseas" <c:if test="${result.curriculum eq 'overseas'}">selected</c:if>>국외승무원</option>
+												<option value="allinone" <c:if test="${result.curriculum eq 'allinone'}">selected</c:if>>종합승무원</option>
 												<option value="university" <c:if test="${result.curriculum eq 'university'}">selected</c:if>>항공운항과</option>
 												<option value="ground" <c:if test="${result.curriculum eq 'ground'}">selected</c:if>>지상직</option>
 												<option value="hotel" <c:if test="${result.curriculum eq 'hotel'}">selected</c:if>>호텔</option>
@@ -112,8 +113,8 @@
 									</tr>
 									<tr>
 										<td width="15%" class="text-center bg-light" style="font-size: 14px">재학현황</td>
-										<td width="25%" colspan="3" class="px-2 py-2">
-											<select class="form-control col-4" name="status" id="status" style="height:30px;padding:0.3rem;background-color:#d7f8fc;">
+										<td width="25%" class="px-2 py-2">
+											<select class="form-control col-12" name="status" id="status" style="height:30px;padding:0.3rem;background-color:#d7f8fc;">
 												<option value="member">정회원</option>
 												<option value="short">단기회원</option>
 												<option value="refund">환불</option>
@@ -121,6 +122,13 @@
 												<option value="rereg">재등록</option>
 												<option value="black">악성고객</option>
 											</select>
+										</td>
+										<td width="15%" class="text-center bg-light" style="font-size: 14px">납부현황</td>
+										<td width="25%" class="px-2 py-2">
+											<div class="input-group">
+												<input type="text" class="form-control" name="paystatus" id="paystatus" value="${result.paystatus}" style="height:30px;">
+												<span class="ml-1 mt-1" style="font-size: 14px">원</span>
+											</div>
 										</td>
 									</tr>
 								</table>
@@ -148,7 +156,7 @@
 								</tr>
 								<tr class="col-12">
 									<td width="10%" class="text-center bg-light" style="font-size: 14px">학력(학교)</td>
-									<td colspan="3" width="15%" class="px-2 py-2"><input type="text" class="form-control" name="edulv" id="edulv" value="${result.gradlv}" style="height:30px;"></td>
+									<td colspan="3" width="15%" class="px-2 py-2"><input type="text" class="form-control" name="edulv" id="edulv" value="${result.edulv}" style="height:30px;"></td>
 									<td width="10%" class="text-center bg-light" style="font-size: 14px">졸업여부</td>
 									<td colspan="3" width="15%" class="px-2 py-2">
 										<select class="form-control" name="gradlv" id="gradlv" style="height:30px;padding:0.3rem;" required>
@@ -277,6 +285,11 @@
 
 	$(document).ready(function() {
 	 	$("#form").validator();	//폼발리데이터
+	 	
+ 	 	$("#paystatus").on("keyup", function(){
+	 		$(this).val($(this).val().replace(/[^-0-9]/g, '').replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'));
+	 	});
+
 	}); 	
 
 	

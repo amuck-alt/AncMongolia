@@ -3,9 +3,33 @@
 <!DOCTYPE html>
 <html>
 
-<%@ include file = "./include/header.jsp" %>
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>크루코리아-관리자페이지</title>
 
-<body style="background-color: gray; background-size: cover;">
+<link rel="stylesheet" href="/admin/vendors/mdi/css/materialdesignicons.min.css">
+<link rel="stylesheet" href="/admin/vendors/base/vendor.bundle.base.css">
+<link rel="stylesheet" href="/admin/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+<link rel="stylesheet" href="/admin/css/style.css">
+<link rel="stylesheet" href="/admin/css/custom.css">
+<link rel="stylesheet" href="/admin/vendors/hover/hover.css">
+<script src="/admin/vendors/base/vendor.bundle.base.js"></script>
+<script src="/admin/vendors/chart.js/Chart.min.js"></script>
+<script src="/admin/vendors/datatables.net/jquery.dataTables.js"></script>
+<script src="/admin/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+<script src="/admin/js/off-canvas.js"></script>
+<script src="/admin/js/hoverable-collapse.js"></script>
+<script src="/admin/js/template.js"></script>
+<script src="/admin/js/dashboard.js"></script>
+<script src="/admin/js/data-table.js"></script>
+<script src="/admin/js/jquery.dataTables.js"></script>
+<script src="/admin/js/dataTables.bootstrap4.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
+
+</head>
+<body style="background:url('/admin/images/crewkorea-bg.jpg'); background-color: gray; background-size: cover;">
   <div class="container-scroller">
     <div class="container-fluid page-body-wrapper full-page-wrapper" style="background-color: ;">
       <div class="content-wrapper d-flex align-items-center auth px-0" style="background:rgba(255, 255, 255, 0.0);">
@@ -14,6 +38,7 @@
             <div class="auth-form-light text-left py-5 px-4 px-sm-5">
               <div class="brand-logo">
                 <img src="https://www.crew-factory.com/img/logo.png">
+                <h5 class="">크루코리아 취업정보사이트</h5>
               </div>
               <h6 class="font-weight-light text-danger" id="login-msg"></h6>
               <form class="pt-3" method="POST" action="/manager/login.do" data-toggle="validator" id="login">

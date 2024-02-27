@@ -149,21 +149,27 @@ if(searchDay == null || searchDay == ""){
                     <table id="tabler1" class="table table-striped table-bordered table-sm">
                       <thead>
                         <tr style="padding:0px 0px; background-color:#0066cc;">
-                        	<th width="22%" align="center" style="font-size: 13px; padding:15px 10px; text-align:center;">이름</th>
-                            <th width="6%" align="center" style="font-size: 13px; padding:15px 10px; text-align:center;">나이</th>
-                            <th width="25%" style="font-size: 13px; padding:15px 10px; text-align:center;">연락처</th>
-                            <th width="25%" style="font-size: 13px; padding:15px 10px; text-align:center;">상담일시</th>
-                            <th width="22%" style="font-size: 13px; padding:15px 10px; text-align:center;">상담사</th>
+                        	<th width="18%" align="center" style="font-size: 13px; padding:15px 10px; text-align:center;">이름</th>
+                            <th width="7%" align="center" style="font-size: 13px; padding:15px 10px; text-align:center;">나이</th>
+                            <th width="20%" style="font-size: 13px; padding:15px 10px; text-align:center;">연락처</th>
+                            <th width="20%" style="font-size: 13px; padding:15px 10px; text-align:center;">상담일시</th>
+                            <th width="20%" style="font-size: 13px; padding:15px 10px; text-align:center;">담당자</th>
+                            <th width="20%" style="font-size: 13px; padding:15px 10px; text-align:center;">상담종료</th>
                         </tr>
                       </thead>
                       <tbody>
                         <c:forEach items="${resrv}" var="list">
-                        <tr>
-                            <td align="center" style="font-size: 13px; padding:15px 10px; text-align:center;"><a href="/manager/reservation/view.do?idx=${list.idx}">${list.cus_name}</a></td>
-                            <td align="center" style="font-size: 13px; padding:15px 10px; text-align:center;">${list.cus_age}</td>
-                            <td align="center" style="font-size: 13px; padding:15px 10px; text-align:center;">${list.cus_mobile}</td>
-                            <td align="center" style="font-size: 13px; padding:15px 10px; text-align:center;">${list.cons_time}</td>
-                            <td align="center" style="font-size: 13px; padding:15px 10px; text-align:center;">${list.cons_manager}</td>
+                        <tr style="padding:0px 0px;">
+                            <td align="center" style="padding:5px 5px; font-size: 13px; text-align:center; height:25px"><a href="/manager/reservation/view.do?idx=${list.idx}">${list.cus_name}</a></td>
+                            <td align="center" style="padding:5px 5px; font-size: 13px; text-align:center; height:25px">${list.cus_age}</td>
+                            <td align="center" style="padding:5px 5px; font-size: 13px; text-align:center; height:25px">${list.cus_mobile}</td>
+                            <td align="center" style="padding:5px 5px; font-size: 13px; text-align:center; height:25px">${list.cons_time}</td>
+                            <td align="center" style="padding:5px 5px; font-size: 13px; text-align:center; height:25px">${list.cons_manager}</td>
+                            <td align="center" style="padding:5px 5px; font-size: 13px; ">
+                            	<c:if test="${list.cons_status ne '99'}">
+                            		<a href="javascript:endCounsel('${list.idx}')"><button class="btn btn-sm btn-danger" style="font-size: 12px; width:50px; height:28px;">종료</button></a>
+                            	</c:if>
+                            </td>
                         </tr>
                         </c:forEach>
                       </tbody>
@@ -197,11 +203,50 @@ if(searchDay == null || searchDay == ""){
                   </div>
                 </div>
               </div>
-            </div>
-            
+            </div>            
           </div>
           
-          
+<!-- modal -->
+<form name="endForm" method="post" action="/manager/reservation/updateEnd.do">
+<input type="hidden" name="idx" id="idx" value="">
+<input type="hidden" name="consultidx" id="consultidx" value="">
+<input type="hidden" name="cons_status" id="cons_status" value="99">
+<input type="hidden" name="consultcode" id="consultcode" value="99">
+<input type="hidden" name="regid" value="${sessionScope.ManagerInfo.usernm}">
+<input type="hidden" name="regip" value="<%= request.getRemoteAddr() %>">          
+<div class="modal" id="myModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">상담종료 메모입력</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <textarea class="form-control col-12" style="padding:0.5rem;" name="note" id="note" placeholder="메모" data-error="메모를 입력하세요." rows="5" required></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">저장</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeModal()">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+</form>  
+
+<script>
+	function endCounsel(idx){
+		$('#idx').val(idx);
+		$('#consultidx').val(idx);
+		$('#myModal').show();
+	}
+
+	function closeModal(){
+		$('#myModal').hide();
+	}
+	
+</script>         
           
           
           <div class="row mt-3">
@@ -332,6 +377,8 @@ if(searchDay == null || searchDay == ""){
   <script src="js/jquery.dataTables.js"></script>
   <script src="js/dataTables.bootstrap4.js"></script>
   <!-- End custom js for this page-->
+
+  
 </body>
 
 </html>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:useBean id="now" class="java.util.Date" />
 
 <%@ include file = "../include/header.jsp" %>
@@ -100,6 +101,7 @@
 						    <option value="" <c:if test="${search.curriculum eq null}">selected</c:if>>전체</option>
 						    <option value="domestic" <c:if test="${search.curriculum eq 'member'}">selected</c:if>>국내승무원</option>
 						    <option value="overseas" <c:if test="${search.curriculum eq 'overseas'}">selected</c:if>>외국항공사</option>
+						    <option value="allinone" <c:if test="${search.curriculum eq 'allinone'}">selected</c:if>>종합승무원</option>
 						    <option value="ground" <c:if test="${search.curriculum eq 'ground'}">selected</c:if>>지상직</option>
 						    <option value="hotel" <c:if test="${search.curriculum eq 'hotel'}">selected</c:if>>호텔</option>
 						    <option value="jobmanager" <c:if test="${search.curriculum eq 'jobmanager'}">selected</c:if>>직업상담사</option>
@@ -146,17 +148,18 @@
                         	</td>
                         	<td width="5%" style="font-size: 13px; padding:5px 5px; text-align:center;"><a href="/manager/student/view.do?idx=${ list.idx }">${list.studentnum}</a></td>
                         	<td style="font-size: 13px; padding:5px 5px; text-align:center;">${list.regday }</td>                            
-                            <td style="font-size: 13px; padding:5px 5px; text-align:center;">
+                            <td style="font-size: 12px; padding:5px 5px; text-align:center;">
                             	<c:choose>
-                            		<c:when test="${list.curriculum eq 'domestic'}"><button class="btn btn-sm btn-primary py-1 px-2">국내승무원</button></c:when>
-                            		<c:when test="${list.curriculum eq 'overseas'}"><button class="btn btn-sm btn-warning py-1 px-2">외국항공사</button></c:when>
-                            		<c:when test="${list.curriculum eq 'ground'}"><button class="btn btn-sm btn-danger py-1 px-2">지상직</button></c:when>
-                            		<c:when test="${list.curriculum eq 'hotel'}"><button class="btn btn-sm btn-sucess py-1 px-2">호텔</button></c:when>
-                            		<c:when test="${list.curriculum eq 'jobmanager'}"><button class="btn btn-sm btn-sucess py-1 px-2">직업상담사</button></c:when>
-                            		<c:when test="${list.curriculum eq 'internship'}"><button class="btn btn-sm btn-sucess py-1 px-2">해외취업연수반</button></c:when>
-                            		<c:when test="${list.curriculum eq 'shorterm'}"><button class="btn btn-sm btn-info py-1 px-2">단기반</button></c:when>
-                            		<c:when test="${list.curriculum eq 'private'}"><button class="btn btn-sm btn-dark py-1 px-2">과외</button></c:when>
-                            		<c:when test="${list.curriculum eq 'etc'}"><button class="btn btn-sm btn-light py-1 px-2">기타</button></c:when>
+                            		<c:when test="${list.curriculum eq 'domestic'}"><button class="btn btn-sm btn-primary py-1 px-2" style="font-size: 12px; width:100px; height:25px; padding:5px 5px;">국내승무원</button></c:when>
+                            		<c:when test="${list.curriculum eq 'overseas'}"><button class="btn btn-sm btn-warning py-1 px-2" style="font-size: 12px; width:100px; height:25px; padding:5px 5px;">외국항공사</button></c:when>
+                            		<c:when test="${list.curriculum eq 'allinone'}"><button class="btn btn-sm py-1 px-2" style="background-color:navy; color:#fff; font-size: 12px; width:100px; height:25px; padding:5px 5px;">종합승무원</button></c:when>
+                            		<c:when test="${list.curriculum eq 'ground'}"><button class="btn btn-sm btn-danger py-1 px-2" style="font-size: 12px; width:100px; height:25px; padding:5px 5px;">지상직</button></c:when>
+                            		<c:when test="${list.curriculum eq 'hotel'}"><button class="btn btn-sm btn-sucess py-1 px-2" style="font-size: 12px; width:100px; height:25px; padding:5px 5px;">호텔</button></c:when>
+                            		<c:when test="${list.curriculum eq 'jobmanager'}"><button class="btn btn-sm btn-sucess py-1 px-2" style="font-size: 12px; width:100px; height:25px; padding:5px 5px;">직업상담사</button></c:when>
+                            		<c:when test="${list.curriculum eq 'internship'}"><button class="btn btn-sm btn-sucess py-1 px-2" style="font-size: 12px; width:100px; height:25px; padding:5px 5px;">해외취업연수반</button></c:when>
+                            		<c:when test="${list.curriculum eq 'shorterm'}"><button class="btn btn-sm btn-info py-1 px-2" style="font-size: 12px; width:100px; height:25px; padding:5px 5px;">단기반</button></c:when>
+                            		<c:when test="${list.curriculum eq 'private'}"><button class="btn btn-sm btn-dark py-1 px-2" style="font-size: 12px; width:100px; height:25px; padding:5px 5px;">과외</button></c:when>
+                            		<c:when test="${list.curriculum eq 'etc'}"><button class="btn btn-sm btn-light py-1 px-2" style="font-size: 12px; width:100px; height:25px; padding:5px 5px;">기타</button></c:when>
                             	</c:choose>
                             </td>
                             <td style="font-size: 13px; padding:5px 5px; text-align:center;">${list.mobile }</td>
@@ -172,7 +175,7 @@
                             		<c:when test="${list.status eq 'black'}"><font color="red">악성고객</font></c:when>
                             	</c:choose>
                             </td>
-                            <td width="40%" style="font-size: 13px; padding:15px 10px; text-align:left;">${list.memo }</td>
+                            <td width="40%" style="font-size: 13px; padding:15px 10px; text-align:left;">${fn:substring(list.memo,0,50)}<c:if test="${fn:length(list.memo) > 50}">&nbsp;...</c:if></td>
                         </tr>
                         </c:forEach>
                       </tbody>
@@ -201,8 +204,9 @@
  	
  	$(document).ready(function() {
     	$('#tabler').DataTable({
+    		"order": [[3, 'desc']],
     		"ordering" : true,
-    		"iDisplayLength" : 200
+    		"iDisplayLength" : 50
     	});
 	});
  	
@@ -211,5 +215,6 @@
  	}
  	
  </script>
+
 
 

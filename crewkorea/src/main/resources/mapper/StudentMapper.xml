@@ -60,7 +60,8 @@
 			skilllv, 
 			memo, 
 			regid, 
-			regdate
+			regdate,
+			paystatus
 		) VALUES (
 			(select ifnull(max(idx)+1, 1) from ck_student_info a), 
 			#{korname}, 
@@ -88,7 +89,8 @@
 			#{skilllv}, 
 			#{memo}, 
 			#{regid}, 
-			now()
+			now(),
+			#{paystatus}
 		)
 	</insert>
 	
@@ -119,7 +121,8 @@
         	skilllv=#{skilllv}, 
         	memo=#{memo}, 
         	regid=#{regid}, 
-        	regdate=now()
+        	regdate=now(),
+        	paystatus=#{paystatus}
         WHERE idx = #{idx}
     </update>
         

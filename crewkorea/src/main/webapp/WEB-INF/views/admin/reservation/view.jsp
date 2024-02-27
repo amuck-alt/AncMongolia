@@ -16,7 +16,7 @@
       <div class="main-panel">
         <div class="content-wrapper">          
 		  <form action="/manager/reservation/update.do" name="form" id="form" method="post" data-toggle="validator" enctype="multipart/form-data">          
-          <input type="hidden" name="regid" value="${sessionScope.ManagerInfo.userid}">
+          <input type="hidden" name="regid" value="${sessionScope.ManagerInfo.usernm}">
           <input type="hidden" name="regip" value="<%= request.getRemoteAddr() %>">
           <input type="hidden" name="consultidx" value="${result.idx}">
           <input type="hidden" name="idx" value="${result.idx}">
@@ -85,6 +85,7 @@
 					  	  <tr>
 					  		<td width="15%" style="font-size: 13px; padding:15px 10px; text-align:center;">
 					  			<c:choose>
+					  				<c:when test="${list.consultcode eq '00'}">상담예약</c:when>
 					  				<c:when test="${list.consultcode eq '01'}">상담일자변경</c:when>
 					  				<c:when test="${list.consultcode eq '02'}">담당자지정(변경)</c:when>
 					  				<c:when test="${list.consultcode eq '99'}">상담종료</c:when>
@@ -98,28 +99,40 @@
 					  	</c:forEach>
                       </tbody>
                     </table>
+                 </div>
+                 
                     
-                    <div class="mt-5 ml-1 mb-2" style="color:blue;"><b>@ 상담이력등록</b></div>
-	                    <div class="form-group">
-	                      	<div class="input-group">
-	                      		<select class="form-control col-2 mr-2" name="consultcode" id="consultcode" data-error="구분을 입력하세요." onchange="javascript:editInformation(this.value)" required>
-	                      			<option value="">구분</option>
-	                      			<option value="01">상담일자변경</option>
-	                      			<option value="02">담당자지정(변경)</option>
-	                      			<option value="03">진행중(메모)</option>
-	                      			<option value="99">상담종료</option>
-	                      		</select>
-	                      		<textarea class="form-control col-10" name="note" id="note" placeholder="메모" data-error="메모를 입력하세요." rows="5" required></textarea>
-	                      		<!-- <input type="text" class="form-control col-10" name="memo" maxlength="10" id="memo" placeholder="메모" data-error="메모를 입력하세요." required> -->
-	                      	</div>
-	                      <div class="help-block with-errors text-danger"></div>
-	                    </div>
-	                    <div class="col-12" style="text-align:right;">
-	                    	<button type="submit" class="btn btn-primary mr-2">저장</button>
-                    		<a href="/manager/reservation/list.do" class="btn btn-light">취소</a>
-	                    </div>              
-                    
-                  </div>
+					<div class="mt-4 mb-2" style="color:blue;"><b>@ 상담이력등록</b></div>
+					<table class="col-12 mt-1 table-bordered">
+						<tr>
+							<td width="10%" class="text-center bg-light" style="font-size: 14px">구분</td>
+							<td width="40%" class="px-2 py-2">
+							<select class="col-12 form-control mr-3" style="height:30px;padding:0.3rem;" name="consultcode" id="consultcode" data-error="구분을 입력하세요." onchange="javascript:editInformation(this.value)" required>
+                      			<option value="">구분</option>
+                      			<option value="00">상담예약</option>
+                      			<option value="01">상담일자변경</option>
+                      			<option value="02">담당자지정(변경)</option>
+                      			<option value="03">상담메모</option>
+                      			<!-- <option value="10">등록완료</option> -->
+                      			<option value="99">상담종료</option>
+                      		</select>
+							</td>
+							<td width="10%" class="text-center bg-light" style="font-size: 14px">작성자</td>
+							<td width="40%" class="px-2 py-2" style="font-size: 14px">${sessionScope.ManagerInfo.usernm}</td>
+						</tr>
+						<tr>
+							<td width="10%" class="text-center bg-light" style="font-size: 14px">메모</td>
+							<td width="90%" colspan="3" class="px-2 py-2">
+								<textarea class="form-control col-12" style="padding:0.5rem;" name="note" id="note" placeholder="메모" data-error="메모를 입력하세요." rows="5" required></textarea>	 
+							</td>
+						</tr>
+					</table>
+					<div class="help-block with-errors text-danger"></div>
+					<div class="mt-3 col-12" style="text-align:right;">
+                   		<button type="submit" class="btn btn-primary mr-2">저장</button>
+                  		<a href="/manager/reservation/list.do" class="btn btn-light">취소</a>
+                   	</div> 	
+								
                 </div>
               </div>
             </div>

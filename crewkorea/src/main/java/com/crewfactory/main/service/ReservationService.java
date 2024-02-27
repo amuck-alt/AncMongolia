@@ -31,6 +31,10 @@ public class ReservationService {
 		return dao.update(domain);
 	}
 	
+	public boolean updateEnd(ReservationDomain domain) throws Exception {
+		return dao.updateEnd(domain);
+	}
+	
 	public boolean delete(int idx) throws Exception {
 		return dao.delete(idx);
 	}
@@ -42,6 +46,7 @@ public class ReservationService {
 	public boolean insertMemo (ReservationDomain domain) throws Exception {
 		return dao.insertMemo(domain);
 	}
+	
 	
 	public List <ReservationDomain> selectIndex () throws Exception {
 		return dao.selectIndex();

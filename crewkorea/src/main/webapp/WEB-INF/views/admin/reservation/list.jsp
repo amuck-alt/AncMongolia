@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 
 <%@ include file = "../include/header.jsp" %>
@@ -121,7 +122,7 @@
                             <td align="center" style="font-size: 13px; padding:15px 10px; text-align:center;">${list.cons_time}</td>
                             <td align="center" style="font-size: 13px; padding:15px 10px; text-align:center;">${list.cons_team}</td>
                             <td align="center" style="font-size: 13px; padding:15px 10px; text-align:center;">${list.cons_manager}</td>
-                            <td align="center" style="font-size: 13px; padding:15px 10px; text-align:left;">${list.note}</td>
+                            <td align="center" style="font-size: 13px; padding:15px 10px; text-align:left;">${fn:substring(list.note,0,60)}<c:if test="${fn:length(list.note) > 60}">&nbsp;...</c:if></td>
                             <td align="center" style="font-size: 13px; padding:15px 10px; text-align:center;"><c:choose><c:when test="${list.updatedate eq null}"><fmt:formatDate value="${list.regdate}" pattern="yyyy-MM-dd" /></c:when><c:otherwise><fmt:formatDate value="${list.updatedate}" pattern="yyyy-MM-dd" /></</c:otherwise></c:choose></td>
                         </tr>
                         </c:forEach>
@@ -152,7 +153,8 @@
  	$(document).ready(function() {
     	$('#notice').DataTable({
     		"order": [[4, 'desc']],
-    		"ordering" : true
+    		"ordering" : true,
+    		"iDisplayLength" : 50
     	});
 	});
  	

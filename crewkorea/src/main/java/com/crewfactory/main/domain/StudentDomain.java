@@ -34,11 +34,18 @@ public class StudentDomain {
 	private Date regdate;
 
 	private String note;
+	private String paystatus;
 	
 	
 	
 	
 	
+	public String getPaystatus() {
+		return paystatus;
+	}
+	public void setPaystatus(String paystatus) {
+		this.paystatus = paystatus;
+	}
 	public int getStudentidx() {
 		return studentidx;
 	}
