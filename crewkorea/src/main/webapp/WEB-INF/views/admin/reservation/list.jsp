@@ -83,8 +83,8 @@
 						</td>
 						<td width="5%" class="text-center bg-light" style="font-size: 14px">담당자</td>
 						<td width="12%" class="px-3 py-2"><input type="text" class="form-control" name="cons_manager" id="cons_manager" value="${search.cons_manager}" style="height:30px;"></td>
-						<%-- <td width="10%" class="text-center bg-light" style="font-size: 14px">상담자(이름, 연락처)</td>
-						<td width="12%" class="px-3 py-2"><input type="text" class="form-control" name="customer" id="customer" value="${search.customer }" style="height:30px;"></td> --%>
+						<td width="10%" class="text-center bg-light" style="font-size: 14px">상담자(이름, 연락처)</td>
+						<td width="12%" class="px-3 py-2"><input type="text" class="form-control" name="cons_customer" id="cons_customer" value="${search.cons_customer }" style="height:30px;"></td>
 						<td width="6%" class="px-3 py-2 text-center"><button type="button" class="btn btn-primary" onclick="goSearch()">검색</button></td>
                 	  </tr>
                   </table>

@@ -35,30 +35,32 @@
 	
 	<select id="downExcel" parameterType="com.crewfactory.main.domain.HumanResourceDomain" resultType="com.crewfactory.main.domain.HumanResourceDomain">
 		select 
-			*,
-			(select concat(a.itvday, ' ', a.itvtime) from ck_interview_info a where a.idx = hopeintv1 and a.recruitidx = #{catenum} limit 1) as interviewday1, 
-			(select concat(a.itvday, ' ', a.itvtime) from ck_interview_info a where a.idx = hopeintv2 and a.recruitidx = #{catenum} limit 1) as interviewday2,
-			concat(birthyear, '. ', birthmonth, '. ', birthday) as birth,
-			concat(phoneagency, '-', phonefirst, '-', phonesecond) as phonenum,
-			ifnull((select status from ck_student_info s where s.mobile = concat(phoneagency, '-', phonefirst, '-', phonesecond) and s.korname = korname),'') as studentcnt
-		from ck_recruit_volunteer
-		where catenum = #{catenum}
+			v.*,
+			(select concat(a.itvday, ' ', a.itvtime) from ck_interview_info a where a.idx = v.hopeintv1 and a.recruitidx = #{catenum} limit 1) as interviewday1, 
+			(select concat(a.itvday, ' ', a.itvtime) from ck_interview_info a where a.idx = v.hopeintv2 and a.recruitidx = #{catenum} limit 1) as interviewday2,
+			concat(v.birthyear, '. ', v.birthmonth, '. ', v.birthday) as birth,
+			concat(v.phoneagency, '-', v.phonefirst, '-', v.phonesecond) as phonenum,
+			s.status as studentcnt,
+			s.idx as studentidx
+		from ck_recruit_volunteer v
+		left outer join ck_student_info s on s.mobile = concat(v.phoneagency, '-', v.phonefirst, '-', v.phonesecond) and s.korname = v.korname
+		where v.catenum = #{catenum}
 		<if test="itvcode == '1차'">
-			and hopeintv1 = #{hopeidx}
+			and v.hopeintv1 = #{hopeidx}
 		</if>
 		 <if test="itvcode == '2차'">
-			and hopeintv2 = #{hopeidx}
+			and v.hopeintv2 = #{hopeidx}
 		</if>
 		<if test="result1st != ''">
-			and result1st = '합격'
+			and v.result1st = '합격'
 		</if>
 		<if test="result2nd != ''">
-			and result2nd = '합격'
+			and v.result2nd = '합격'
 		</if>
 		<if test="result3rd != ''">
-			and result3rd = '합격'
+			and v.result3rd = '합격'
 		</if>
-		order by catenum, studentnum asc
+		order by v.catenum, v.studentnum asc
 	</select>
 	
 	<select id="view" parameterType="int" resultType="com.crewfactory.main.domain.HumanResourceDomain">

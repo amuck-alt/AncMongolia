@@ -27,8 +27,15 @@ public class ReservationDomain {
 	private String customer;
 	private String cons_startday;
 	private String cons_endday;
+	private String cons_customer;
 	
 		
+	public String getCons_customer() {
+		return cons_customer;
+	}
+	public void setCons_customer(String cons_customer) {
+		this.cons_customer = cons_customer;
+	}
 	public String getCons_startday() {
 		return cons_startday;
 	}

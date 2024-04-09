@@ -12,21 +12,21 @@
 		FROM ck_consult_info a
 		WHERE 1 = 1
 		]]>
-			<if test="cons_status != ''">
-				AND a.cons_status = #{cons_status}
-			</if>
- 			<if test="cons_startday != ''">
-				<![CDATA[ AND STR_TO_DATE(a.cons_day, '%Y-%m-%d') >= STR_TO_DATE(#{cons_startday}, '%Y-%m-%d') ]]>
-			</if>
-			<if test="cons_endday != ''">
-				<![CDATA[ AND STR_TO_DATE(a.cons_day, '%Y-%m-%d') <= STR_TO_DATE(#{cons_endday}, '%Y-%m-%d') ]]>
-			</if>
-			<if test="cons_manager != ''">
-				AND a.cons_manager = #{cons_manager}
-			</if>
-			<!-- <if test="customer != ''">
-				AND a.cus_name like '%'||#{customer}||'%'
-			</if> -->
+		<if test="cons_status != ''">
+			AND a.cons_status = #{cons_status}
+		</if>
+			<if test="cons_startday != ''">
+			<![CDATA[ AND STR_TO_DATE(a.cons_day, '%Y-%m-%d') >= STR_TO_DATE(#{cons_startday}, '%Y-%m-%d') ]]>
+		</if>
+		<if test="cons_endday != ''">
+			<![CDATA[ AND STR_TO_DATE(a.cons_day, '%Y-%m-%d') <= STR_TO_DATE(#{cons_endday}, '%Y-%m-%d') ]]>
+		</if>
+		<if test="cons_manager != ''">
+			AND a.cons_manager = #{cons_manager}
+		</if>
+		<if test="cons_customer != ''">
+			AND (a.cus_name like concat('%', #{cons_customer}, '%') OR replace(a.cus_mobile, '-', '') like replace(concat('%', #{cons_customer}, '%'), '-', ''))
+		</if>
 		ORDER BY a.cons_status asc, a.cons_day DESC, a.cons_time DESC
 	</select>
 	

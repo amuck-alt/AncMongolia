@@ -68,7 +68,7 @@
             <div class="collapse" id="student">
               <ul class="nav flex-column sub-menu">
               	<li class="nav-item"><a class="nav-link" href="/manager/notice/list.do">공지사항</a></li>
-                <li class="nav-item"><a class="nav-link" href="/manager/reservation/list.do?cons_status=&cons_startday=&cons_endday=&cons_manager=">상담예약관리</a></li>
+                <li class="nav-item"><a class="nav-link" href="/manager/reservation/list.do?cons_status=&cons_startday=&cons_endday=&cons_manager=&cons_customer=">상담예약관리</a></li>
 				<li class="nav-item"><a class="nav-link" href="/manager/student/list.do?status=&curriculum=&korname=&mobile=&mento=">재학생관리</a></li>
               </ul>
             </div>

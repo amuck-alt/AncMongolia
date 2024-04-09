@@ -32,15 +32,14 @@ public class AdminReservationController {
 		String cons_startday = request.getParameter("cons_startday");
 		String cons_endday = request.getParameter("cons_endday");
 		String cons_manager = request.getParameter("cons_manager");
-		String customer = request.getParameter("customer");
+		String cons_customer = request.getParameter("cons_customer");
 		
 		if(cons_status == null) domain.setCons_status("");
 		if(cons_startday == null) domain.setCons_startday("");
 		if(cons_endday == null) domain.setCons_endday("");
 		if(cons_manager == null) domain.setCons_manager("");
-		if(customer == null) domain.setCustomer("");
-				
-		 
+		if(cons_customer == null) domain.setCons_customer("");
+
 		model.addAttribute("search", domain);
 		model.addAttribute("result", service.select(domain));
 		return "/admin/reservation/list";
