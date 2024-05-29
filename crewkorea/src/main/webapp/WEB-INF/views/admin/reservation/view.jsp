@@ -94,7 +94,7 @@
 					  		</td>
 					  		<td width="*%" style="font-size: 13px; padding:15px 10px; text-align:left;">${list.note}</td>
 					  		<td style="font-size: 13px; padding:15px 10px; text-align:center;">${list.regid}</td>
-					  		<td style="font-size: 13px; padding:15px 10px; text-align:center;"><fmt:formatDate value="${list.regdate}" pattern="yyyy-MM-dd" /></td>
+					  		<td style="font-size: 13px; padding:15px 10px; text-align:center;"><fmt:formatDate value="${list.regdate}" pattern="yyyy-MM-dd HH:mm" /></td>
 					  	  </tr>
 					  	</c:forEach>
                       </tbody>

@@ -25,7 +25,7 @@
 	
 	<insert id="insert" parameterType="com.crewfactory.main.domain.NoticeDomain">
 		INSERT INTO ck_notice_info (
-			idx, section, description, title, content, regid, regip, regdate, thumbnail
+			idx, section, description, title, content, regid, regip, regdate, thumbnail, filename, filepath
 		) VALUES (
 			(select ifnull(max(idx)+1, 1) from ck_notice_info a),
 			#{section },
@@ -35,7 +35,9 @@
 			#{regid },
 			#{regip },
 			now(),
-			#{thumbnail }
+			#{thumbnail},
+			#{filename},
+			#{filepath}
 		);
 	</insert>
 	<update id="update" parameterType="com.crewfactory.main.domain.NoticeDomain">
@@ -48,7 +50,9 @@
 			regid = #{regid },
 			regip = #{regip },
 			visit = #{visit },
-			thumbnail = #{thumbnail }
+			thumbnail = #{thumbnail },
+			filename = #{filename},
+			filepath = #{filepath}
 		WHERE idx = #{idx}
     </update>    
     <delete id="delete" parameterType="int">

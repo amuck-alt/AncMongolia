@@ -79,8 +79,9 @@
 												<option value="allinone" <c:if test="${result.curriculum eq 'allinone'}">selected</c:if>>종합승무원</option>
 												<option value="university" <c:if test="${result.curriculum eq 'university'}">selected</c:if>>항공운항과</option>
 												<option value="ground" <c:if test="${result.curriculum eq 'ground'}">selected</c:if>>지상직</option>
+												<option value="travel" <c:if test="${result.curriculum eq 'travel'}">selected</c:if>>여행사</option>
 												<option value="hotel" <c:if test="${result.curriculum eq 'hotel'}">selected</c:if>>호텔</option>
-												<option value="jobmanager" <c:if test="${result.curriculum eq 'jobmanager'}">selected</c:if>>직업상담사</option>
+												<!-- option value="jobmanager" <c:if test="${result.curriculum eq 'jobmanager'}">selected</c:if>>직업상담사</option -->
 												<option value="internship" <c:if test="${result.curriculum eq 'internship'}">selected</c:if>>해외취업연수반</option>
 												<option value="shorterm" <c:if test="${result.curriculum eq 'shorterm'}">selected</c:if>>단기반</option>
 												<option value="private" <c:if test="${result.curriculum eq 'private'}">selected</c:if>>과외</option>

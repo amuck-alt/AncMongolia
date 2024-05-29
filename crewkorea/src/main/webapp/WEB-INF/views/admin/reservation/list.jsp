@@ -102,7 +102,7 @@
                             <th width="10%" align="center" style="font-size: 13px; padding:15px 10px; text-align:center; background-color:#0066cc;">담당팀</th>
                             <th width="8%" align="center" style="font-size: 13px; padding:15px 10px; text-align:center; background-color:#0066cc;">담당자</th>
                             <th width="*%" align="center" style="font-size: 13px; padding:15px 10px; text-align:center; background-color:#0066cc;">상담이력</th>
-                            <th width="8%" align="center" style="font-size: 13px; padding:15px 10px; text-align:center; background-color:#0066cc;">수정일자</th>
+                            <th width="10%" align="center" style="font-size: 13px; padding:15px 10px; text-align:center; background-color:#0066cc;">수정일자</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -123,7 +123,7 @@
                             <td align="center" style="font-size: 13px; padding:15px 10px; text-align:center;">${list.cons_team}</td>
                             <td align="center" style="font-size: 13px; padding:15px 10px; text-align:center;">${list.cons_manager}</td>
                             <td align="center" style="font-size: 13px; padding:15px 10px; text-align:left;">${fn:substring(list.note,0,60)}<c:if test="${fn:length(list.note) > 60}">&nbsp;...</c:if></td>
-                            <td align="center" style="font-size: 13px; padding:15px 10px; text-align:center;"><c:choose><c:when test="${list.updatedate eq null}"><fmt:formatDate value="${list.regdate}" pattern="yyyy-MM-dd" /></c:when><c:otherwise><fmt:formatDate value="${list.updatedate}" pattern="yyyy-MM-dd" /></</c:otherwise></c:choose></td>
+                            <td align="center" style="font-size: 13px; padding:15px 10px; text-align:center;"><c:choose><c:when test="${list.updatedate eq null}"><fmt:formatDate value="${list.regdate}" pattern="yyyy-MM-dd HH:mm" /></c:when><c:otherwise><fmt:formatDate value="${list.updatedate}" pattern="yyyy-MM-dd HH:mm" /></</c:otherwise></c:choose></td>
                         </tr>
                         </c:forEach>
                       </tbody>

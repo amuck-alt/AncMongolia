@@ -21,9 +21,9 @@
                   </div>
                 </div>
                 <div class="d-flex justify-content-between align-items-end flex-wrap">
-                  <button type="button" class="btn btn-danger bg-white btn-icon mr-3 mt-2 mt-xl-0" onclick="goWrite()">
+                  <a href="/manager/notice/write.do"><button type="button" class="btn btn-danger bg-white btn-icon mr-3 mt-2 mt-xl-0">
                     <i class="mdi mdi-plus text-muted"></i>
-                  </button>
+                  </button></a>
                   <button type="button" class="btn btn-light bg-white btn-icon mr-3 d-none d-md-block ">
                     <i class="mdi mdi-download text-muted"></i>
                   </button>
@@ -90,10 +90,6 @@
     	});
 	});
  	
- 	function goWrite(){
- 		document.location.href="/manager/notice/write.do";
- 	}
- 	
- </script>
+</script>
 
 

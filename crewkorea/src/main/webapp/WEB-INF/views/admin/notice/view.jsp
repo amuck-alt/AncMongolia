@@ -6,6 +6,11 @@
 <!DOCTYPE html>
 <html>
 <%@ include file = "../include/header.jsp" %>
+<style>
+	.filebox .upload-name { display: inline-block; height: 40px; padding: 0 10px; vertical-align: middle; border: 1px solid #dddddd; width: 78%; color: #999999; }
+	.filelabel { display: inline-block; padding: 10px 20px; color: #fff; vertical-align: middle; background-color: gray; cursor: pointer; height: 40px; margin-left: 10px; }
+	.filebox input[type="file"] { position: absolute; width: 0; height: 0; padding: 0; overflow: hidden; border: 0; }
+</style>
 <body>
   <div class="container-scroller">
     <%@ include file="../include/nav-bar.jsp" %>
@@ -30,7 +35,22 @@
                       <input type="text" class="form-control" value="${result.title }" name="title" id="title" placeholder="제목" data-error="제목을 입력하세요." required>
                       <div class="help-block with-errors text-danger"></div>
                     </div>
-                   
+                    <div class="form-group">
+                      <label for="description" class="control-label">첨부된파일</label>
+                      <div class="input-group">
+	                      <div class="mb-2">
+	               			<span></span><a href="/data/download.do?filepath=${result.filepath}&filename=${result.filename}">${result.filename}</a>
+	               		  </div>
+	               	  </div>
+	               	</div>
+	               	<div class="form-group">
+                      <label for="title" class="control-label">첨부파일수정</label>
+                      <div class="filebox">					    
+					    <input class="upload-name form-control" value="첨부파일" placeholder="첨부파일">
+					    <label class="filelabel" for="file">파일찾기</label> 
+					    <input type="file" name="file" id="file">
+					  </div>
+                    </div>
                     <div class="form-group">
                       <label for="editor" class="control-label">내용</label>
 	                  	<textarea class="form-control" name="content" id="editor">${result.content}</textarea>
@@ -63,36 +83,11 @@
 	 	$("#form").validator();	//폼발리데이터
 	});
  	
- 	//썸네일업로드 스크립트	
-	$("#upload-tn").click(function (e) {
-  		e.preventDefault();
- 		$("#thumbnail").click();
- 	});
 	
-	$(document).ready(function(){
-		$("#thumbnail").on("change", handleImageFileSelect);
+	$("#file").on('change',function() {
+		var fileName = $("#file").val();
+		$(".upload-name").val(fileName);
 	});
-	
-	function handleImageFileSelect(e){
-		var files = e.target.files;
-		var fileArr = Array.prototype.slice.call(files);
-		fileArr.forEach(function(f){
-			if(!f.type.match("image.*")){
-				alert("이미지파일만 업로드 가능합니다.");
-				return;
-			}
-			var reader = new FileReader();
-			reader.onload = function(e){
-				$("#wrapper-tn").attr("src", e.target.result);
-			}
-			reader.readAsDataURL(f);
-		});
-	}
-	
-	function deleteImageAction(){
-		$("#wrapper-tn").attr("src", "/admin/images/no-image.png");
-		$("#thumbnail").val("");
-	}
  	
  	function deleteContent(idx){
 		if(confirm("정말로 삭제하시겠습니까?") == true){

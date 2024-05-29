@@ -102,9 +102,11 @@
 						    <option value="domestic" <c:if test="${search.curriculum eq 'member'}">selected</c:if>>국내승무원</option>
 						    <option value="overseas" <c:if test="${search.curriculum eq 'overseas'}">selected</c:if>>외국항공사</option>
 						    <option value="allinone" <c:if test="${search.curriculum eq 'allinone'}">selected</c:if>>종합승무원</option>
+						    <option value="university" <c:if test="${search.curriculum eq 'university'}">selected</c:if>>항공운항과</option>
 						    <option value="ground" <c:if test="${search.curriculum eq 'ground'}">selected</c:if>>지상직</option>
+						    <option value="travel" <c:if test="${search.curriculum eq 'travel'}">selected</c:if>>여행사</option>
 						    <option value="hotel" <c:if test="${search.curriculum eq 'hotel'}">selected</c:if>>호텔</option>
-						    <option value="jobmanager" <c:if test="${search.curriculum eq 'jobmanager'}">selected</c:if>>직업상담사</option>
+						    <!-- option value="jobmanager" <c:if test="${search.curriculum eq 'jobmanager'}">selected</c:if>>직업상담사</option -->
 						    <option value="internship" <c:if test="${search.curriculum eq 'internship'}">selected</c:if>>해외취업연수반</option>
 						    <option value="shorterm" <c:if test="${search.curriculum eq 'shorterm'}">selected</c:if>>단기반</option>
 						    <option value="private" <c:if test="${search.curriculum eq 'private'}">selected</c:if>>과외</option>
@@ -153,9 +155,10 @@
                             		<c:when test="${list.curriculum eq 'domestic'}"><button class="btn btn-sm btn-primary py-1 px-2" style="font-size: 12px; width:100px; height:25px; padding:5px 5px;">국내승무원</button></c:when>
                             		<c:when test="${list.curriculum eq 'overseas'}"><button class="btn btn-sm btn-warning py-1 px-2" style="font-size: 12px; width:100px; height:25px; padding:5px 5px;">외국항공사</button></c:when>
                             		<c:when test="${list.curriculum eq 'allinone'}"><button class="btn btn-sm py-1 px-2" style="background-color:navy; color:#fff; font-size: 12px; width:100px; height:25px; padding:5px 5px;">종합승무원</button></c:when>
+                            		<c:when test="${list.curriculum eq 'university'}"><button class="btn btn-sm py-1 px-2" style="background-color:green; color:#fff; font-size: 12px; width:100px; height:25px; padding:5px 5px;">항공운항과</button></c:when>
                             		<c:when test="${list.curriculum eq 'ground'}"><button class="btn btn-sm btn-danger py-1 px-2" style="font-size: 12px; width:100px; height:25px; padding:5px 5px;">지상직</button></c:when>
                             		<c:when test="${list.curriculum eq 'hotel'}"><button class="btn btn-sm btn-sucess py-1 px-2" style="font-size: 12px; width:100px; height:25px; padding:5px 5px;">호텔</button></c:when>
-                            		<c:when test="${list.curriculum eq 'jobmanager'}"><button class="btn btn-sm btn-sucess py-1 px-2" style="font-size: 12px; width:100px; height:25px; padding:5px 5px;">직업상담사</button></c:when>
+                            		<c:when test="${list.curriculum eq 'travel'}"><button class="btn btn-sm btn-sucess py-1 px-2" style="font-size: 12px; width:100px; height:25px; padding:5px 5px;">여행사</button></c:when>
                             		<c:when test="${list.curriculum eq 'internship'}"><button class="btn btn-sm btn-sucess py-1 px-2" style="font-size: 12px; width:100px; height:25px; padding:5px 5px;">해외취업연수반</button></c:when>
                             		<c:when test="${list.curriculum eq 'shorterm'}"><button class="btn btn-sm btn-info py-1 px-2" style="font-size: 12px; width:100px; height:25px; padding:5px 5px;">단기반</button></c:when>
                             		<c:when test="${list.curriculum eq 'private'}"><button class="btn btn-sm btn-dark py-1 px-2" style="font-size: 12px; width:100px; height:25px; padding:5px 5px;">과외</button></c:when>
