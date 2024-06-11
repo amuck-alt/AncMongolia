@@ -95,6 +95,7 @@ private static final Logger logger = LoggerFactory.getLogger(AdminNoticeControll
 	
 	@PostMapping("/manager/notice/update.do")
 	public String memupdate(HttpServletRequest request, @RequestParam("file") MultipartFile af, Model model) throws Exception {
+		
 		String idx = request.getParameter("idx");
 		String section = request.getParameter("section");			
 		String description = request.getParameter("description");
@@ -102,6 +103,8 @@ private static final Logger logger = LoggerFactory.getLogger(AdminNoticeControll
 		String content = request.getParameter("content");
 		String regid = request.getParameter("regid");
 		String regip = request.getParameter("regip");
+		String fname = request.getParameter("filename");
+		String fpath = request.getParameter("filepath");
 
 
 		try {
@@ -115,8 +118,8 @@ private static final Logger logger = LoggerFactory.getLogger(AdminNoticeControll
 		    	domain.setFilename(filename);
 		    	domain.setFilepath(filepath);
 		    }else {
-		    	domain.setFilename("");
-		    	domain.setFilepath("");
+		    	domain.setFilename(fname);
+		    	domain.setFilepath(fpath);
 		    }
 			
 			domain.setThumbnail("");

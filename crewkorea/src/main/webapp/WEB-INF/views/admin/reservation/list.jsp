@@ -36,7 +36,9 @@
                   <button type="button" class="btn btn-light bg-white btn-icon mr-3 mt-2 mt-xl-0">
                     <i class="mdi mdi-clock-outline text-muted"></i>
                   </button> -->
-                  <button class="btn btn-primary mt-2 mt-xl-0" onclick="goExcel()">엑셀다운로드</button>
+                  <c:if test="${sessionScope.ManagerInfo.section eq 'super'}">
+                  	<button class="btn btn-primary mt-2 mt-xl-0" onclick="goExcel()">엑셀다운로드</button>
+                  </c:if>
                 </div>
               </div>
             </div>

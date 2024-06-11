@@ -25,6 +25,8 @@
           <input type="hidden" name="regip" value="<%= request.getRemoteAddr() %>">
           <input type="hidden" name="section" value="${ result.section }"/>
           <input type="hidden" name="thumb" value="${ result.thumbnail }"/>
+          <input type="hidden" name="filename" value="${ result.filename }"/>
+          <input type="hidden" name="filepath" value="${ result.filepath }"/>
           <div class="row">
             <div class="col-md-9 grid-margin stretch-card">
               <div class="card">

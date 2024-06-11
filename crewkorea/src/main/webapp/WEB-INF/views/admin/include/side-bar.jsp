@@ -19,7 +19,7 @@
           </li>
           </c:if>
           <c:if test="${sessionScope.ManagerInfo.section eq 'super' || sessionScope.ManagerInfo.section eq 'recruit'}">
-          <li class="nav-item <c:if test="${ param.act eq 'c'}">active</c:if>">
+          <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#mem" aria-expanded="false" aria-controls="mem">
               <i class="mdi mdi-account menu-icon"></i>
               <span class="menu-title">회원관리</span>
@@ -31,7 +31,7 @@
               </ul>
             </div>
           </li>
-          <li class="nav-item <c:if test="${ param.act eq 'd'}">active</c:if>">
+          <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#bbs" aria-expanded="false" aria-controls="bbs">
               <i class="mdi mdi-view-headline menu-icon"></i>
               <span class="menu-title">게시판관리</span>
@@ -44,7 +44,7 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#recruit" aria-expanded="false" aria-controls="bbs">
+            <a class="nav-link" data-toggle="collapse" href="#recruit" aria-expanded="false" aria-controls="recruit">
               <i class="mdi mdi-view-headline menu-icon"></i>
               <span class="menu-title">채용관리</span>
               <i class="menu-arrow"></i>
